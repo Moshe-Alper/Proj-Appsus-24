@@ -1,1 +1,7 @@
  /* note index */
+
+ .note-index {
+    background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+ }
