@@ -15,7 +15,7 @@
 
 .note-preview h1 {
     font-size: 1.25rem;
-    margin-bottom: 10px;
+    margin-block-end: 10px;
     color: #3c4043;
     word-wrap: break-word;
     font-weight: bold;
@@ -37,4 +37,12 @@
     max-width: 100%;
     height: auto;
     border-radius: 4px;
+}
+
+.note-preview .note-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 10px;
+    color: #888;
+    font-size: 0.9rem;
 }

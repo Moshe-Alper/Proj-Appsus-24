@@ -10,13 +10,27 @@ export function NoteIndex() {
     useEffect(() => {
         noteService.query()
             .then(setNotes)
+            .catch(err => {
+                console.log('Problem getting note:', err)
+            })
     }, [])
 
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(() => {
+                setNotes(notes => notes.filter(note => note.id !== noteId))
+            })
+            .catch(err => {
+                console.log('Problem removing note:', err)
+            })
+    }
+
     if (!notes) return <h1>Loading...</h1>
-    // console.log('notes:', notes)
     return (
         <section className="note-index">
-            <NoteList notes={notes} />
+            <NoteList
+                onRemoveNote={onRemoveNote}
+                notes={notes} />
         </section>
     )
 }

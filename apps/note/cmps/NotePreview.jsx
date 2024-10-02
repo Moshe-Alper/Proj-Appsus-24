@@ -2,15 +2,17 @@ import { NoteImg } from "./dynamic-note-type/NoteImg.jsx";
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx";
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx";
 
-export function NotePreview({ note }) {
-    console.log('note:', note)
+export function NotePreview({ note, onRemoveNote }) {
+    // console.log('note:', note)
 
     return (
         <article className="note-preview">
             <DynamicCmp type={note.type} info={note.info} />
+            <div className="note-footer">
+            <button onClick={() => onRemoveNote(note.id)}>Delete</button>
+            </div>
         </article>
     )
-
 
     function DynamicCmp({ type, info }) {
         switch (type) {
