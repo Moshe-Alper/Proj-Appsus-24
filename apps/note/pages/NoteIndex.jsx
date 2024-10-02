@@ -13,7 +13,7 @@ export function NoteIndex() {
     }, [])
 
     if (!notes) return <h1>Loading...</h1>
-    console.log('notes:', notes)
+    // console.log('notes:', notes)
     return (
         <section className="note-index">
             <NoteList notes={notes} />
