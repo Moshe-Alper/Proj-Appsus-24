@@ -46,6 +46,7 @@ export function NoteIndex() {
             <NoteList
                 onRemoveNote={onRemoveNote}
                 notes={notes} 
+                refreshNotes={loadNotes}
                 />
         </section>
     )

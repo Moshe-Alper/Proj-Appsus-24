@@ -6,7 +6,7 @@ import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 import { NoteActions } from "./NoteActions.jsx"
 import { NoteEdit } from "./NoteEdit.jsx";
 
-export function NotePreview({ note, onRemoveNote }) {
+export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     // console.log('note:', note)
     const [isShowEditModal, setIsShowEditModal] = useState(false)
 
@@ -27,6 +27,7 @@ export function NotePreview({ note, onRemoveNote }) {
                 {isShowEditModal && (
                     <NoteEdit
                         toggleEditModal={onToggleEditModal}
+                        refreshNotes={refreshNotes}
                     />
                 )}
 

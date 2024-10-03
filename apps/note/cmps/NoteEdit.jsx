@@ -7,7 +7,7 @@ import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 
 const { useState, useEffect } = React
 
-export function NoteEdit({ toggleEditModal }) {
+export function NoteEdit({ toggleEditModal, refreshNotes }) {
 
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
@@ -16,19 +16,6 @@ export function NoteEdit({ toggleEditModal }) {
     useEffect(() => {
         if (noteId) loadNote()
     }, [])
-
-
-    // function loadNote() {
-    //     noteService.get(noteId)
-    //         .then(note => {
-    //             console.log('Loaded note:', note)
-    //             setNoteToEdit(note)
-    //         })
-    //         .catch(err => {
-    //             console.log('Problem getting note:', err)
-    //             navigate('/note')
-    //         })
-    // }
 
     function loadNote() {
         noteService.get(noteId)
@@ -52,16 +39,22 @@ export function NoteEdit({ toggleEditModal }) {
                 value = target.checked
                 break
         }
-        setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
+        setNoteToEdit(prevNote => ({
+            ...prevNote,
+            info: {
+                ...prevNote.info,
+                [field]: value
+            }
+        }))
     }
-
 
     function onSaveNote(ev) {
         ev.preventDefault()
         noteService.save(noteToEdit)
             .then(note => {
+                toggleEditModal()
+                refreshNotes()
                 navigate('/note')
-                console.log('save')
             })
             .catch(err => {
                 console.log('err:', err)
@@ -69,9 +62,7 @@ export function NoteEdit({ toggleEditModal }) {
             })
             .finally(() => {
                 navigate('/note')
-
             })
-        toggleEditModal()
     }
 
     return (
@@ -80,6 +71,7 @@ export function NoteEdit({ toggleEditModal }) {
                 <div className="edit-modal">
                     <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
                     <button>Save</button>
+                    <button>Close</button>
                 </div>
             </form>
         </section>
@@ -90,7 +82,7 @@ export function NoteEdit({ toggleEditModal }) {
             case 'NoteTxt':
                 return <NoteTxt
                     info={info}
-                    handleChange={handleChange}
+                    onChangeInfo={handleChange}
                 />
             case 'NoteImg':
                 return <NoteImg info={info} />

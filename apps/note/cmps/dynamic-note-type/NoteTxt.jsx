@@ -1,19 +1,20 @@
-export function NoteTxt({ info, handleChange }) {
+export function NoteTxt({ info, onChangeInfo }) {
 
     const { txt } = info
 
-    const isEditable = typeof handleChange === 'function';
+    const isEditable = typeof onChangeInfo === 'function';
     const editClass = isEditable ? 'editable' : ''
 
-    // console.log('txt:', txt)
     return (
         <section className={`note-text ${editClass}`}>
             {isEditable ? (
                 <input
+                    autoFocus
+                    placeholder="Note"
                     type="text"
                     name="txt"
                     value={txt}
-                    onChange={handleChange}
+                    onChange={onChangeInfo}
                     className="note-text-input" 
                 />
             ) : (
