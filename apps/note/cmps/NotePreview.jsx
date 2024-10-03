@@ -1,14 +1,14 @@
-const { Link } = ReactRouterDOM
 const { useState } = React
 
-import { NoteImg } from "./dynamic-note-type/NoteImg.jsx";
-import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx";
-import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx";
+import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
+import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
+import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
+import { NoteActions } from "./NoteActions.jsx"
 import { NoteEdit } from "./NoteEdit.jsx";
 
 export function NotePreview({ note, onRemoveNote }) {
     // console.log('note:', note)
-    const [isShowEditModal, setIsShowEditModal] = useState()
+    const [isShowEditModal, setIsShowEditModal] = useState(false)
 
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
@@ -19,12 +19,14 @@ export function NotePreview({ note, onRemoveNote }) {
             <DynamicCmp type={note.type} info={note.info} />
             <div className="note-footer">
                 {/* Create note-actions comp */}
-                <button onClick={() => onRemoveNote(note.id)}>Delete</button>
-                <Link to={`/note/${note.id}`}><button onClick={onToggleEditModal}>Edit</button></Link>
+                <NoteActions
+                    note={note}
+                    onRemoveNote={onRemoveNote}
+                    onToggleEditModal={onToggleEditModal}
+                />
                 {isShowEditModal && (
-                    <NoteEdit 
-                    toggleEditModal={onToggleEditModal}
-
+                    <NoteEdit
+                        toggleEditModal={onToggleEditModal}
                     />
                 )}
 

@@ -39,10 +39,3 @@
     border-radius: 4px;
 }
 
-.note-preview .note-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-block-start: 10px;
-    color: #888;
-    font-size: 0.9rem;
-}

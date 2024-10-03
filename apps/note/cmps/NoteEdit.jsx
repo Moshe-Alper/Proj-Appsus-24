@@ -1,13 +1,43 @@
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
+import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
+import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
+import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 
-const { useState } = React
+const { useState, useEffect } = React
 
 export function NoteEdit({ toggleEditModal }) {
-    
+
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
+    const { noteId } = useParams()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (noteId) loadNote()
+    }, [])
+
+
+    // function loadNote() {
+    //     noteService.get(noteId)
+    //         .then(note => {
+    //             console.log('Loaded note:', note)
+    //             setNoteToEdit(note)
+    //         })
+    //         .catch(err => {
+    //             console.log('Problem getting note:', err)
+    //             navigate('/note')
+    //         })
+    // }
+
+    function loadNote() {
+        noteService.get(noteId)
+            .then(setNoteToEdit)
+            .catch(err => {
+                console.log('Problem getting note:', err)
+                navigate('/note')
+            })
+    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -25,11 +55,13 @@ export function NoteEdit({ toggleEditModal }) {
         setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
     }
 
+
     function onSaveNote(ev) {
         ev.preventDefault()
         noteService.save(noteToEdit)
             .then(note => {
                 navigate('/note')
+                console.log('save')
             })
             .catch(err => {
                 console.log('err:', err)
@@ -42,16 +74,31 @@ export function NoteEdit({ toggleEditModal }) {
         toggleEditModal()
     }
 
-    const { title, publishedDate } = noteToEdit
-
     return (
         <section className="note-edit">
             <form onSubmit={onSaveNote} className="note-form">
                 <div className="edit-modal">
-                <input value={title} onChange={handleChange} type="text" name="title" id="title" />
-                <button>Save</button>
+                    <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                    <button>Save</button>
                 </div>
             </form>
         </section>
     )
+
+    function DynamicCmp({ type, info }) {
+        switch (type) {
+            case 'NoteTxt':
+                return <NoteTxt
+                    info={info}
+                    handleChange={handleChange}
+                />
+            case 'NoteImg':
+                return <NoteImg info={info} />
+            case 'NoteTodos':
+                return <NoteTodos info={info} />
+            default:
+                return <p>Loading...</p>
+        }
+    }
+
 }
