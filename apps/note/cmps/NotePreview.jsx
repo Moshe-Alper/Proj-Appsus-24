@@ -1,15 +1,36 @@
-import { NoteImg } from "./dynamic-note-type/NoteImg.jsx";
-import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx";
-import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx";
+const { useState } = React
 
-export function NotePreview({ note, onRemoveNote }) {
+import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
+import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
+import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
+import { NoteActions } from "./NoteActions.jsx"
+import { NoteEdit } from "./NoteEdit.jsx";
+
+export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     // console.log('note:', note)
+    const [isShowEditModal, setIsShowEditModal] = useState(false)
+
+    function onToggleEditModal() {
+        setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
+    }
 
     return (
         <article className="note-preview">
             <DynamicCmp type={note.type} info={note.info} />
             <div className="note-footer">
-            <button onClick={() => onRemoveNote(note.id)}>Delete</button>
+                {/* Create note-actions comp */}
+                <NoteActions
+                    note={note}
+                    onRemoveNote={onRemoveNote}
+                    onToggleEditModal={onToggleEditModal}
+                />
+                {isShowEditModal && (
+                    <NoteEdit
+                        toggleEditModal={onToggleEditModal}
+                        refreshNotes={refreshNotes}
+                    />
+                )}
+
             </div>
         </article>
     )

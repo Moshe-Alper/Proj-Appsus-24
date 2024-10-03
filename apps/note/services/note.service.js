@@ -50,8 +50,8 @@ function save(note) {
     }
 }
 
-function getEmptyNote(title = '', publishedDate = Date.now()) {
-    return { title, publishedDate }
+function getEmptyNote(txt = '') {
+    return { txt }
 }
 
 function getDefaultFilter() {
@@ -61,6 +61,30 @@ function getDefaultFilter() {
 }
 
 // Local Functions
+
+// function _createNotes() {
+//     let notes = utilService.loadFromStorage(NOTE_KEY) || []
+
+//     if (notes && notes.length) return
+
+//     notes = [
+//         {
+//             id: utilService.makeId(),
+//             createdAt: Date.now(),
+//             type: 'NoteTxt',
+//             isPinned: true,
+//             style: {
+//                 backgroundColor: '#00d'
+//             },
+//             title: 'Fullstack Me Baby!',
+//             info: {
+//                 content: 'Hello!'
+//             }
+//         }
+
+//     ]
+//     utilService.saveToStorage(NOTE_KEY, notes)
+// }
 
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY) || []
