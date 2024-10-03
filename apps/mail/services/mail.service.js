@@ -18,6 +18,10 @@ export const mailService = {
     getDefaultFilter,
 }
 
+
+window.mailService = mailService
+console.log('mailService is available:', window.mailService)
+
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
@@ -28,6 +32,7 @@ function query(filterBy = {}) {
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
+        .then(mail => _setNextPrevMailId(mail))
 }
 
 function remove(mailId) {
@@ -64,7 +69,7 @@ function _getFilteredMails(mails, filterBy) {
     // Filter by text search (subject, body, or from fields)
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
-        mails = mails.filter(mail => 
+        mails = mails.filter(mail =>
             regExp.test(mail.from) || regExp.test(mail.subject) || regExp.test(mail.body)
         )
     }
@@ -81,7 +86,7 @@ function _getFilteredMails(mails, filterBy) {
 
     // Filter by labels
     if (filterBy.labels && filterBy.labels.length > 0) {
-        mails = mails.filter(mail => 
+        mails = mails.filter(mail =>
             filterBy.labels.some(label => mail.labels.includes(label))
         )
     }
@@ -107,10 +112,10 @@ function getEmptyMail(subject = '', body = '', to = '') {
 
 function getDefaultFilter() {
     return {
-        status: 'inbox',
+        status: '',
         txt: '',
-        isRead: null,
-        isStared: null,
+        isRead: false,
+        isStared: false,
         labels: []
     }
 }
@@ -124,6 +129,7 @@ function _createMails() {
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
         ]
         saveToStorage(MAIL_KEY, mails)
+        console.log('Mails saved to storage:', mails)
     }
 }
 
@@ -132,3 +138,15 @@ function _createMail(subject, body, to) {
     mail.sentAt = Date.now()
     return mail
 }
+
+function _setNextPrevMailId(mail) {
+    return query().then((mails) => {
+        const mailIdx = mails.findIndex((currMail) => currMail.id === mail.id)
+        const nextMail = mails[mailIdx + 1] ? mails[mailIdx + 1] : mails[0]
+        const prevMail = mails[mailIdx - 1] ? mails[mailIdx - 1] : mails[mails.length - 1]
+        mail.nextMailId = nextMail.id
+        mail.prevMailId = prevMail.id
+        return mail
+    })
+}
+
