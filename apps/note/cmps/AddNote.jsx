@@ -1,8 +1,14 @@
-export function AddNote() {
+const { useNavigate } = ReactRouterDOM
+
+
+export function AddNote({ handleChange}) {
+    const navigate = useNavigate()
+
 
     function onSaveNote(ev) {
         ev.preventDefault()
-        console.log('Saving Note');
+        navigate('/note')
+        console.log('Saving Note')
     }
 
     return (
@@ -10,12 +16,14 @@ export function AddNote() {
             <form onSubmit={onSaveNote}>
             <input 
             placeholder="Title"
+            onChange={handleChange}
             type="text" 
             name="txt"
             className="note-title-input"
             />
-            <input 
+            <textarea 
             placeholder="Take a note..."
+            onChange={handleChange} 
             type="text" 
             name="txt"
             className="note-content-input"

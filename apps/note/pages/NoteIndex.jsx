@@ -1,3 +1,5 @@
+const { Outlet, Link } = ReactRouterDOM
+
 const { useEffect, useState } = React
 
 import { AddNote } from "../cmps/AddNote.jsx"
@@ -44,7 +46,8 @@ export function NoteIndex() {
             filterBy={filterBy} 
             onSetFilterBy={onSetFilterBy}
             />
-            <AddNote />
+            <Link to="/note/edit"><h1>Add Note</h1></Link>
+            <Outlet />
             <NoteList
                 onRemoveNote={onRemoveNote}
                 notes={notes} 
