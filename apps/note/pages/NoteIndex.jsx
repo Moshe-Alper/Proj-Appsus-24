@@ -2,6 +2,7 @@ const { Outlet, Link } = ReactRouterDOM
 
 const { useEffect, useState } = React
 
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { AddNote } from "../cmps/AddNote.jsx"
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
@@ -28,9 +29,11 @@ export function NoteIndex() {
         noteService.remove(noteId)
             .then(() => {
                 setNotes(notes => notes.filter(note => note.id !== noteId))
+                showSuccessMsg('Note removed successfully')
             })
             .catch(err => {
                 console.log('Problem removing note:', err)
+                showErrorMsg('Problem removing note ${bookId}')
             })
     }
 

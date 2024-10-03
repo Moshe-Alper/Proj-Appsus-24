@@ -7,6 +7,7 @@ import { Home } from "./pages/Home.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 import { NoteEdit } from "./apps/note/cmps/NoteEdit.jsx"
+import { UserMsg } from "./apps/note/cmps/UserMsg.jsx"
 
 
 
@@ -23,6 +24,7 @@ export function App() {
                 </Route>
                 <Route path="/note/:noteId" element={<NoteIndex />} />
             </Routes>
+        <UserMsg />
         </section>
     </Router>
 }
