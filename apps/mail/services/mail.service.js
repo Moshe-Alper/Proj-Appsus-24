@@ -2,64 +2,65 @@
 
 import { loadFromStorage, makeId, saveToStorage } from './util.service.js'
 import { storageService } from './async-storage.service.js'
-import { getDemoEmails } from './email-data.js'
+import { getDemomails } from './mail-data.js'
 
-const EMAIL_KEY = 'emailDB'
-_createEmails()
+const MAIL_KEY = 'mailDB'
+_creatMails()
 
-const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
+const loggedinUser = {
+    mail: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
 
-
-export const emailService = {
+export const mailService = {
     query,
     get,
     remove,
     save,
-    getEmptyEmail,
+    getEmptyMail,
     getDefaultFilter,
 }
 
 function query(filterBy = {}) {
-    return storageService.query(EMAIL_KEY)
-        .then(emails => {
-            emails = _getFilteredEmails(emails, filterBy)
-            return emails
+    return storageService.query(MAIL_KEY)
+        .then(mails => {
+            mails = _getFilteredmails(mails, filterBy)
+            return mails
         })
 }
 
-function get(emailId) {
-    return storageService.get(EMAIL_KEY, emailId)
-    // .then(emailId => _setNextPrevEmailId(emailId))
+function get(mailId) {
+    return storageService.get(MAIL_KEY, mailId)
+    // .then(mailId => _setNextPrevmailId(mailId))
 }
 
-function remove(emailId) {
-    return storageService.remove(EMAIL_KEY, emailId)
+function remove(mailId) {
+    return storageService.remove(MAIL_KEY, mailId)
 }
 
-function save(email) {
-    if (email.id) {
-        return storageService.put(EMAIL_KEY, email)
+function save(mail) {
+    if (mail.id) {
+        return storageService.put(MAIL_KEY, mail)
     } else {
-        return storageService.post(EMAIL_KEY, email)
+        return storageService.post(MAIL_KEY, mail)
     }
 }
 
-
-function _getFilteredEmails(emails, filterBy) {
+function _getFilteredmails(mails, filterBy) {
 
     // Filter by status (inbox, sent, trash, draft)
     if (filterBy.status) {
 
-        emails = emails.filter(email => {
+        mails = mails.filter(mail => {
             switch (filterBy.status) {
                 case 'inbox':
-                    return email.to === loggedinUser.email && !email.removedAt
+                    return mail.to === loggedinUser.mail && !mail.removedAt
                 case 'sent':
-                    return email.from === loggedinUser.email
+                    return mail.from === loggedinUser.mail
                 case 'trash':
-                    return email.removedAt
+                    return mail.removedAt
                 case 'draft':
-                    return !email.sentAt
+                    return !mail.sentAt
                 default:
                     return true
             }
@@ -68,29 +69,29 @@ function _getFilteredEmails(emails, filterBy) {
 
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
-        emails = emails.filter(email => regExp.test(email.from) || regExp.test(email.subject)
-            || regExp.test(email.body)
+        mails = mails.filter(mail => regExp.test(mail.from) || regExp.test(mail.subject)
+            || regExp.test(mail.body)
         )
     }
 
     if (filterBy.isRead !== undefined) {
-        emails = emails.filter(email => email.isRead === filterBy.isRead)
+        mails = mails.filter(mail => mail.isRead === filterBy.isRead)
     }
 
     if (filterBy.isStared !== undefined) {
-        emails = emails.filter(email => email.isStared === filterBy.isStared)
+        mails = mails.filter(mail => mail.isStared === filterBy.isStared)
     }
 
     if (filterBy.labels && filterBy.labels.length > 0) {
-        emails = emails.filter(email =>
-            filterBy.labels.some(label => email.labels.includes(label))
+        mails = mails.filter(mail =>
+            filterBy.labels.some(label => mail.labels.includes(label))
         )
     }
 
-    return emails
+    return mails
 }
 
-function getEmptyEmail(subject = '', body = '', to = '') {
+function getEmptyMail(subject = '', body = '', to = '') {
     return {
         id: makeId(),
         createdAt: Date.now(),
@@ -99,7 +100,7 @@ function getEmptyEmail(subject = '', body = '', to = '') {
         isRead: false,
         sentAt: null,
         removedAt: null,
-        from: loggedinUser.email,
+        from: loggedinUser.mail,
         to,
         labels: [],
         isStared: false,
@@ -116,20 +117,20 @@ function getDefaultFilter() {
     }
 }
 
-function _createEmails() {
-    let emails = utilService.loadFromStorage(EMAIL_KEY)
-    if (!emails || !emails.length) {
-        emails = [
-            _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
-            _createMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
-            _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
+function _creatMails() {
+    let mails = utilService.loadFromStorage(MAIL_KEY)
+    if (!mails || !mails.length) {
+        mails = [
+            _creatMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
+            _creatMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
+            _creatMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
         ]
-        utilService.saveToStorage(EMAIL_KEY, emails)
+        utilService.saveToStorage(MAIL_KEY, mails)
     }
 }
 
-function _createEmail(subject, body, to) {
-    const mail = getEmptyEmail(subject, body, to)
+function _creatMail(subject, body, to) {
+    const mail = getEmptyMail(subject, body, to)
     mail.sentAt = Date.now()
     return mail
 }
