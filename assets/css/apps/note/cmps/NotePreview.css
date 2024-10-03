@@ -1,0 +1,48 @@
+.note-preview {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    word-wrap: break-word;
+    overflow: hidden;
+    min-height: 100px; 
+}
+
+.note-preview:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.note-preview h1 {
+    font-size: 1.25rem;
+    margin-block-end: 10px;
+    color: #3c4043;
+    word-wrap: break-word;
+    font-weight: bold;
+}
+
+.note-preview p,
+.note-preview ul {
+    color: #5f6368;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.note-preview ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.note-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.note-preview .note-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 10px;
+    color: #888;
+    font-size: 0.9rem;
+}

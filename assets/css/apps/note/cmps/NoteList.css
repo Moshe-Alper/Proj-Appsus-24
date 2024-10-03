@@ -1,1 +1,9 @@
- /* note list */
+ .note-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 16px; /* Space between notes */
+    padding: 20px;
+    justify-content: center; /* Center notes horizontally */
+}
+
