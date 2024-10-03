@@ -1,16 +1,13 @@
-// mail service
-
 import { loadFromStorage, makeId, saveToStorage } from './util.service.js'
 import { storageService } from './async-storage.service.js'
-import { getDemomails } from './mail-data.js'
 
 const MAIL_KEY = 'mailDB'
-_creatMails()
 
 const loggedinUser = {
     mail: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
+_createMails()
 
 export const mailService = {
     query,
@@ -24,14 +21,13 @@ export const mailService = {
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            mails = _getFilteredmails(mails, filterBy)
+            mails = _getFilteredMails(mails, filterBy)
             return mails
         })
 }
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
-    // .then(mailId => _setNextPrevmailId(mailId))
 }
 
 function remove(mailId) {
@@ -46,11 +42,9 @@ function save(mail) {
     }
 }
 
-function _getFilteredmails(mails, filterBy) {
-
+function _getFilteredMails(mails, filterBy) {
     // Filter by status (inbox, sent, trash, draft)
     if (filterBy.status) {
-
         mails = mails.filter(mail => {
             switch (filterBy.status) {
                 case 'inbox':
@@ -67,23 +61,27 @@ function _getFilteredmails(mails, filterBy) {
         })
     }
 
+    // Filter by text search (subject, body, or from fields)
     if (filterBy.txt) {
         const regExp = new RegExp(filterBy.txt, 'i')
-        mails = mails.filter(mail => regExp.test(mail.from) || regExp.test(mail.subject)
-            || regExp.test(mail.body)
+        mails = mails.filter(mail => 
+            regExp.test(mail.from) || regExp.test(mail.subject) || regExp.test(mail.body)
         )
     }
 
+    // Filter by read status
     if (filterBy.isRead !== undefined) {
         mails = mails.filter(mail => mail.isRead === filterBy.isRead)
     }
 
+    // Filter by starred status
     if (filterBy.isStared !== undefined) {
         mails = mails.filter(mail => mail.isStared === filterBy.isStared)
     }
 
+    // Filter by labels
     if (filterBy.labels && filterBy.labels.length > 0) {
-        mails = mails.filter(mail =>
+        mails = mails.filter(mail => 
             filterBy.labels.some(label => mail.labels.includes(label))
         )
     }
@@ -113,23 +111,23 @@ function getDefaultFilter() {
         txt: '',
         isRead: null,
         isStared: null,
-        lables: []
+        labels: []
     }
 }
 
-function _creatMails() {
-    let mails = utilService.loadFromStorage(MAIL_KEY)
+function _createMails() {
+    let mails = loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _creatMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
-            _creatMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
-            _creatMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
+            _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
+            _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
         ]
-        utilService.saveToStorage(MAIL_KEY, mails)
+        saveToStorage(MAIL_KEY, mails)
     }
 }
 
-function _creatMail(subject, body, to) {
+function _createMail(subject, body, to) {
     const mail = getEmptyMail(subject, body, to)
     mail.sentAt = Date.now()
     return mail
