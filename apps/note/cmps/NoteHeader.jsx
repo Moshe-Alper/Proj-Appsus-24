@@ -4,7 +4,7 @@ export function NoteHeader({ filterBy, onSetFilterBy }) {
     return <header className="note-header">
         <div className="logo">
         <button className="btn-header"><img src="assets/img/google-material-icons/menu.svg" alt="menu"/></button>
-            <img src="assets/img/keep-logo.png" alt="logo image" className="keep-logo" />
+            <img src="assets/img/notes/keep-logo.png" alt="logo image" className="keep-logo" />
             <h1>Keep</h1>
         </div>
         <NoteFilter 

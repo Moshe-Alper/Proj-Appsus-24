@@ -120,7 +120,7 @@ function _createNotes() {
             type: 'NoteImg',
             isPinned: false,
             info: {
-                url: '/assets/img/Sea-turtle.jpg',
+                url: '/assets/img/notes/Sea-turtle.jpg',
                 title: 'Bobi and Me'
             },
             style: {
