@@ -39,3 +39,35 @@
     border-radius: 4px;
 }
 
+.color-input {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.items-container {
+    display: flex;
+    gap: 10px;
+}
+
+.item {
+    border: whitesmoke 3px solid;
+    padding: 5px;
+    margin: 5px;
+    min-height: 40px;
+    min-width: 40px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: .2s border-width;
+}
+
+.items-container .chosen {
+    border: solid whitesmoke 6px;
+}

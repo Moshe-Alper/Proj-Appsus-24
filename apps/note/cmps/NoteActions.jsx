@@ -8,6 +8,7 @@ export function NoteActions({ note, onRemoveNote, onToggleEditModal }) {
             <Link to={`/note/${note.id}`}>
                 <button onClick={onToggleEditModal}>Edit</button>
             </Link>
+            <button>Background Color</button>
         </div>
     )
 }

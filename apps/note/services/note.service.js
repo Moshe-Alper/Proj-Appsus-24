@@ -51,8 +51,19 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = '') {
-    return { txt }
+function getEmptyNote(txt = 'here is text', backgroundColor='#fff') {
+    return {
+        id: '22',
+        createdAt: Date.now(),
+        type: 'NoteTxt',
+        isPinned: false,
+        style: {
+            backgroundColor: ''
+        },
+        info: {
+            txt: ''
+        }
+    }
 }
 
 function getDefaultFilter() {
@@ -132,6 +143,9 @@ function _createNotes() {
             createdAt: Date.now(),
             type: 'NoteTodos',
             isPinned: false,
+            style: {
+                backgroundColor: '#904'
+            },
             info: {
                 title: 'Get my stuff together',
                 todos: [
