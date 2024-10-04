@@ -45,7 +45,6 @@ function remove(entityType, entityId) {
         .then(entities => {
             const idx = entities.findIndex(entity => entity.id === entityId)
             if (entityId === -1) return null
-            entities[entityId].removedAt = Date.now()
             if (idx < 0) throw new Error(`Remove failed, cannot find entity with id: ${entityId} in: ${entityType}`)
             entities.splice(idx, 1)
             _save(entityType, entities)

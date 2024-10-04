@@ -1,22 +1,9 @@
-/* Mail List */
-.mail-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .mail-preview {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 15px;
-    border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.mail-preview:hover {
-    background-color: #f9f9f9;
 }
 
 /* Starred and Unstarred Icons */
@@ -45,15 +32,17 @@
 }
 
 .date {
-    flex: 0.5;
+    /* flex: 0.5; */
     text-align: right;
-    color: #999;
+    color: #333;
 }
 
-.unread .subject {
+.unread .subject,
+.from,
+.date {
     font-weight: bold;
 }
 
-.read .subject {
+.read .subject.from.date {
     font-weight: normal;
 }

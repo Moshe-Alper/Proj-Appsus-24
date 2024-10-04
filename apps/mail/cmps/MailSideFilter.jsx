@@ -4,6 +4,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy }) {
 
     const [selectedStatus, setSelectedStatus] = useState(filterBy.status || 'inbox' )
     
+    // console.log(filterBy)
     function handleStatusChange(status) {
         setSelectedStatus(status)
         onSetFilterBy({ ...filterBy, status })
