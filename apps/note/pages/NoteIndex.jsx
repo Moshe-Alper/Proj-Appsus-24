@@ -6,6 +6,7 @@ import { NoteHeader } from "../cmps/NoteHeader.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { getTruthyValues } from "../../../services/util.service.js"
+import { NoteSidebar } from "../cmps/NoteSidebar.jsx"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
@@ -49,13 +50,16 @@ export function NoteIndex() {
             filterBy={filterBy} 
             onSetFilterBy={onSetFilterBy}
             />
+            <main className="note-container">
             <Link to="/note/edit"><h1>Add Note</h1></Link>
             <Outlet />
+            <NoteSidebar />
             <NoteList
                 onRemoveNote={onRemoveNote}
                 notes={notes} 
                 refreshNotes={loadNotes}
                 />
+            </main>
         </section>
     )
 }

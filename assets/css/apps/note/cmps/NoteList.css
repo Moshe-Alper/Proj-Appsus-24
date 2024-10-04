@@ -1,9 +1,12 @@
  .note-list {
+    grid-column: 2;
+    grid-row: 2; 
+    
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 16px; /* Space between notes */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
     padding: 20px;
-    justify-content: center; /* Center notes horizontally */
-}
+    justify-content: center;
 
+ }

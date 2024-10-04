@@ -1,0 +1,40 @@
+.note-sidebar {
+    grid-row: 1 / 4; 
+
+    width: 80px;
+    height: 896px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    z-index: 1000;
+  }
+  
+  .note-sidebar.open {
+    transform: translateX(0); 
+  }
+  
+  .note-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .note-sidebar ul li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #5f6368; 
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .note-sidebar ul li:hover {
+    color: #202124; 
+  }
+  
+  .note-sidebar .sidebar-header {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #202124;
+  }
