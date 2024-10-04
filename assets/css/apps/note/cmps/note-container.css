@@ -1,0 +1,7 @@
+.note-container {
+    display: grid;
+    grid-template-columns: 15rem 1fr; 
+    grid-template-rows: auto 1fr auto;
+    height: 100vh; 
+    gap: 1rem;
+  }
