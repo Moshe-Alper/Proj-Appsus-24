@@ -1,1 +1,6 @@
- /* mail index  */
+.mail-index {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f6f8;
+    font-family: Arial, sans-serif;
+}
