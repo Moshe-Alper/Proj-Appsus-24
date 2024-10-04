@@ -1,0 +1,59 @@
+/* Mail List */
+.mail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mail-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mail-preview:hover {
+    background-color: #f9f9f9;
+}
+
+/* Starred and Unstarred Icons */
+.star {
+    margin-right: 10px;
+}
+
+.star.starred {
+    color: gold;
+}
+
+.star.unstarred {
+    color: #ccc;
+}
+
+/* Email from, subject, and date columns */
+.from {
+    flex: 1;
+    color: #555;
+}
+
+.subject {
+    flex: 2;
+    font-weight: normal;
+    color: #333;
+}
+
+.date {
+    flex: 0.5;
+    text-align: right;
+    color: #999;
+}
+
+.unread .subject {
+    font-weight: bold;
+}
+
+.read .subject {
+    font-weight: normal;
+}

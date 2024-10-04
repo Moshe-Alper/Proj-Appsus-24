@@ -1,1 +1,17 @@
- /* mail list */
+.mail-list {
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.mail-list li {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+.mail-list li:hover {
+    background-color: #f5f5f5;
+}
