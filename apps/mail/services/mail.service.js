@@ -20,7 +20,7 @@ export const mailService = {
 
 
 window.mailService = mailService
-console.log('mailService is available:', window.mailService)
+// console.log('mailService is available:', window.mailService)
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)

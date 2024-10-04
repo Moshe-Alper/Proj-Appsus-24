@@ -11,6 +11,7 @@ export const noteService = {
     save,
     getEmptyNote,
     getDefaultFilter,
+    getFilterFromSearchParams,
 }
 
 // For Debug (easy access from console)
@@ -58,6 +59,15 @@ function getDefaultFilter() {
     return {
         txt: ''
     }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || ''
+    }
+    return filterBy
 }
 
 // Local Functions
