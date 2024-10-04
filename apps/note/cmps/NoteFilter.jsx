@@ -31,10 +31,11 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
         onSetFilterBy(filterByToEdit)
     }
 
-    const isValid = txt
-
     return (
         <section className="note-filter">
+            <div className="search-btn">
+                <img src="./../assets/img/google-material-icons/search.svg" alt="search-btn" />
+            </div>
             <form onSubmit={onSubmit}>
                 <input
                     value={txt}
@@ -44,7 +45,6 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
                     id="txt"
                     placeholder="Search"
                 />
-                <button disabled={!isValid}>&#128269;</button>
             </form>
         </section>
     )
