@@ -2,13 +2,13 @@ const { useState, useEffect } = React
 
 export function MailSideFilter({ filterBy, onSetFilterBy }) {
 
-    const [selectedStatus, setSelectedStatus] = useState(filterBy.status )
+    const [selectedStatus, setSelectedStatus] = useState(filterBy.status || 'inbox' )
     
     function handleStatusChange(status) {
         setSelectedStatus(status)
         onSetFilterBy({ ...filterBy, status })
     }
-    
+
     return (
         <section className="mail-side-filter">
             <nav>
