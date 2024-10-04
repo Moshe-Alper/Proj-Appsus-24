@@ -2,14 +2,12 @@ const { useEffect, useState } = React
 const { Outlet, Link, useSearchParams } = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
-import { NoteFilter } from "../cmps/NoteFilter.jsx"
+import { NoteHeader } from "../cmps/NoteHeader.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { getTruthyValues } from "../../../services/util.service.js"
 
-
 export function NoteIndex() {
-
     const [notes, setNotes] = useState(null)
     const [searchPrms, setSearchPrms ] = useSearchParams()
     const [filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchPrms))
@@ -47,7 +45,7 @@ export function NoteIndex() {
     // console.log('notes:', notes)
     return (
         <section className="note-index">
-            <NoteFilter 
+            <NoteHeader 
             filterBy={filterBy} 
             onSetFilterBy={onSetFilterBy}
             />

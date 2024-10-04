@@ -1,14 +1,6 @@
-import { NoteHeader } from "../apps/note/cmps/NoteHeader.jsx";
-
-const { Link, NavLink, useLocation } = ReactRouterDOM
+const { Link, NavLink } = ReactRouterDOM
 
 export function AppHeader() {
-
-    const location = useLocation(); 
-
-    if (location.pathname === "/note") {
-        return <NoteHeader />
-    }
 
     return <header className="app-header">
         <Link to="/">
