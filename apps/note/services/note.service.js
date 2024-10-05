@@ -51,8 +51,10 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = '') {
-    return { txt }
+function getEmptyNote(txt = 'title',) {
+    return {
+        txt: ''
+    }
 }
 
 function getDefaultFilter() {
@@ -132,6 +134,9 @@ function _createNotes() {
             createdAt: Date.now(),
             type: 'NoteTodos',
             isPinned: false,
+            style: {
+                backgroundColor: '#904'
+            },
             info: {
                 title: 'Get my stuff together',
                 todos: [

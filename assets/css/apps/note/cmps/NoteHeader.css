@@ -43,33 +43,3 @@
     color: rgb(95, 99, 104);
 }
 
- /* buttons */
-
- .btn-header {
-    background-color: transparent;
-    border: none;
-    padding: 0.5rem; 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-header:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .btn-header:active {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-header img, .btn-header i {
-    width: 1.5rem; 
-    height: 1.5rem; 
-  }
-  
-  .btn-header i {
-    font-size: 1.5rem; 
-  }

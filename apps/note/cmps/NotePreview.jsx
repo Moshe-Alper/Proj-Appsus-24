@@ -1,5 +1,6 @@
-const { useState } = React
+const { useState, useEffect } = React
 
+import { ColorInput } from "./ColorInput.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
@@ -7,31 +8,48 @@ import { NoteActions } from "./NoteActions.jsx"
 import { NoteEdit } from "./NoteEdit.jsx";
 
 export function NotePreview({ note, onRemoveNote, refreshNotes }) {
-    // console.log('note:', note)
     const [isShowEditModal, setIsShowEditModal] = useState(false)
 
+    const initialBackgroundColor = note.style.backgroundColor || '#fff'
+    const [ noteStyle, setNoteStyle ] = useState({
+        backgroundColor: initialBackgroundColor
+    })
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         onSetNoteStyle({ backgroundColor: 'red' })
+    //     }, 2000)
+    // }, [])
+
+    
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
 
+    function onSetNoteStyle(newStyle) {
+        setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }))
+    }
+    
+
     return (
-        <article className="note-preview">
+        <article style={{ ...noteStyle }}  className="note-preview">
             <DynamicCmp type={note.type} info={note.info} />
-            <div className="note-footer">
-                {/* Create note-actions comp */}
                 <NoteActions
                     note={note}
                     onRemoveNote={onRemoveNote}
                     onToggleEditModal={onToggleEditModal}
-                />
+                    />
                 {isShowEditModal && (
                     <NoteEdit
-                        toggleEditModal={onToggleEditModal}
-                        refreshNotes={refreshNotes}
+                    toggleEditModal={onToggleEditModal}
+                    refreshNotes={refreshNotes}
                     />
                 )}
 
-            </div>
+                {/* <ColorInput 
+                onSetNoteStyle={onSetNoteStyle}
+                { ...noteStyle }
+                /> */}
         </article>
     )
 

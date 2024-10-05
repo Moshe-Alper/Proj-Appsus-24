@@ -83,9 +83,9 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
                 </section>
             ) : (
                 // This is the add form
-               <AddNote 
-               handleChange={handleChange}
-               />
+                <AddNote handleChange={handleChange} title='hi'>
+                    <input placeholder="write text" type="text" />
+                </AddNote>
             )}
         </section>
     )
