@@ -1,6 +1,7 @@
 .create-note {
     grid-column: 2;
     grid-row: 1;
+    z-index: 10;
 }
 
 .create-note form {
@@ -13,23 +14,15 @@
     box-shadow: 0 1px 7px rgba(128, 128, 128);
 }
 
-.create-note form input {
-    width: 100%;
-    border: none;
-    padding: 4px 0;
-    margin-block-end: 20px;
-    outline: none;
-    font-size: 1rem;
-    resize: none;
-}
-
+.create-note form input,
 .create-note form textarea {
     width: 100%;
     border: none;
-    padding: 4px 0 4px 0;
+    padding: 4px 0 4px 10px; 
     outline: none;
     font-size: 1rem;
     resize: none;
+    box-sizing: border-box; 
 }
 
 .create-note form .create-btn {

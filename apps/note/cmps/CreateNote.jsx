@@ -6,7 +6,9 @@ import { noteService } from "../services/note.service.js"
 export function CreateNote({ refreshNotes }) {
 
     const [newNote, setNewNote] = useState(noteService.getEmptyNote())
+    const [isExpanded, setIsExpanded] = useState(false)
     const navigate = useNavigate()
+
 
 
     function handleChange({ target }) {
@@ -16,7 +18,7 @@ export function CreateNote({ refreshNotes }) {
             case 'number':
             case 'range':
                 value = +value
-                break;
+                break
 
             case 'checkbox':
                 value = target.checked
@@ -53,24 +55,30 @@ export function CreateNote({ refreshNotes }) {
     // console.log('newNote:', newNote)
     const { info } = newNote
     const { txt, content } = info
-    return <section className="create-note">
-        <form onSubmit={onSaveNote}>
-            <input
-                value={txt}
-                type="text"
-                placeholder="Title"
-                name="txt"
-                onChange={handleChange}
-            />
-            <p>
-                <textarea
-                    value={content}
-                    name="content"
-                    placeholder="Take a note..."
-                    onChange={handleChange}
-                ></textarea>
-            </p>
-            <button className="create-btn">Close</button>
-        </form>
-    </section>
+
+
+    return (
+        <section className="create-note">
+            <form onSubmit={onSaveNote} onClick={() => {if (!isExpanded) setIsExpanded(true) }}>
+                {isExpanded && (
+                    <input
+                        value={txt}
+                        type="text"
+                        placeholder="Title"
+                        name="txt"
+                        onChange={handleChange}
+                    />
+                )}
+                <p>
+                    <textarea
+                        value={content}
+                        name="content"
+                        placeholder="Take a note..."
+                        onChange={handleChange}
+                    ></textarea>
+                </p>
+                <button type="submit" className="create-btn">Save</button> {/* Changed to "Save" */}
+            </form>
+        </section>
+    )
 }

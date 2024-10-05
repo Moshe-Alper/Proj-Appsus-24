@@ -13,7 +13,7 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         if (noteId) loadNote()
     }, [])
@@ -69,24 +69,17 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
     if (!noteToEdit) return <p>Loading...</p>
     return (
         <section className="note-section">
-            {noteToEdit.id ? (
-                // This is the edit form
-                <section className="note-edit">
-                    <h1>Edit Note</h1>
-                    <form onSubmit={onSaveNote} className="note-form">
-                        <div className="edit-modal">
-                            <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                            <button>Save</button>
-                            <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
-                        </div>
-                    </form>
-                </section>
-            ) : (
-                // This is the add form
-                <AddNote handleChange={handleChange} title='hi'>
-                    <input placeholder="write text" type="text" />
-                </AddNote>
-            )}
+            <section className="note-edit">
+                <h1>Edit Note</h1>
+                <form onSubmit={onSaveNote} className="note-form">
+                    <div className="edit-modal">
+                        <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                        <button>Save</button>
+                        <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
+                    </div>
+                </form>
+            </section>
+
         </section>
     )
 
