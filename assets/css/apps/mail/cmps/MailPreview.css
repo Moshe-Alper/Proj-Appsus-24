@@ -38,11 +38,14 @@
 }
 
 .unread .subject,
-.from,
-.date {
+.unread .from,
+.unread .date {
     font-weight: bold;
 }
 
-.read .subject.from.date {
+.read .subject,
+.read .from,
+.read .date {
     font-weight: normal;
+    background-color: #f5f5f5;
 }
