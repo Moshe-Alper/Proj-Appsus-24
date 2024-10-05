@@ -21,15 +21,7 @@ console.log('noteService is available:', window.noteService)
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
-            if (filterBy.txt) {
-                const regex = new RegExp(filterBy.txt, 'i')
-
-                notes = notes.filter(note =>
-                    (note.info.title && regex.test(note.info.title)) ||
-                    (note.info.txt && regex.test(note.info.txt))
-                )
-            }
-            return notes
+            return _filterNotesBy(notes, filterBy)
         })
 }
 
@@ -51,15 +43,26 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = 'title',) {
+function getEmptyNote(txt = '', content='', isPinned = false) {
     return {
-        txt: ''
+        id: '',
+        createdAt: Date.now(),
+        type: 'NoteTxt', 
+        isPinned: isPinned,
+        style: {
+            backgroundColor: 'white' 
+        },
+        info: {
+            txt: txt,
+            content: content
+        }
     }
 }
 
+
 function getDefaultFilter() {
     return {
-        txt: ''
+        txt: '',
     }
 }
 
@@ -74,30 +77,6 @@ function getFilterFromSearchParams(searchParams) {
 
 // Local Functions
 
-// function _createNotes() {
-//     let notes = utilService.loadFromStorage(NOTE_KEY) || []
-
-//     if (notes && notes.length) return
-
-//     notes = [
-//         {
-//             id: utilService.makeId(),
-//             createdAt: Date.now(),
-//             type: 'NoteTxt',
-//             isPinned: true,
-//             style: {
-//                 backgroundColor: '#00d'
-//             },
-//             title: 'Fullstack Me Baby!',
-//             info: {
-//                 content: 'Hello!'
-//             }
-//         }
-
-//     ]
-//     utilService.saveToStorage(NOTE_KEY, notes)
-// }
-
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY) || []
 
@@ -110,10 +89,11 @@ function _createNotes() {
             type: 'NoteTxt',
             isPinned: true,
             style: {
-                backgroundColor: '#00d'
+                backgroundColor: 'white'
             },
             info: {
-                txt: 'Fullstack Me Baby!'
+                txt: 'Fullstack Me Baby!',
+                content: 'Im Stacking you'
             }
         },
         {
@@ -126,7 +106,7 @@ function _createNotes() {
                 title: 'Bobi and Me'
             },
             style: {
-                backgroundColor: '#00d'
+                backgroundColor: 'yellow'
             }
         },
         {
@@ -135,7 +115,7 @@ function _createNotes() {
             type: 'NoteTodos',
             isPinned: false,
             style: {
-                backgroundColor: '#904'
+                backgroundColor: 'white'
             },
             info: {
                 title: 'Get my stuff together',
@@ -158,4 +138,21 @@ function _setNextPrevNoteId(note) {
         note.prevNoteId = prevNote.id
         return note
     })
+}
+
+function _filterNotesBy(notes, filterBy) {
+    if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+
+        notes = notes.filter(note =>
+            (note.info.title && regex.test(note.info.title)) ||
+            (note.info.txt && regex.test(note.info.txt))
+        )
+    }
+
+    if (filterBy.type) {
+        notes = notes.filter(note => note.type === filterBy.type)
+    }
+
+    return notes
 }

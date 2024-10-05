@@ -11,8 +11,8 @@ import { CreateNote } from "../cmps/CreateNote.jsx"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
-    const [searchPrms, setSearchPrms ] = useSearchParams()
-    const [filterBy, setFilterBy ] = useState(noteService.getFilterFromSearchParams(searchPrms))
+    const [searchPrms, setSearchPrms] = useSearchParams()
+    const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchPrms))
 
     useEffect(() => {
         loadNotes()
@@ -21,21 +21,21 @@ export function NoteIndex() {
 
     function loadNotes() {
         noteService.query(filterBy)
-        .then(setNotes)
-        .catch(err => {
-            console.log('Problem getting note:', err)
-        })
+            .then(setNotes)
+            .catch(err => {
+                console.log('Problem getting note:', err)
+            })
     }
 
     function onRemoveNote(noteId) {
         noteService.remove(noteId)
             .then(() => {
                 setNotes(notes => notes.filter(note => note.id !== noteId))
-                showSuccessMsg('Note removed successfully')
+                showSuccessMsg('Note trashed')
             })
             .catch(err => {
                 console.log('Problem removing note:', err)
-                showErrorMsg('Problem removing note ${bookId}')
+                showErrorMsg('Problem removing note')
             })
     }
 
@@ -44,23 +44,30 @@ export function NoteIndex() {
     }
 
     if (!notes) return <h1>Loading...</h1>
-    // console.log('notes:', notes)
     return (
         <section className="note-index">
-            <NoteHeader 
-            filterBy={filterBy} 
-            onSetFilterBy={onSetFilterBy}
+            <NoteHeader
+                filterBy={filterBy}
+                onSetFilterBy={onSetFilterBy}
             />
             <main className="note-container">
-            {/* <Link to="/note/edit"><h1>Add Note</h1></Link> */}
-            {/* <Outlet/> */}
-            <NoteSidebar />
-            <CreateNote />
-            <NoteList
-                onRemoveNote={onRemoveNote}
-                notes={notes} 
-                refreshNotes={loadNotes}
+                <NoteSidebar />
+                
+                <CreateNote
+                    refreshNotes={loadNotes}
                 />
+                {notes.length === 0 ? (
+                    <div className="no-notes-msg">
+                        <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
+                        <h1>Notes will appear here</h1>
+                    </div>
+                ) : (
+                    <NoteList
+                        onRemoveNote={onRemoveNote}
+                        notes={notes}
+                        refreshNotes={loadNotes}
+                    />
+                )}
             </main>
         </section>
     )

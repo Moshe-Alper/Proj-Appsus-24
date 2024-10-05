@@ -1,7 +1,6 @@
 const { useNavigate, useParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
-import { AddNote } from "./AddNote.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
@@ -13,7 +12,7 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         if (noteId) loadNote()
     }, [])
@@ -69,24 +68,17 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
     if (!noteToEdit) return <p>Loading...</p>
     return (
         <section className="note-section">
-            {noteToEdit.id ? (
-                // This is the edit form
-                <section className="note-edit">
-                    <h1>Edit Note</h1>
-                    <form onSubmit={onSaveNote} className="note-form">
-                        <div className="edit-modal">
-                            <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                            <button>Save</button>
-                            <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
-                        </div>
-                    </form>
-                </section>
-            ) : (
-                // This is the add form
-                <AddNote handleChange={handleChange} title='hi'>
-                    <input placeholder="write text" type="text" />
-                </AddNote>
-            )}
+            <section className="note-edit">
+                <h1>Edit Note</h1>
+                <form onSubmit={onSaveNote} className="note-form">
+                    <div className="edit-modal">
+                        <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                        <button>Save</button>
+                        <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
+                    </div>
+                </form>
+            </section>
+
         </section>
     )
 
