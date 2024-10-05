@@ -1,6 +1,8 @@
 .mail-index {
-    display: flex;
+    display: grid;
+    grid-template-columns: 0.2fr 0.5fr;
+    grid-template-rows: 0.1fr 0.5fr;
     height: 100vh;
-    background-color: #f4f6f8;
     font-family: Arial, sans-serif;
+
 }

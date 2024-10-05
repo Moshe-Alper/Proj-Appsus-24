@@ -38,7 +38,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                     <input
                         type="text"
                         name="txt"
-                        placeholder="Search mail"
+                        placeholder="🔍 Search mail"
                         onChange={handleChange}
                     />
                 </div>
