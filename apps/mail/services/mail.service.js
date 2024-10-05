@@ -23,6 +23,7 @@ window.mailService = mailService
 console.log('mailService is available:', window.mailService)
 
 function query(filterBy = {}) {
+    console.log('Current filter:', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             mails = _getFilteredMails(mails, filterBy)
@@ -74,8 +75,9 @@ function _getFilteredMails(mails, filterBy) {
         )
     }
 
-    // Filter by read status
+    // // Filter by read status
     if (filterBy.isRead !== undefined) {
+        console.log("filter",filterBy.isRead !== undefined)
         mails = mails.filter(mail => mail.isRead === filterBy.isRead)
     }
 
@@ -114,7 +116,7 @@ function getDefaultFilter() {
     return {
         status: '',
         txt: '',
-        isRead: false,
+        isRead: undefined ,
         isStared: false,
         labels: []
     }

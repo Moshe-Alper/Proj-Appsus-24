@@ -41,8 +41,17 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                         onChange={handleChange}
                     />
                 </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        name="isRead"
+                        checked={filterByToEdit.isRead} 
+                        onChange={handleChange}
+                    />
+                    Show Read Emails
+                </div>
             </form>
-     
+
         </section>
     )
 }
