@@ -21,3 +21,34 @@
 .grid {
     display: grid;
 }
+
+ /* buttons */
+
+ .btn-note {
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-note:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-note:active {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-note img, .btn-note i {
+    width: 1.5rem; 
+    height: 1.5rem; 
+  }
+  
+  .btn-note i {
+    font-size: 1.5rem; 
+  }

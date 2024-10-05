@@ -46,10 +46,10 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
                     />
                 )}
 
-                <ColorInput 
+                {/* <ColorInput 
                 onSetNoteStyle={onSetNoteStyle}
                 { ...noteStyle }
-                />
+                /> */}
         </article>
     )
 

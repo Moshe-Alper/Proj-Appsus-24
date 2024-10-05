@@ -2,7 +2,6 @@ const { useNavigate, useParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { AddNote } from "./AddNote.jsx"
-import { ColorInput } from "./ColorInput.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
@@ -84,9 +83,9 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
                 </section>
             ) : (
                 // This is the add form
-                <AddNote
-                    handleChange={handleChange}
-                />
+                <AddNote handleChange={handleChange} title='hi'>
+                    <input placeholder="write text" type="text" />
+                </AddNote>
             )}
         </section>
     )

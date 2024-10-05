@@ -51,18 +51,9 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = 'here is text', backgroundColor='#fff') {
+function getEmptyNote(txt = 'title',) {
     return {
-        id: '22',
-        createdAt: Date.now(),
-        type: 'NoteTxt',
-        isPinned: false,
-        style: {
-            backgroundColor: ''
-        },
-        info: {
-            txt: ''
-        }
+        txt: ''
     }
 }
 
