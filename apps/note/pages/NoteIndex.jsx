@@ -52,6 +52,7 @@ export function NoteIndex() {
             />
             <main className="note-container">
                 <NoteSidebar />
+                
                 <CreateNote
                     refreshNotes={loadNotes}
                 />

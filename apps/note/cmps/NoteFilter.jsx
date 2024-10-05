@@ -3,6 +3,8 @@ const { useState, useEffect } = React
 export function NoteFilter({ filterBy, onSetFilterBy }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+        const [isExpanded, setIsExpanded] = useState(false)
+
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
@@ -21,7 +23,13 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
                 value = target.checked
                 break
         }
+
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+    }
+
+    function handleFilterChange(type) {
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, type }))
+        setIsExpanded(false)
     }
 
     const { txt, type } = filterByToEdit
@@ -32,8 +40,12 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
     }
 
     return (
-        <section className="note-filter">
-            <div className="search-btn">
+        <section
+    className="note-filter"
+    onClick={() => { if (!isExpanded) setIsExpanded(true) }}
+>
+            
+            <div  className="search-btn">
                 <img src="./../assets/img/google-material-icons/search.svg" alt="search-btn" />
             </div>
             <form onSubmit={onSubmit}>
@@ -45,7 +57,27 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
                     id="txt"
                     placeholder="Search"
                 />
+                {isExpanded && (
+
+                <div className="filter-icons-container">
+                <div className="filter-icon" onClick={() => handleFilterChange('NoteTxt')}>
+                    <img src="./../assets/img/google-material-icons/label.svg" alt="Text Notes" />
+                    <h1>Text</h1>
+                </div>
+                <div className="filter-icon" onClick={() => handleFilterChange('NoteImg')}>
+                    <img src="./../assets/img/google-material-icons/image.svg" alt="Image Notes" />
+                    <h1>Image</h1>
+                </div>
+                <div className="filter-icon" onClick={() => handleFilterChange('NoteTodos')}>
+                    <img src="./../assets/img/google-material-icons/list.svg" alt="Todo Notes" />
+                    <h1>List</h1>
+                </div>
+            </div>
+            )}
+
             </form>
+
+
         </section>
     )
 }

@@ -21,15 +21,7 @@ console.log('noteService is available:', window.noteService)
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
-            if (filterBy.txt) {
-                const regex = new RegExp(filterBy.txt, 'i')
-
-                notes = notes.filter(note =>
-                    (note.info.title && regex.test(note.info.title)) ||
-                    (note.info.txt && regex.test(note.info.txt))
-                )
-            }
-            return notes
+            return _filterNotesBy(notes, filterBy)
         })
 }
 
@@ -68,10 +60,9 @@ function getEmptyNote(txt = '', content='', isPinned = false) {
 }
 
 
-
 function getDefaultFilter() {
     return {
-        txt: ''
+        txt: '',
     }
 }
 
@@ -147,4 +138,21 @@ function _setNextPrevNoteId(note) {
         note.prevNoteId = prevNote.id
         return note
     })
+}
+
+function _filterNotesBy(notes, filterBy) {
+    if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+
+        notes = notes.filter(note =>
+            (note.info.title && regex.test(note.info.title)) ||
+            (note.info.txt && regex.test(note.info.txt))
+        )
+    }
+
+    if (filterBy.type) {
+        notes = notes.filter(note => note.type === filterBy.type)
+    }
+
+    return notes
 }
