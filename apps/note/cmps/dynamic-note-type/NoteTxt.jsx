@@ -1,6 +1,5 @@
-export function NoteTxt({ info, onChangeInfo }) {
-
-    const { txt } = info
+export function NoteTxt({ info = { txt: '' }, onChangeInfo }) {
+    const { txt, content } = info
 
     const isEditable = typeof onChangeInfo === 'function';
     const editClass = isEditable ? 'editable' : ''
@@ -18,7 +17,10 @@ export function NoteTxt({ info, onChangeInfo }) {
                     className="note-text-input" 
                 />
             ) : (
-                <h1>{txt}</h1>
+                <div>
+                    <h1>{txt}</h1>
+                    <p>{content}</p>
+                </div>
             )}
         </section>
     )

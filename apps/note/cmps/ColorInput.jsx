@@ -1,4 +1,4 @@
-export function ColorInput({ onSetNoteStyle, backgroundColor }) {
+export function ColorInput({ onSetNoteStyle, backgroundColor, onToggleStyleModal }) {
 
     const colors = [
         '#F44236',
@@ -19,7 +19,7 @@ export function ColorInput({ onSetNoteStyle, backgroundColor }) {
 
     return (
         <section className="color-input">
-            <form className="items-container" onSubmit={onColorInput}>
+            <div className="items-container" onSubmit={onColorInput}>
                 {colors.map(color => (
 
                     <div
@@ -30,7 +30,8 @@ export function ColorInput({ onSetNoteStyle, backgroundColor }) {
                     ></div>
 
                 ))}
-            </form>
+                <button className="btn-note" onClick={onToggleStyleModal}>x</button>
+            </div>
         </section >
     )
 }
