@@ -77,7 +77,6 @@ function _getFilteredMails(mails, filterBy) {
 
     // // Filter by read status
     if (filterBy.isRead !== undefined) {
-        console.log("filter",filterBy.isRead !== undefined)
         mails = mails.filter(mail => mail.isRead === filterBy.isRead)
     }
 

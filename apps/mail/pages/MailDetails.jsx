@@ -17,7 +17,6 @@ export function MailDetails() {
     function loadMail() {
         mailService.get(params.mailId)
             .then(loadedMail => {
-                // console.log(loadedMail)
                 if (!loadedMail.isRead) {
                     loadedMail.isRead = true
                     mailService.save(loadedMail)
