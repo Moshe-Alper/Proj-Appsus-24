@@ -1,16 +1,22 @@
-export function CreateNote(props) {
+const { useState } = React
+
+export function CreateNote({ note, handleChange, onSaveNote }) {
+    // console.log('note:', note)
+
     return <section className="create-note">
         <form>
             <input 
-            type="title" 
-            placeholder="Take a note..." 
-            name="title"
+            type="text" 
+            placeholder="Title" 
+            name="txt"
             />
             <p>
                 <textarea 
                 name="content" 
-                placeholder="Take a note..."></textarea>
+                placeholder="Take a note..."
+                ></textarea>
             </p>
+            <button className="create-btn" onSubmit={onSaveNote}>Close</button>
     </form>
     </section>
 }

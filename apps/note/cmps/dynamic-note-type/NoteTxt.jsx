@@ -18,7 +18,11 @@ export function NoteTxt({ info, onChangeInfo }) {
                     className="note-text-input" 
                 />
             ) : (
-                <h1>{txt}</h1>
+                <div>
+                    <h1>{txt}</h1>
+                    <p>Hi how are you?</p>
+
+                </div>
             )}
         </section>
     )

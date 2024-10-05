@@ -31,3 +31,13 @@
     font-size: 1rem;
     resize: none;
 }
+
+.create-note form .create-btn {
+    font-weight: 700;
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}

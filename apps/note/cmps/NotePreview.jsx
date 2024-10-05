@@ -15,13 +15,7 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
         backgroundColor: initialBackgroundColor
     })
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         onSetNoteStyle({ backgroundColor: 'red' })
-    //     }, 2000)
-    // }, [])
-
-    
+    // console.log('note:', note)
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
