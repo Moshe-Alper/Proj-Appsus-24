@@ -1,5 +1,6 @@
 const { useState, useEffect } = React
 
+import { noteService } from "../services/note.service.js"
 import { ColorInput } from "./ColorInput.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
@@ -9,22 +10,40 @@ import { NoteEdit } from "./NoteEdit.jsx";
 
 export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     const [isShowEditModal, setIsShowEditModal] = useState(false)
+    const [isShowStyleModal, setIsShowStyleModal] = useState(false)
 
     const initialBackgroundColor = note.style.backgroundColor || '#fff'
     const [ noteStyle, setNoteStyle ] = useState({
         backgroundColor: initialBackgroundColor
     })
 
-    // console.log('note:', note)
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
 
-    function onSetNoteStyle(newStyle) {
-        setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }))
+    function onToggleStyleModal() {
+        setIsShowStyleModal((prevIsStyleModal) => !prevIsStyleModal)
+    }
+
+      function onSetNoteStyle(newStyle) {
+        setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }));
+
+        const updatedNote = {
+            ...note,
+            style: {
+                ...note.style,
+                ...newStyle
+            }
+        };
+
+        noteService.save(updatedNote)
+            .then(() => {
+                console.log('New note color:', note.style.backgroundColor)
+            
+            })
+            .catch(err => console.log('Error saving note style:', err));
     }
     
-
     return (
         <article style={{ ...noteStyle }}  className="note-preview">
             <DynamicCmp type={note.type} info={note.info} />
@@ -32,6 +51,7 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
                     note={note}
                     onRemoveNote={onRemoveNote}
                     onToggleEditModal={onToggleEditModal}
+                    onToggleStyleModal={onToggleStyleModal}
                     />
                 {isShowEditModal && (
                     <NoteEdit
@@ -39,11 +59,13 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
                     refreshNotes={refreshNotes}
                     />
                 )}
-
-                {/* <ColorInput 
+                {isShowStyleModal && (
+                <ColorInput 
                 onSetNoteStyle={onSetNoteStyle}
+                onToggleStyleModal={onToggleStyleModal}
                 { ...noteStyle }
-                /> */}
+                /> 
+                )}
         </article>
     )
 

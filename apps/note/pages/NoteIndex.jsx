@@ -44,7 +44,6 @@ export function NoteIndex() {
     }
 
     if (!notes) return <h1>Loading...</h1>
-    console.log('notes:', notes.length)
     return (
         <section className="note-index">
             <NoteHeader
@@ -52,9 +51,6 @@ export function NoteIndex() {
                 onSetFilterBy={onSetFilterBy}
             />
             <main className="note-container">
-                {/* <Link to="/note/edit"><h1>Add Note</h1></Link> */}
-                {/* <Outlet/> */}
-
                 <NoteSidebar />
                 <CreateNote
                     refreshNotes={loadNotes}

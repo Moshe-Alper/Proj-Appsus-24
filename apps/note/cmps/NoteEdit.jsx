@@ -1,7 +1,6 @@
 const { useNavigate, useParams } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
-import { AddNote } from "./AddNote.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
