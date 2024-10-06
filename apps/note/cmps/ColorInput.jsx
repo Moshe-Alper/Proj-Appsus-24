@@ -1,13 +1,16 @@
 export function ColorInput({ onSetNoteStyle, backgroundColor, onToggleStyleModal }) {
 
     const colors = [
-        '#F44236',
-        '#9C27B0',
-        '#3F51B5',
-        '#2196F3',
-        '#4caf50',
-        '#101010',
+        'rgb(246, 235, 97)',
+        'rgb(239, 154, 154)',
+        'rgb(255, 204, 128)',
+        'rgb(200, 230, 201)',
+        'rgb(178, 235, 242)',
+        'rgb(187, 222, 251)',
+        'rgb(225, 190, 231)',
+        'rgb(248, 187, 208)'
     ]
+
     function onSetColor(color) {
         const newStyle = { backgroundColor: color }
         onSetNoteStyle(newStyle)
@@ -24,13 +27,13 @@ export function ColorInput({ onSetNoteStyle, backgroundColor, onToggleStyleModal
 
                     <div
                         key={color}
-                        className={`item ${color===backgroundColor ? 'chosen' : '' }`}
+                        className={`item ${color === backgroundColor ? 'chosen' : ''}`}
                         style={{ backgroundColor: color }}
                         onClick={() => onSetColor(color)}
                     ></div>
 
                 ))}
-                <button className="btn-note" onClick={onToggleStyleModal}>x</button>
+                <button className="btn-note close-btn" onClick={onToggleStyleModal}>x</button>
             </div>
         </section >
     )

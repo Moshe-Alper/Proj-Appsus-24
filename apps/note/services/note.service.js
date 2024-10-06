@@ -108,7 +108,7 @@ function _createNotes() {
                 imgUrl: '/assets/img/notes/Sea-turtle.jpg',
             },
             style: {
-                backgroundColor: 'yellow'
+                backgroundColor: 'rgb(246, 235, 97)'
             }
         },
         {

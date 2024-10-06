@@ -7,9 +7,9 @@ import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 import { NoteFooter } from "./NoteFooter.jsx"
 import { NoteEdit } from "./NoteEdit.jsx";
-import { NotePreviewHeader } from "./NotePreviewHeader.jsx"
+import { NoteHeader } from "./NoteHeader.jsx"
 
-export function NotePreview({ note, onRemoveNote, refreshNotes }) {
+export function NotePreview({ note, onRemoveNote, refreshNotes, togglePinNote }) {
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
 
@@ -47,7 +47,10 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     
     return (
         <article style={{ ...noteStyle }}  className="note-preview">
-            <NotePreviewHeader info={note.info} />
+            <NoteHeader 
+            togglePinNote={togglePinNote}
+            note={note}
+            />
             <DynamicCmp type={note.type} info={note.info} />
                 <NoteFooter
                     note={note}

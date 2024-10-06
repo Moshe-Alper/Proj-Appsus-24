@@ -1,3 +1,7 @@
+.note-preview {
+    position: relative; /* Ensure it has a positioning context */
+}
+
 .note-footer {
     display: flex;
     justify-content: flex-end;
@@ -11,7 +15,7 @@
 }
 
 
-.note-footer:hover {
+.note-preview:hover .note-footer {
     opacity: 1;
 }
 

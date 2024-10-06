@@ -1,3 +1,20 @@
 :root {
     --main-bg-color: lightblue;
+
+    /* note */
+
+    --clr-primary-base: rgb(255, 255, 255);
+    --clr-primary-1: rgb(0, 0, 0);
+    --clr-primary-0: rgb(235, 235, 235);
+
+    --clr-secondary-1: rgb(241, 243, 244) 
+    
+    --clr-note-yellow: rgb(246, 235, 97);
+    --clr-note-red: rgb(239, 154, 154);
+    --clr-note-orange: rgb(255, 204, 128);
+    --clr-note-green: rgb(200, 230, 201);
+    --clr-note-teal: rgb(178, 235, 242);
+    --clr-note-blue: rgb(187, 222, 251);
+    --clr-note-purple: rgb(225, 190, 231);
+    --clr-note-pink: rgb(248, 187, 208);
 }

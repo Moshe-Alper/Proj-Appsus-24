@@ -2,7 +2,7 @@ const { useEffect, useState, Fragment } = React
 const { Outlet, Link, useSearchParams } = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
-import { NoteHeader } from "../cmps/NoteHeader.jsx"
+import { KeepHeader } from "../cmps/KeepHeader.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
 import { noteService } from "../services/note.service.js"
 import { getTruthyValues } from "../../../services/util.service.js"
@@ -43,10 +43,28 @@ export function NoteIndex() {
         setFilterBy({ ...filterBy })
     }
 
+    function onTogglePinNote(noteId) {
+        const note = notes.find(note => note.id === noteId)
+        if (!note) return
+
+        const updatedNote = { ...note, isPinned: !note.isPinned }
+
+        noteService.save(updatedNote)
+            .then(() => {
+                setNotes(notes => notes.map(n => (n.id === noteId ? updatedNote : n)))
+                showSuccessMsg(`Note ${updatedNote.isPinned ? 'pinned' : 'unpinned'}`)
+            })
+            .catch(err => {
+                console.log('Problem toggling pin:', err)
+                showErrorMsg('Problem pinning/unpinning note')
+            })
+    }
+
+
     if (!notes) return <h1>Loading...</h1>
     return (
         <section className="note-index">
-            <NoteHeader
+            <KeepHeader
                 filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy}
             />
@@ -54,20 +72,22 @@ export function NoteIndex() {
                 <NoteSidebar />
                 <CreateNote
                     refreshNotes={loadNotes}
-                    />
+                />
                 {notes.length === 0 ? (
                     <div className="no-notes-msg">
                         <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
                         <h1>Notes will appear here</h1>
                     </div>
-                ) : 
-                (
-                    <NoteList
-                        onRemoveNote={onRemoveNote}
-                        notes={notes}
-                        refreshNotes={loadNotes}
-                    />
-                )}
+                ) :
+                    (
+                        <NoteList
+                            onRemoveNote={onRemoveNote}
+                            notes={notes}
+                            refreshNotes={loadNotes}
+                            togglePinNote={onTogglePinNote}
+
+                        />
+                    )}
             </main>
         </section>
     )
