@@ -4,7 +4,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
     const [selectedStatus, setSelectedStatus] = useState(filterBy.status)
 
-    // console.log(filterBy)
+    console.log(filterBy)
     function handleStatusChange(status) {
         setSelectedStatus(status)
         onSetFilterBy({ ...filterBy, status })
@@ -16,7 +16,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
                 <ul>
                     <li className={selectedStatus === 'inbox' ? 'active' : ''}
                         onClick={() => handleStatusChange('inbox')}>
-                        Inbox ({counts.inbox}) {/* Show unread count */}
+                        Inbox ({counts.inbox}) 
                     </li>
                     <li className={selectedStatus === 'sent' ? 'active' : ''}
                         onClick={() => handleStatusChange('sent')}>

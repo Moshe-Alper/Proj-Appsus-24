@@ -9,7 +9,7 @@ export function MailDetails() {
     const [mail, setMail] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
-
+ 
     useEffect(() => {
         loadMail()
     }, [params.mailId])
@@ -25,17 +25,17 @@ export function MailDetails() {
             })
             .catch(err => {
                 console.error('Problem getting mail', err)
-                navigate('/mail')
+                navigate('/mail/folder')
             })
     }
 
     function onDeleteMail() {
         mailService.remove(params.mailId)
-        navigate('/mail')
+        navigate('/mail/folder')
     }
 
     function onBack() {
-        navigate('/mail')
+        navigate('/mail/folder')
     }
 
     if (!mail) return <div>Loading...</div>

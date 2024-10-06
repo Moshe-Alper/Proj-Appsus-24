@@ -1,5 +1,5 @@
 
-
+const { useParams, useNavigate, Link } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { mailService } from "../services/mail.service.js"
@@ -12,8 +12,9 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
     const [counts, setCounts] = useState({ inbox: 0, sent: 0, trash: 0, draft: 0 })
     const [selectedStatus, setSelectedStatus] = useState('inbox')
-
-    const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
+    const { folder } = useParams()
+    console.log(folder)
+    // const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
     useEffect(() => {
         loadMails()
@@ -22,8 +23,9 @@ export function MailIndex() {
 
 
     function loadMails() {
+        // filterBy.status = folder
         mailService.query(filterBy)
-            .then(setMails)
+            .then(setMails,setSelectedStatus)
             .catch(err => {
                 console.log('Problems getting mails:', err)
             })
@@ -44,21 +46,24 @@ export function MailIndex() {
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
-    function handleStatusChange(status) {
-        setSelectedStatus(status)
-        onSetFilterBy({ status })
-    }
-
-    function onMailRead(mailId) {
-        const mailToRead = mails.find(mail => mail.id === mailId)
-        if (mailToRead && !mailToRead.isRead) {
-            setCounts(prevCounts => {
-                const newCounts = { ...prevCounts }
-                newCounts.inbox = Math.max(0, newCounts.inbox - 1)
-                return newCounts
-            })
-        }
-    }
+    // function onMailRead(mailId) {
+    //     const mailToRead = mails.find(mail => mail.id === mailId);
+        
+    //     // Only mark as read if the mail isn't already read
+    //     if (mailToRead && !mailToRead.isRead) {
+    //         mailToRead.isRead = true;
+    //         mailService.save(mailToRead);  // Save updated mail
+    
+    //         // Update the mails state (to trigger re-render) and reduce the unread count for the folder
+    //         setMails(mails.map(mail => mail.id === mailId ? { ...mail, isRead: true } : mail));
+            
+    //         setCounts(prevCounts => {
+    //             const newCounts = { ...prevCounts };
+    //             newCounts[folder] = Math.max(0, newCounts[folder] - 1);  // Reduce unread count
+    //             return newCounts;
+    //         });
+    //     }
+    // }
 
     if (!mails) return <h1>Loading...</h1>
     return (
@@ -66,7 +71,7 @@ export function MailIndex() {
         <section className="mail-index">
             <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts}  />
-            <MailList mails={mails} onMailRead={onMailRead} />
+            <MailList mails={mails} />
         </section>
     )
 
