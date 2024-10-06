@@ -95,7 +95,7 @@ function _getFilteredMails(mails, filterBy) {
     return mails
 }
 
-function getEmptyMail(subject = '', body = '', to = '') {
+function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
     return {
         id: makeId(),
         createdAt: Date.now(),
@@ -104,7 +104,7 @@ function getEmptyMail(subject = '', body = '', to = '') {
         isRead: false,
         sentAt: null,
         removedAt: null,
-        from: loggedinUser.mail,
+        from,
         to,
         labels: [],
         isStared: false,
@@ -113,9 +113,9 @@ function getEmptyMail(subject = '', body = '', to = '') {
 
 function getDefaultFilter() {
     return {
-        status: '',
+        status: 'inbox',
         txt: '',
-        isRead: undefined ,
+        isRead: undefined,
         isStared: false,
         labels: []
     }
@@ -126,7 +126,7 @@ function _createMails() {
     if (!mails || !mails.length) {
         mails = [
             _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
-            _createMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
         ]
         saveToStorage(MAIL_KEY, mails)
@@ -134,8 +134,8 @@ function _createMails() {
     }
 }
 
-function _createMail(subject, body, to) {
-    const mail = getEmptyMail(subject, body, to)
+function _createMail(subject, body, to, from) {
+    const mail = getEmptyMail(subject, body, to, from)
     mail.sentAt = Date.now()
     return mail
 }
