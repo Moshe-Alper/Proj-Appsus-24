@@ -1,10 +1,10 @@
 const { useState, useEffect } = React
 
-export function MailSideFilter({ filterBy, onSetFilterBy }) {
+export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
-    const [selectedStatus, setSelectedStatus] = useState(filterBy.status || 'inbox' )
-    
-    // console.log(filterBy)
+    const [selectedStatus, setSelectedStatus] = useState(filterBy.status)
+
+    console.log(filterBy)
     function handleStatusChange(status) {
         setSelectedStatus(status)
         onSetFilterBy({ ...filterBy, status })
@@ -14,21 +14,21 @@ export function MailSideFilter({ filterBy, onSetFilterBy }) {
         <section className="mail-side-filter">
             <nav>
                 <ul>
-                    <li className={selectedStatus === 'inbox' ? 'active' : ''} 
+                    <li className={selectedStatus === 'inbox' ? 'active' : ''}
                         onClick={() => handleStatusChange('inbox')}>
-                        Inbox
+                        Inbox ({counts.inbox}) 
                     </li>
-                    <li className={selectedStatus === 'sent' ? 'active' : ''} 
+                    <li className={selectedStatus === 'sent' ? 'active' : ''}
                         onClick={() => handleStatusChange('sent')}>
-                        Sent
+                        Sent ({counts.sent})
                     </li>
-                    <li className={selectedStatus === 'trash' ? 'active' : ''} 
+                    <li className={selectedStatus === 'trash' ? 'active' : ''}
                         onClick={() => handleStatusChange('trash')}>
-                        Trash
+                        Trash ({counts.trash})
                     </li>
-                    <li className={selectedStatus === 'draft' ? 'active' : ''} 
+                    <li className={selectedStatus === 'draft' ? 'active' : ''}
                         onClick={() => handleStatusChange('draft')}>
-                        Draft
+                        Draft ({counts.draft})
                     </li>
                 </ul>
             </nav>

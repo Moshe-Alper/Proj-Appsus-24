@@ -16,6 +16,7 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
+    getMailCountByFolder
 }
 
 
@@ -23,7 +24,7 @@ window.mailService = mailService
 console.log('mailService is available:', window.mailService)
 
 function query(filterBy = {}) {
-    console.log('Current filter:', filterBy)
+    // console.log('Current filter:', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             mails = _getFilteredMails(mails, filterBy)
@@ -94,8 +95,22 @@ function _getFilteredMails(mails, filterBy) {
 
     return mails
 }
+function getMailCountByFolder(){
 
-function getEmptyMail(subject = '', body = '', to = '') {
+    return storageService.query(MAIL_KEY)
+    .then(mails => {
+        const counts = {
+            inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            trash: mails.filter(mail => mail.removedAt).length,
+            draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
+        }
+        return counts
+    })
+
+}
+
+function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
     return {
         id: makeId(),
         createdAt: Date.now(),
@@ -104,7 +119,7 @@ function getEmptyMail(subject = '', body = '', to = '') {
         isRead: false,
         sentAt: null,
         removedAt: null,
-        from: loggedinUser.mail,
+        from,
         to,
         labels: [],
         isStared: false,
@@ -113,9 +128,9 @@ function getEmptyMail(subject = '', body = '', to = '') {
 
 function getDefaultFilter() {
     return {
-        status: '',
+        status: 'inbox',
         txt: '',
-        isRead: undefined ,
+        isRead: undefined,
         isStared: false,
         labels: []
     }
@@ -126,7 +141,7 @@ function _createMails() {
     if (!mails || !mails.length) {
         mails = [
             _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
-            _createMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
         ]
         saveToStorage(MAIL_KEY, mails)
@@ -134,8 +149,8 @@ function _createMails() {
     }
 }
 
-function _createMail(subject, body, to) {
-    const mail = getEmptyMail(subject, body, to)
+function _createMail(subject, body, to, from) {
+    const mail = getEmptyMail(subject, body, to, from)
     mail.sentAt = Date.now()
     return mail
 }
