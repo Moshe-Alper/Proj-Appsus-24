@@ -1,7 +1,7 @@
 import { NotePreview } from "./NotePreview.jsx"
 
 
-export function NoteList({ notes, onRemoveNote, refreshNotes, togglePinNote }) {
+export function NoteList({ notes, onRemoveNote, refreshNotes, togglePinNote, onDuplicateNote }) {
     const pinnedNotes = notes.filter(note => note.isPinned)
     const otherNotes = notes.filter(note => !note.isPinned)
 
@@ -18,6 +18,7 @@ export function NoteList({ notes, onRemoveNote, refreshNotes, togglePinNote }) {
                                     note={note}
                                     refreshNotes={refreshNotes}
                                     togglePinNote={togglePinNote}
+                                    onDuplicateNote={onDuplicateNote}
                                 />
                             </li>)}
                     </ul>
@@ -35,6 +36,7 @@ export function NoteList({ notes, onRemoveNote, refreshNotes, togglePinNote }) {
                                     note={note}
                                     refreshNotes={refreshNotes}
                                     togglePinNote={togglePinNote}
+                                    onDuplicateNote={onDuplicateNote}
                                 />
                             </li>)}
                     </ul>

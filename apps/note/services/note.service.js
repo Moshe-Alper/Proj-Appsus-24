@@ -105,7 +105,7 @@ function _createNotes() {
             isPinned: false,
             info: {
                 title: 'Bobi and Me',
-                imgUrl: '/assets/img/notes/Sea-turtle.jpg',
+                imgUrl: 'assets/img/notes/Sea-turtle.jpg',
             },
             style: {
                 backgroundColor: 'rgb(246, 235, 97)'

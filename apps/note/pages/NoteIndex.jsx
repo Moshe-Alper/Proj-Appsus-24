@@ -39,6 +39,10 @@ export function NoteIndex() {
             })
     }
 
+    function onDuplicateNote() {
+        console.log('copy')
+    }
+
     function onSetFilterBy(filterBy) {
         setFilterBy({ ...filterBy })
     }
@@ -85,6 +89,7 @@ export function NoteIndex() {
                             notes={notes}
                             refreshNotes={loadNotes}
                             togglePinNote={onTogglePinNote}
+                            onDuplicateNote={onDuplicateNote}
 
                         />
                     )}

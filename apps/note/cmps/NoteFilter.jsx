@@ -46,7 +46,7 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
 >
             
             <div  className="search-btn">
-                <img src="./../assets/img/google-material-icons/search.svg" alt="search-btn" />
+                <img src="assets/img/google-material-icons/search.svg" alt="search-btn" />
             </div>
             <form onSubmit={onSubmit}>
                 <input
@@ -61,15 +61,15 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
 
                 <div className="filter-icons-container">
                 <div className="filter-icon" onClick={() => handleFilterChange('NoteTxt')}>
-                    <img src="./../assets/img/google-material-icons/label.svg" alt="Text Notes" />
+                    <img src="assets/img/google-material-icons/label.svg" alt="Text Notes" />
                     <h1>Text</h1>
                 </div>
                 <div className="filter-icon" onClick={() => handleFilterChange('NoteImg')}>
-                    <img src="./../assets/img/google-material-icons/image.svg" alt="Image Notes" />
+                    <img src="assets/img/google-material-icons/image.svg" alt="Image Notes" />
                     <h1>Image</h1>
                 </div>
                 <div className="filter-icon" onClick={() => handleFilterChange('NoteTodos')}>
-                    <img src="./../assets/img/google-material-icons/list.svg" alt="Todo Notes" />
+                    <img src="assets/img/google-material-icons/list.svg" alt="Todo Notes" />
                     <h1>List</h1>
                 </div>
             </div>
