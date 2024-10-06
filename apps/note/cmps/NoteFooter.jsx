@@ -1,9 +1,9 @@
 const { Link } = ReactRouterDOM
 
-export function NoteActions({ note, onRemoveNote, onToggleEditModal, onToggleStyleModal }) {
+export function NoteFooter({ note, onRemoveNote, onToggleEditModal, onToggleStyleModal }) {
 
     return (
-        <div className="note-actions">
+        <div className="note-footer">
 
             <button className="btn-note" onClick={() => onRemoveNote(note.id)}>
             <img src="assets/img/google-material-icons/delete.svg" alt="trash-button" />

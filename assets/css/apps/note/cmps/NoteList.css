@@ -1,34 +1,44 @@
  .note-list {
-    grid-column: 2;
-    grid-row: 2; 
-    
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1em;
-    padding: 1.25em;
-    justify-content: center;
+   grid-column: 2;
+   grid-row: 2;
 
+   list-style: none;
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+   gap: 1em;
+   padding: 1.25em;
+   justify-content: center;
+
+ }
+
+h1.pinned-title, h1.other-title {
+   color: rgb(95, 99, 104);
+   letter-spacing: .0727272727rem;
+   font-size: .6875rem;
+   font-weight: 500;
+   line-height: 1rem;
+   text-transform: uppercase;
+   margin: 2rem 2rem .5rem;
  }
 
 
  .no-notes-msg {
-   display: flex;            
-   justify-content: start;   
-   align-items: center;        
-   height: 100%;               
-   flex-direction: column;     
-}
+   display: flex;
+   justify-content: start;
+   align-items: center;
+   height: 100%;
+   flex-direction: column;
+ }
 
- .no-notes-msg h1{
+ .no-notes-msg h1 {
    font-size: 1.375rem;
    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.75rem;
+   letter-spacing: 0;
+   line-height: 1.75rem;
    color: rgb(95, 99, 104);
  }
 
- .no-notes-msg img{
+ .no-notes-msg img {
    width: 7.5rem;
    height: 7.5rem;
    opacity: .1;
