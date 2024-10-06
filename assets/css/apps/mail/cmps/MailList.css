@@ -17,6 +17,15 @@
     transition: background-color 0.3s;
 }
 
+.mail-list li.read {
+    background-color: #f1f1f1; /* Lighter color for read emails */
+}
+
+.mail-list li.unread {
+    background-color: #ffffff; /* Default color for unread emails */
+    font-weight: bold;
+}
+
 .mail-list li:hover {
     background-color: #f5f5f5;
 }
