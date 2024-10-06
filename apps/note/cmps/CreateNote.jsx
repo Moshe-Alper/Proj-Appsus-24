@@ -54,7 +54,7 @@ export function CreateNote({ refreshNotes }) {
 
     // console.log('newNote:', newNote)
     const { info } = newNote
-    const { txt, content } = info
+    const { title, txt } = info
 
 
     return (
@@ -62,17 +62,17 @@ export function CreateNote({ refreshNotes }) {
             <form onSubmit={onSaveNote} onClick={() => {if (!isExpanded) setIsExpanded(true) }}>
                 {isExpanded && (
                     <input
-                        value={txt}
+                        value={title}
                         type="text"
                         placeholder="Title"
-                        name="txt"
+                        name="title"
                         onChange={handleChange}
                     />
                 )}
                 <p>
                     <textarea
-                        value={content}
-                        name="content"
+                        value={txt}
+                        name="txt"
                         placeholder="Take a note..."
                         onChange={handleChange}
                     ></textarea>

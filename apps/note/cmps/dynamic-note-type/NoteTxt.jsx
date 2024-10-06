@@ -1,5 +1,6 @@
 export function NoteTxt({ info = { txt: '' }, onChangeInfo }) {
-    const { txt, content } = info
+    
+    const { txt } = info
 
     const isEditable = typeof onChangeInfo === 'function';
     const editClass = isEditable ? 'editable' : ''
@@ -18,8 +19,7 @@ export function NoteTxt({ info = { txt: '' }, onChangeInfo }) {
                 />
             ) : (
                 <div>
-                    <h1>{txt}</h1>
-                    <p>{content}</p>
+                    <p>{txt}</p>
                 </div>
             )}
         </section>

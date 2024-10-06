@@ -5,8 +5,9 @@ import { ColorInput } from "./ColorInput.jsx"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
-import { NoteActions } from "./NoteActions.jsx"
+import { NoteFooter } from "./NoteFooter.jsx"
 import { NoteEdit } from "./NoteEdit.jsx";
+import { NotePreviewHeader } from "./NotePreviewHeader.jsx"
 
 export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     const [isShowEditModal, setIsShowEditModal] = useState(false)
@@ -46,8 +47,9 @@ export function NotePreview({ note, onRemoveNote, refreshNotes }) {
     
     return (
         <article style={{ ...noteStyle }}  className="note-preview">
+            <NotePreviewHeader info={note.info} />
             <DynamicCmp type={note.type} info={note.info} />
-                <NoteActions
+                <NoteFooter
                     note={note}
                     onRemoveNote={onRemoveNote}
                     onToggleEditModal={onToggleEditModal}

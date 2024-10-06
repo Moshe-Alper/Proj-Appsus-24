@@ -1,4 +1,4 @@
-.note-actions {
+.note-footer {
     display: flex;
     justify-content: flex-end;
     align-items: center; 
@@ -11,11 +11,11 @@
 }
 
 
-.note-actions:hover {
+.note-footer:hover {
     opacity: 1;
 }
 
-.note-actions button {
+.note-footer button {
     width: 2rem;
     height: 2rem;
 }

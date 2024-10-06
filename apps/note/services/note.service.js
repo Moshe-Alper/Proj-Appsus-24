@@ -43,7 +43,7 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = '', content='', isPinned = false) {
+function getEmptyNote(title = '', txt='', isPinned = false) {
     return {
         id: '',
         createdAt: Date.now(),
@@ -53,8 +53,8 @@ function getEmptyNote(txt = '', content='', isPinned = false) {
             backgroundColor: 'white' 
         },
         info: {
-            txt: txt,
-            content: content
+            title: title,
+            txt: txt
         }
     }
 }
@@ -92,8 +92,10 @@ function _createNotes() {
                 backgroundColor: 'white'
             },
             info: {
-                txt: 'Fullstack Me Baby!',
-                content: 'Im Stacking you'
+                title: 'Fullstack Me Baby!',
+                txt: 'Im Stacking you',
+                imgUrl: '',
+                todos: {}
             }
         },
         {
@@ -102,8 +104,8 @@ function _createNotes() {
             type: 'NoteImg',
             isPinned: false,
             info: {
-                url: '/assets/img/notes/Sea-turtle.jpg',
-                title: 'Bobi and Me'
+                title: 'Bobi and Me',
+                imgUrl: '/assets/img/notes/Sea-turtle.jpg',
             },
             style: {
                 backgroundColor: 'yellow'

@@ -1,4 +1,4 @@
-const { useEffect, useState } = React
+const { useEffect, useState, Fragment } = React
 const { Outlet, Link, useSearchParams } = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
@@ -52,16 +52,16 @@ export function NoteIndex() {
             />
             <main className="note-container">
                 <NoteSidebar />
-                
                 <CreateNote
                     refreshNotes={loadNotes}
-                />
+                    />
                 {notes.length === 0 ? (
                     <div className="no-notes-msg">
                         <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
                         <h1>Notes will appear here</h1>
                     </div>
-                ) : (
+                ) : 
+                (
                     <NoteList
                         onRemoveNote={onRemoveNote}
                         notes={notes}
