@@ -16,6 +16,7 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
+    getMailCountByFolder
 }
 
 
@@ -23,7 +24,7 @@ window.mailService = mailService
 console.log('mailService is available:', window.mailService)
 
 function query(filterBy = {}) {
-    console.log('Current filter:', filterBy)
+    // console.log('Current filter:', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             mails = _getFilteredMails(mails, filterBy)
@@ -93,6 +94,20 @@ function _getFilteredMails(mails, filterBy) {
     }
 
     return mails
+}
+function getMailCountByFolder(){
+
+    return storageService.query(MAIL_KEY)
+    .then(mails => {
+        const counts = {
+            inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            trash: mails.filter(mail => mail.removedAt).length,
+            draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
+        }
+        return counts
+    })
+
 }
 
 function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
