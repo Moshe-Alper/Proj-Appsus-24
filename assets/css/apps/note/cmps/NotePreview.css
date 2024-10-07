@@ -35,11 +35,6 @@
     list-style-type: disc;
 }
 
-.note-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
 
 .color-input {
     position: absolute;
@@ -75,3 +70,21 @@
     border: solid whitesmoke 6px;
 }
 
+/* todos */
+
+.note-preview .note-todos {
+    list-style: none;
+}
+
+.note-preview .note-todos .done {
+    text-decoration: line-through;
+    color: gray;
+}
+
+/* image */
+
+.note-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
