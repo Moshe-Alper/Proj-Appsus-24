@@ -83,7 +83,7 @@ export function NoteIndex() {
             <main className="note-container">
                 <NoteSidebar />
                 <CreateNote
-                    refreshNotes={loadNotes}
+                    loadNotes={loadNotes}
                 />
                 {notes.length === 0 ? (
                     <div className="no-notes-msg">
@@ -95,7 +95,7 @@ export function NoteIndex() {
                         <NoteList
                             onRemoveNote={onRemoveNote}
                             notes={notes}
-                            refreshNotes={loadNotes}
+                            loadNotes={loadNotes}
                             togglePinNote={onTogglePinNote}
                             onDuplicateNote={onDuplicateNote}
 

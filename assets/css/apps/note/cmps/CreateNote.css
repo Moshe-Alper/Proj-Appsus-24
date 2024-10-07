@@ -6,19 +6,19 @@
 
 .create-note form {
     position: relative;
-    width: 600px;
-    margin:  32px auto 50px auto;
+    width: 37.5rem;
+    margin: 2rem auto 3.125rem auto;
     background-color: #fff;
-    padding: 5px;
-    border-radius: 7px;
-    box-shadow: 0 1px 7px rgba(128, 128, 128);
+    padding: 0.3125rem;
+    border-radius: 0.4375rem;
+    box-shadow: 0 0.0625rem 0.4375rem rgba(128, 128, 128);
 }
 
 .create-note form input,
 .create-note form textarea {
     width: 100%;
     border: none;
-    padding: 4px 0 4px 10px; 
+    padding: 0.25rem 0 0.25rem 0.625rem;
     outline: none;
     font-size: 1rem;
     resize: none;
@@ -28,9 +28,33 @@
 .create-note form .create-btn {
     font-weight: 700;
     position: absolute;
-    right: 18px;
-    bottom: 18px;
+    right: 1.125rem;
+    bottom: 1.125rem;
     cursor: pointer;
     border: none;
     background-color: transparent;
+}
+
+.note-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.note-text {
+    flex-grow: 1;
+    margin-right: 0.625rem;
+}
+
+.input-title {
+    margin-bottom: 0.625rem; 
+}
+
+.button-container {
+    display: flex;
+    gap: 0.625rem; 
+}
+
+.expanded-buttons {
+    margin-top: 0.625rem; 
 }
