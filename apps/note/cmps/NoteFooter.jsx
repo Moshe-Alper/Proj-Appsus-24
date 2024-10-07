@@ -11,7 +11,7 @@ export function NoteFooter({
                 <img src="assets/img/google-material-icons/delete.svg" alt="trash-button" />
             </button  >
 
-            <button className="btn-note" onClick={onDuplicateNote}>
+            <button className="btn-note" onClick={() => onDuplicateNote(note)}>
                 <img src="assets/img/google-material-icons/duplicate.svg" alt="duplicate-button" />
             </button>
             

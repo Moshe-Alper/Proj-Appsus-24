@@ -12,6 +12,7 @@ export const noteService = {
     getEmptyNote,
     getDefaultFilter,
     getFilterFromSearchParams,
+    duplicate,
 }
 
 // For Debug (easy access from console)
@@ -59,7 +60,6 @@ function getEmptyNote(title = '', txt='', isPinned = false) {
     }
 }
 
-
 function getDefaultFilter() {
     return {
         txt: '',
@@ -73,6 +73,16 @@ function getFilterFromSearchParams(searchParams) {
         filterBy[field] = searchParams.get(field) || ''
     }
     return filterBy
+}
+
+function duplicate(note) {
+    const newNote = {
+        ...note,
+        id: '', 
+        createdAt: Date.now(),    
+        isPinned: false         
+    }
+    return save(newNote) 
 }
 
 // Local Functions

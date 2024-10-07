@@ -39,8 +39,16 @@ export function NoteIndex() {
             })
     }
 
-    function onDuplicateNote() {
-        console.log('copy')
+    function onDuplicateNote(note) {
+        noteService.duplicate(note)
+            .then(duplicatedNote => {
+                setNotes(prevNotes => [duplicatedNote, ...prevNotes])
+                showSuccessMsg('Note Duplicated')
+            })
+            .catch(err => {
+                console.error('Error duplicating note:', err)
+                showErrorMsg('Problem duplicating note') 
+            })
     }
 
     function onSetFilterBy(filterBy) {
