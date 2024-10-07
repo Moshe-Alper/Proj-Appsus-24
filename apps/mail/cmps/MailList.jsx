@@ -7,7 +7,7 @@ export function MailList({ mails}) {
         <ul className="mail-list">
             {mails.map(mail => (
                 <li key={mail.id}>
-                    <Link to={`/mail/folder/${mail.id}`}>
+                    <Link to={`/mail/${mail.id}`}>
                         <MailPreview
                             mail={mail}
                         />

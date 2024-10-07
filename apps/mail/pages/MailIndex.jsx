@@ -10,10 +10,7 @@ import { MailSideFilter } from "../cmps/MailSideFilter.jsx"
 export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-    const [counts, setCounts] = useState({ inbox: 0, sent: 0, trash: 0, draft: 0 })
-    const [selectedStatus, setSelectedStatus] = useState('inbox')
-    const { folder } = useParams()
-    console.log(folder)
+    const [counts, setCounts] = useState({ Inbox: 0, Sent: 0, Trash: 0, Draft: 0 })    
     // const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 
     useEffect(() => {
@@ -21,11 +18,10 @@ export function MailIndex() {
         updateMailCounts()
     }, [filterBy])
 
-
     function loadMails() {
         // filterBy.status = folder
         mailService.query(filterBy)
-            .then(setMails,setSelectedStatus)
+            .then(setMails)
             .catch(err => {
                 console.log('Problems getting mails:', err)
             })
@@ -43,27 +39,11 @@ export function MailIndex() {
     }
 
     function onSetFilterBy(filterBy) {
+        console.log(filterBy)
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
-    // function onMailRead(mailId) {
-    //     const mailToRead = mails.find(mail => mail.id === mailId);
-        
-    //     // Only mark as read if the mail isn't already read
-    //     if (mailToRead && !mailToRead.isRead) {
-    //         mailToRead.isRead = true;
-    //         mailService.save(mailToRead);  // Save updated mail
-    
-    //         // Update the mails state (to trigger re-render) and reduce the unread count for the folder
-    //         setMails(mails.map(mail => mail.id === mailId ? { ...mail, isRead: true } : mail));
-            
-    //         setCounts(prevCounts => {
-    //             const newCounts = { ...prevCounts };
-    //             newCounts[folder] = Math.max(0, newCounts[folder] - 1);  // Reduce unread count
-    //             return newCounts;
-    //         });
-    //     }
-    // }
+console.log(filterBy)
 
     if (!mails) return <h1>Loading...</h1>
     return (

@@ -2,34 +2,33 @@ const { useState, useEffect } = React
 
 export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
-    const [selectedStatus, setSelectedStatus] = useState(filterBy.status)
+    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
-    console.log(filterBy)
-    function handleStatusChange(status) {
-        setSelectedStatus(status)
-        onSetFilterBy({ ...filterBy, status })
+    useEffect(() => {
+        onSetFilterBy(filterByToEdit)
+    }, [filterByToEdit])
+
+    const handleChange = (folder) => {
+        setFilterByToEdit(prevFilter => ({
+          ...prevFilter,
+          folder: folder
+        }))
     }
 
+    const folders = ['Inbox', 'Sent', 'Trash', 'Delete']
     return (
         <section className="mail-side-filter">
             <nav>
                 <ul>
-                    <li className={selectedStatus === 'inbox' ? 'active' : ''}
-                        onClick={() => handleStatusChange('inbox')}>
-                        Inbox ({counts.inbox}) 
-                    </li>
-                    <li className={selectedStatus === 'sent' ? 'active' : ''}
-                        onClick={() => handleStatusChange('sent')}>
-                        Sent ({counts.sent})
-                    </li>
-                    <li className={selectedStatus === 'trash' ? 'active' : ''}
-                        onClick={() => handleStatusChange('trash')}>
-                        Trash ({counts.trash})
-                    </li>
-                    <li className={selectedStatus === 'draft' ? 'active' : ''}
-                        onClick={() => handleStatusChange('draft')}>
-                        Draft ({counts.draft})
-                    </li>
+                    {folders.map(folder => (
+                        <li
+                            key={folder}
+                            className={filterBy.folder === folder ? 'active' : ''}
+                            onClick={() => handleChange(folder)}
+                        >
+                            {folder} {counts[folder] || 0}
+                        </li>
+                    ))}
                 </ul>
             </nav>
         </section>

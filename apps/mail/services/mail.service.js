@@ -49,18 +49,19 @@ function save(mail) {
     }
 }
 
+
 function _getFilteredMails(mails, filterBy) {
     // Filter by status (inbox, sent, trash, draft)
-    if (filterBy.status) {
+    if (filterBy.folder) {
         mails = mails.filter(mail => {
-            switch (filterBy.status) {
-                case 'inbox':
+            switch (filterBy.folder) {
+                case 'Inbox':
                     return mail.to === loggedinUser.mail && !mail.removedAt
-                case 'sent':
+                case 'Sent':
                     return mail.from === loggedinUser.mail
-                case 'trash':
+                case 'Trash':
                     return mail.removedAt
-                case 'draft':
+                case 'Draft':
                     return !mail.sentAt
                 default:
                     return true
@@ -100,10 +101,10 @@ function getMailCountByFolder(){
     return storageService.query(MAIL_KEY)
     .then(mails => {
         const counts = {
-            inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-            sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-            trash: mails.filter(mail => mail.removedAt).length,
-            draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
+            Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+            Trash: mails.filter(mail => mail.removedAt).length,
+            Draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
         }
         return counts
     })
@@ -128,7 +129,7 @@ function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail
 
 function getDefaultFilter() {
     return {
-        status: 'inbox',
+        folder: 'Inbox',
         txt: '',
         isRead: undefined,
         isStared: false,

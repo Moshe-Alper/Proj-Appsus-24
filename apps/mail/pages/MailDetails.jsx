@@ -13,29 +13,29 @@ export function MailDetails() {
     useEffect(() => {
         loadMail()
     }, [params.mailId])
-
+    
     function loadMail() {
         mailService.get(params.mailId)
-            .then(loadedMail => {
-                if (!loadedMail.isRead) {
-                    loadedMail.isRead = true
+        .then(loadedMail => {
+            if (!loadedMail.isRead) {
+                loadedMail.isRead = true
                     mailService.save(loadedMail)
                 }
                 setMail(loadedMail)
             })
             .catch(err => {
                 console.error('Problem getting mail', err)
-                navigate('/mail/folder')
+                navigate('/mail')
             })
     }
 
     function onDeleteMail() {
         mailService.remove(params.mailId)
-        navigate('/mail/folder')
+        navigate('/mail')
     }
 
     function onBack() {
-        navigate('/mail/folder')
+        navigate('/mail')
     }
 
     if (!mail) return <div>Loading...</div>
