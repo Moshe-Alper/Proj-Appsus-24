@@ -44,14 +44,14 @@ function save(note) {
     }
 }
 
-function getEmptyNote(title = '', txt='', isPinned = false) {
+function getEmptyNote(title = '', txt = '', isPinned = false) {
     return {
         id: '',
         createdAt: Date.now(),
-        type: 'NoteTxt', 
+        type: 'NoteTxt',
         isPinned: isPinned,
         style: {
-            backgroundColor: 'white' 
+            backgroundColor: 'white'
         },
         info: {
             title: title,
@@ -78,11 +78,11 @@ function getFilterFromSearchParams(searchParams) {
 function duplicate(note) {
     const newNote = {
         ...note,
-        id: '', 
-        createdAt: Date.now(),    
-        isPinned: false         
+        id: '',
+        createdAt: Date.now(),
+        isPinned: false
     }
-    return save(newNote) 
+    return save(newNote)
 }
 
 // Local Functions
@@ -140,6 +140,20 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTE_KEY, notes)
 }
+
+function _getInfoByType(type) {
+    switch (type) {
+        case 'NoteTxt':
+            return { title: '', txt: '' }
+        case 'NoteImg':
+            return { title: '', imgUrl: '' }
+        case 'NoteTodos':
+            return { title: '', todos: [] }
+        default:
+            return { title: '', txt: '' }
+    }
+}
+
 
 function _setNextPrevNoteId(note) {
     return query().then((notes) => {

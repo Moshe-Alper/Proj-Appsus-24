@@ -7,9 +7,9 @@ export function CreateNote({ loadNotes }) {
 
     const [newNote, setNewNote] = useState(noteService.getEmptyNote())
     const [isExpanded, setIsExpanded] = useState(false)
+    const [noteType, setNoteType] = useState('NoteTxt')
+
     const navigate = useNavigate()
-
-
 
     function handleChange({ target }) {
         const field = target.name
@@ -36,11 +36,17 @@ export function CreateNote({ loadNotes }) {
     function onSaveNote(ev) {
         ev.preventDefault()
 
+        if (!isValid) {
+            setIsExpanded(false)
+            return
+        }
+
         noteService.save(newNote)
             .then(note => {
                 console.log('Success adding note:', note)
                 setNewNote(noteService.getEmptyNote())
                 loadNotes()
+                setIsExpanded(false)
                 navigate('/note')
             })
             .catch(err => {
@@ -52,17 +58,16 @@ export function CreateNote({ loadNotes }) {
             })
     }
 
-    // console.log('newNote:', newNote)
     const { info } = newNote
     const { title, txt } = info
 
-
+    const isValid = title.trim() || txt.trim()
     return (
         <section className="create-note">
             <form
                 onSubmit={onSaveNote}
                 onClick={() => {
-                    if (!isExpanded) setIsExpanded(true);
+                    if (!isExpanded) setIsExpanded(true)
                 }}
             >
                 {isExpanded && (
@@ -77,6 +82,7 @@ export function CreateNote({ loadNotes }) {
                     </div>
                 )}
 
+
                 <div className="note-text-container">
                     <p className="note-text">
                         <textarea
@@ -89,13 +95,13 @@ export function CreateNote({ loadNotes }) {
 
                     {!isExpanded && (
                         <div className="button-container">
-                            <button className="btn-note">
+                            <button onClick={() => setNoteType('NoteTodos')} className="btn-note">
                                 <img src="assets/img/google-material-icons/check_box.svg" alt="New List" />
                             </button>
                             <button className="btn-note">
                                 <img src="assets/img/google-material-icons/brush.svg" alt="New note with drawing" />
                             </button>
-                            <button className="btn-note">
+                            <button onClick={() => setNoteType('NoteImg')} className="btn-note">
                                 <img src="assets/img/google-material-icons/image.svg" alt="New note with image" />
                             </button>
                         </div>
