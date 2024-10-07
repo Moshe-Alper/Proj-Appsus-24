@@ -1,15 +1,41 @@
 const { useNavigate } = ReactRouterDOM
-const { useState, Fragment } = React
+const { useState, useRef } = React
 
 import { noteService } from "../services/note.service.js"
 
 export function CreateNote({ loadNotes }) {
 
-    const [newNote, setNewNote] = useState(noteService.getEmptyNote())
-    const [isExpanded, setIsExpanded] = useState(false)
     const [noteType, setNoteType] = useState('NoteTxt')
+    const [newNote, setNewNote] = useState(noteService.getEmptyNote('', '', false, '#fff', noteType))
+    const [isExpanded, setIsExpanded] = useState(false)
+    const [imgSrc, setImgSrc] = useState(null)
 
+    const inputRef = useRef(null)
     const navigate = useNavigate()
+
+    function handleFileChange(ev) {
+        const file = ev.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                setImgSrc(e.target.result) 
+                setNewNote(prevNote => ({
+                    ...prevNote,
+                    type: 'NoteImg', 
+                    info: {
+                        ...prevNote.info,
+                        imgSrc: e.target.result 
+                    }
+                }))
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
+    function handleImageButtonClick() {
+        setNoteType('NoteImg')
+        inputRef.current.click()
+    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -35,25 +61,30 @@ export function CreateNote({ loadNotes }) {
 
     function onSaveNote(ev) {
         ev.preventDefault()
-
+    
         if (!isValid) {
             setIsExpanded(false)
             return
         }
-
-        noteService.save(newNote)
+    console.log('newNote:', newNote)
+        const noteToSave = { ...newNote }
+    
+        if (noteType === 'NoteImg' && imgSrc) {
+            noteToSave.info.imgSrc = imgSrc || noteToSave.info.imgSrc
+        }
+    
+        if (noteType === 'NoteTodos') {
+            noteToSave.info.todos = newNote.info.todos
+        }console.log('noteToSave:', noteToSave)
+        noteService.save(noteToSave)
             .then(note => {
-                console.log('Success adding note:', note)
-                setNewNote(noteService.getEmptyNote())
+                setNewNote(noteService.getEmptyNote('', '', false, '#fff', 'NoteTxt'))
+                setImgSrc(null)
                 loadNotes()
                 setIsExpanded(false)
                 navigate('/note')
             })
             .catch(err => {
-                console.log('err:', err)
-                navigate('/note')
-            })
-            .finally(() => {
                 navigate('/note')
             })
     }
@@ -61,15 +92,29 @@ export function CreateNote({ loadNotes }) {
     const { info } = newNote
     const { title, txt } = info
 
-    const isValid = title.trim() || txt.trim()
+    const isValid = title.trim() || txt.trim() || imgSrc
+
     return (
         <section className="create-note">
+            <input 
+                type="file" 
+                ref={inputRef} 
+                style={{ display: 'none' }} 
+                accept="image/*" 
+                onChange={handleFileChange} 
+            />
             <form
                 onSubmit={onSaveNote}
                 onClick={() => {
                     if (!isExpanded) setIsExpanded(true)
                 }}
             >
+                {noteType === 'NoteImg' && imgSrc && (
+                    <div className="input-image">
+                        <img src={imgSrc} alt="Uploaded Image" />
+                    </div>
+                )}
+
                 {isExpanded && (
                     <div className="input-title">
                         <input
@@ -81,7 +126,6 @@ export function CreateNote({ loadNotes }) {
                         />
                     </div>
                 )}
-
 
                 <div className="note-text-container">
                     <p className="note-text">
@@ -101,7 +145,7 @@ export function CreateNote({ loadNotes }) {
                             <button className="btn-note">
                                 <img src="assets/img/google-material-icons/brush.svg" alt="New note with drawing" />
                             </button>
-                            <button onClick={() => setNoteType('NoteImg')} className="btn-note">
+                            <button onClick={handleImageButtonClick} className="btn-note">
                                 <img src="assets/img/google-material-icons/image.svg" alt="New note with image" />
                             </button>
                         </div>
@@ -117,7 +161,7 @@ export function CreateNote({ loadNotes }) {
                 )}
 
                 {isExpanded && (
-                    <button type="submit" className="create-btn">Save</button>
+                    <button type="submit" className="create-btn">Close</button>
                 )}
             </form>
         </section>

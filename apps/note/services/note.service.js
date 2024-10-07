@@ -44,19 +44,16 @@ function save(note) {
     }
 }
 
-function getEmptyNote(title = '', txt = '', isPinned = false) {
+function getEmptyNote(title = '', txt = '', isPinned = false, backgroundColor = '#fff', type = 'NoteTxt') {
     return {
         id: '',
         createdAt: Date.now(),
-        type: 'NoteTxt',
+        type: type,
         isPinned: isPinned,
         style: {
-            backgroundColor: 'white'
+            backgroundColor
         },
-        info: {
-            title: title,
-            txt: txt
-        }
+        info: _getInfoByType(type)
     }
 }
 

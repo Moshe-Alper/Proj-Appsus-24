@@ -14,7 +14,7 @@ export function NotePreview({
 }) {
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
-
+    
     const initialBackgroundColor = note.style.backgroundColor || '#fff'
     const [noteStyle, setNoteStyle] = useState({
         backgroundColor: initialBackgroundColor
