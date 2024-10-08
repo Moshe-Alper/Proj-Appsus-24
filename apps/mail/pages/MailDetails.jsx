@@ -1,5 +1,5 @@
 const { useEffect, useState } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, useNavigate, Link ,useOutletContext} = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg } from "../services/event-bus.service.js"
@@ -9,7 +9,9 @@ export function MailDetails() {
     const [mail, setMail] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
- 
+    const { setMails } = useOutletContext()
+    
+   console.log(setMails)
     useEffect(() => {
         loadMail()
     }, [params.mailId])
@@ -30,12 +32,20 @@ export function MailDetails() {
     }
 
     function onDeleteMail() {
+        console.log(params.mailId)
         mailService.remove(params.mailId)
-        navigate('/mail')
+        .then(() => {
+            // Update the state after deletion
+            setMails(prevMails => prevMails.filter(mail => mail.id !== params.mailId));
+            
+            // Navigate back to the mail list
+            navigate('/mail');
+          })
+          .catch(err => console.error('Failed to delete mail', err));
     }
 
     function onBack() {
-        navigate('/mail')
+        navigate(`/mail`)
     }
 
     if (!mail) return <div>Loading...</div>

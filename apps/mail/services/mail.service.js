@@ -16,7 +16,8 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
-    getMailCountByFolder
+    getMailCountByFolder,
+    getFilterFromSearchParams
 }
 
 
@@ -96,18 +97,18 @@ function _getFilteredMails(mails, filterBy) {
 
     return mails
 }
-function getMailCountByFolder(){
+function getMailCountByFolder() {
 
     return storageService.query(MAIL_KEY)
-    .then(mails => {
-        const counts = {
-            Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-            Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-            Trash: mails.filter(mail => mail.removedAt).length,
-            Draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
-        }
-        return counts
-    })
+        .then(mails => {
+            const counts = {
+                Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+                Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+                Trash: mails.filter(mail => mail.removedAt).length,
+                Draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
+            }
+            return counts
+        })
 
 }
 
@@ -137,13 +138,26 @@ function getDefaultFilter() {
     }
 }
 
+function getFilterFromSearchParams(searchParams) {
+    const folder = searchParams.get('folder') || 'Inbox'
+    const isRead = searchParams.get('isRead') || ''
+    return {
+        folder,
+        // isRead: undefined
+    }
+}
+
 function _createMails() {
     let mails = loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
             _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
             _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
+            _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
+            _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
         ]
         saveToStorage(MAIL_KEY, mails)
         console.log('Mails saved to storage:', mails)

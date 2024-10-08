@@ -15,7 +15,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
         }))
     }
 
-    const folders = ['Inbox', 'Sent', 'Trash', 'Delete']
+    const folders = ['Inbox', 'Sent', 'Trash', 'Draft']
     return (
         <section className="mail-side-filter">
             <nav>
@@ -26,7 +26,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
                             className={filterBy.folder === folder ? 'active' : ''}
                             onClick={() => handleChange(folder)}
                         >
-                            {folder} {counts[folder] || 0}
+                            {folder} {counts[folder] }
                         </li>
                     ))}
                 </ul>
