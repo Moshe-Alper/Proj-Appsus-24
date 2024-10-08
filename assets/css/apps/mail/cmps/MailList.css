@@ -1,21 +1,21 @@
 .mail-list {
-    /* grid-row: 1; */
-    padding: 20px;
+    grid-row: 2;
+    padding: 10px;
     background-color: #ffffff;
     overflow-y: auto;
-    /* padding: 0; */
     list-style-type: none;
     width: 100%;
-    max-width: 800px;
-    /* margin: 0 auto; */
-    
-}
+    max-width: 620px;
+    margin: 0
+    }
 
 .mail-list li {
-    padding: 1rem;
+    padding: 0.8rem;
     border-bottom: 1px solid #ddd;
     transition: background-color 0.3s;
+    background-clip: padding-box;
 }
+
 
 .mail-list li.read {
     background-color: #f1f1f1; /* Lighter color for read emails */

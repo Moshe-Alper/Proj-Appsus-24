@@ -14,7 +14,7 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchPrms))
-    const [counts, setCounts] = useState()    
+    const [counts, setCounts] = useState()
 
     // console.log(filterBy)
     useEffect(() => {
@@ -30,7 +30,7 @@ export function MailIndex() {
                 console.log('Problems getting mails:', err)
             })
     }
-    
+
     // Fetch counts for each folder
     function updateMailCounts() {
         mailService.getMailCountByFolder()
@@ -47,23 +47,23 @@ export function MailIndex() {
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
-// console.log(filterBy)
+    // console.log(filterBy)
 
     if (!mails) return <h1>Loading...</h1>
     return (
 
         <section className="mail-index">
-             <MailHeader
+            <MailHeader
                 filterBy={filterBy}
-                onSetFilterBy={onSetFilterBy}
-            />
-            <section>
-                <Link to="/mail/edit" >Compose Mail</Link>
-            </section>
-            {/* <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} /> */}
-            <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts}  />
-            <MailList mails={mails} setMails={setMails} />
-        </section>
+                onSetFilterBy={onSetFilterBy} />
+            <main className="mail-container">
+                <section>
+                    <Link to="/mail/edit" >Compose Mail</Link>
+                </section>
+                <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
+                <MailList mails={mails} setMails={setMails} />
+            </main>
+        </section >
     )
 
 }
