@@ -9,6 +9,7 @@ export function CreateNote({ loadNotes }) {
     const [newNote, setNewNote] = useState(noteService.getEmptyNote('', '', false, '#fff', noteType))
     const [isExpanded, setIsExpanded] = useState(false)
     const [imgSrc, setImgSrc] = useState(null)
+    const [newTodo, setNewTodo] = useState('')
 
     const inputRef = useRef(null)
     const navigate = useNavigate()
@@ -18,13 +19,13 @@ export function CreateNote({ loadNotes }) {
         if (file) {
             const reader = new FileReader()
             reader.onload = (e) => {
-                setImgSrc(e.target.result) 
+                setImgSrc(e.target.result)
                 setNewNote(prevNote => ({
                     ...prevNote,
-                    type: 'NoteImg', 
+                    type: 'NoteImg',
                     info: {
                         ...prevNote.info,
-                        imgSrc: e.target.result 
+                        imgSrc: e.target.result
                     }
                 }))
             }
@@ -36,6 +37,11 @@ export function CreateNote({ loadNotes }) {
         setNoteType('NoteImg')
         inputRef.current.click()
     }
+
+    function handleTodoChange(ev) {
+        setNewTodo(ev.target.value)
+    }
+
 
     function handleChange({ target }) {
         const field = target.name
@@ -61,21 +67,21 @@ export function CreateNote({ loadNotes }) {
 
     function onSaveNote(ev) {
         ev.preventDefault()
-    
+
         if (!isValid) {
             setIsExpanded(false)
             return
         }
-    console.log('newNote:', newNote)
         const noteToSave = { ...newNote }
-    
+
         if (noteType === 'NoteImg' && imgSrc) {
             noteToSave.info.imgSrc = imgSrc || noteToSave.info.imgSrc
         }
-    
+
         if (noteType === 'NoteTodos') {
-            noteToSave.info.todos = newNote.info.todos
-        }console.log('noteToSave:', noteToSave)
+            // noteToSave.info.todos = newNote.info.todos
+        } 
+
         noteService.save(noteToSave)
             .then(note => {
                 setNewNote(noteService.getEmptyNote('', '', false, '#fff', 'NoteTxt'))
@@ -90,18 +96,18 @@ export function CreateNote({ loadNotes }) {
     }
 
     const { info } = newNote
-    const { title, txt } = info
+    const { title, txt, todos } = info
 
     const isValid = title.trim() || txt.trim() || imgSrc
 
     return (
         <section className="create-note">
-            <input 
-                type="file" 
-                ref={inputRef} 
-                style={{ display: 'none' }} 
-                accept="image/*" 
-                onChange={handleFileChange} 
+            <input
+                type="file"
+                ref={inputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                onChange={handleFileChange}
             />
             <form
                 onSubmit={onSaveNote}
@@ -128,6 +134,7 @@ export function CreateNote({ loadNotes }) {
                 )}
 
                 <div className="note-text-container">
+
                     <p className="note-text">
                         <textarea
                             value={txt}
@@ -151,6 +158,7 @@ export function CreateNote({ loadNotes }) {
                         </div>
                     )}
                 </div>
+                    {/* todos */}
 
                 {isExpanded && (
                     <div className="expanded-buttons">

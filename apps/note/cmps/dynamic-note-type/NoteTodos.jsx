@@ -1,8 +1,8 @@
 export function NoteTodos({ info }) {
 
-    console.log('info:', info)
+    // console.log('info:', info)
     const { todos } = info
-    console.log('todos:', todos)
+    // console.log('todos:', todos)
     return (
         <section className="note-text">
             <ul className="note-todos">

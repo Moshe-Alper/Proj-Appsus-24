@@ -41,8 +41,8 @@ export function NotePreview({
 
         noteService.save(updatedNote)
             .then(() => {
-                console.log('New note color:', note.style.backgroundColor)
-
+                console.log('New note color:', updatedNote.style.backgroundColor)
+                onToggleStyleModal()
             })
             .catch(err => console.log('Error saving note style:', err));
     }
