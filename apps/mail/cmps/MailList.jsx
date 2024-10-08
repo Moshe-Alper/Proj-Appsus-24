@@ -6,7 +6,7 @@ import { MailPreview } from "./MailPreview.jsx";
 
 export function MailList({ mails,setMails }) {
     const { mailId } = useParams()
-    console.log(setMails)
+    console.log(mailId)
 
     return (
 
@@ -24,7 +24,7 @@ export function MailList({ mails,setMails }) {
                     ))}
                 </ul>
             ) : (
-                <Outlet context={{ setMails }} />
+                <Outlet context={{ mails ,setMails }} />
             )}
         </React.Fragment>
     )

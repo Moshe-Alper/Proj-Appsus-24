@@ -16,7 +16,8 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchPrms))
     const [counts, setCounts] = useState()
 
-    // console.log(filterBy)
+
+    console.log(filterBy)
     useEffect(() => {
         loadMails()
         updateMailCounts()
@@ -43,11 +44,8 @@ export function MailIndex() {
     }
 
     function onSetFilterBy(filterBy) {
-        // console.log(filterBy)
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
-
-    // console.log(filterBy)
 
     if (!mails) return <h1>Loading...</h1>
     return (

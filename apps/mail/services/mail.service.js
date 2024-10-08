@@ -139,12 +139,13 @@ function getDefaultFilter() {
 }
 
 function getFilterFromSearchParams(searchParams) {
-    const folder = searchParams.get('folder') || 'Inbox'
-    const isRead = searchParams.get('isRead') || ''
-    return {
-        folder,
-        // isRead: undefined
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) ||
+            defaultFilter[field]
     }
+    return filterBy
 }
 
 function _createMails() {

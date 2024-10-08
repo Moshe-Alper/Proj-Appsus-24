@@ -10,8 +10,8 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
     const handleChange = (folder) => {
         setFilterByToEdit(prevFilter => ({
-          ...prevFilter,
-          folder: folder
+            ...prevFilter,
+            folder: folder
         }))
     }
 
@@ -26,7 +26,14 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
                             className={filterBy.folder === folder ? 'active' : ''}
                             onClick={() => handleChange(folder)}
                         >
-                            {folder} {counts[folder] }
+                            <section className="btn-sidebar">
+                                <img
+                                    src={`assets/img/google-material-icons/${folder}.svg`}
+                                    alt={`${folder}-icon`}
+                                />
+                               <span className="folder-name">{folder}</span>
+                               <span className="folder-count">{counts[folder]}</span>
+                            </section>
                         </li>
                     ))}
                 </ul>

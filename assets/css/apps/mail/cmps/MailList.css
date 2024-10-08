@@ -1,7 +1,8 @@
 .mail-list {
-    grid-row: 2;
+    grid-row: 1/4;
+    grid-column: 2;
     padding: 10px;
-    background-color: #ffffff;
+    background-color: #f2f6fc;
     overflow-y: auto;
     list-style-type: none;
     width: 100%;
@@ -18,7 +19,7 @@
 
 
 .mail-list li.read {
-    background-color: #f1f1f1; /* Lighter color for read emails */
+    background-color: #f2f6fc; /* Lighter color for read emails */
 }
 
 .mail-list li.unread {
@@ -29,3 +30,5 @@
 .mail-list li:hover {
     background-color: #f5f5f5;
 }
+
+
