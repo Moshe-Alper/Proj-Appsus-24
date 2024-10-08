@@ -8,11 +8,13 @@ import { noteService } from "../services/note.service.js"
 import { getTruthyValues } from "../../../services/util.service.js"
 import { NoteSidebar } from "../cmps/NoteSidebar.jsx"
 import { CreateNote } from "../cmps/CreateNote.jsx"
+import { NoteSearch } from "../cmps/NoteSearch.jsx"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
     const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchPrms))
+    const [isFiltering, setIsFiltering] = useState(true)
 
     useEffect(() => {
         loadNotes()
@@ -47,7 +49,7 @@ export function NoteIndex() {
             })
             .catch(err => {
                 console.error('Error duplicating note:', err)
-                showErrorMsg('Problem duplicating note') 
+                showErrorMsg('Problem duplicating note')
             })
     }
 
@@ -72,8 +74,8 @@ export function NoteIndex() {
             })
     }
 
-
     if (!notes) return <h1>Loading...</h1>
+
     return (
         <section className="note-index">
             <KeepHeader
@@ -82,25 +84,28 @@ export function NoteIndex() {
             />
             <main className="note-container">
                 <NoteSidebar />
-                <CreateNote
-                    loadNotes={loadNotes}
-                />
-                {notes.length === 0 ? (
-                    <div className="no-notes-msg">
-                        <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
-                        <h1>Notes will appear here</h1>
-                    </div>
-                ) :
-                    (
-                        <NoteList
-                            onRemoveNote={onRemoveNote}
-                            notes={notes}
-                            loadNotes={loadNotes}
-                            togglePinNote={onTogglePinNote}
-                            onDuplicateNote={onDuplicateNote}
 
-                        />
-                    )}
+                {!isFiltering ? (
+                    <Fragment>
+                        <CreateNote loadNotes={loadNotes} />
+                        {notes.length === 0 ? (
+                            <div className="no-notes-msg">
+                                <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
+                                <h1>Notes will appear here</h1>
+                            </div>
+                        ) : (
+                            <NoteList
+                                onRemoveNote={onRemoveNote}
+                                notes={notes}
+                                loadNotes={loadNotes}
+                                togglePinNote={onTogglePinNote}
+                                onDuplicateNote={onDuplicateNote}
+                            />
+                        )}
+                    </Fragment>
+                ) : (
+                <NoteSearch/> 
+                )}
             </main>
         </section>
     )

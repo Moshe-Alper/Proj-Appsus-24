@@ -57,24 +57,6 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
                     id="txt"
                     placeholder="Search"
                 />
-                {isExpanded && (
-
-                <div className="filter-icons-container">
-                <div className="filter-icon" onClick={() => handleFilterChange('NoteTxt')}>
-                    <img src="assets/img/google-material-icons/label.svg" alt="Text Notes" />
-                    <h1>Text</h1>
-                </div>
-                <div className="filter-icon" onClick={() => handleFilterChange('NoteImg')}>
-                    <img src="assets/img/google-material-icons/image.svg" alt="Image Notes" />
-                    <h1>Image</h1>
-                </div>
-                <div className="filter-icon" onClick={() => handleFilterChange('NoteTodos')}>
-                    <img src="assets/img/google-material-icons/list.svg" alt="Todo Notes" />
-                    <h1>List</h1>
-                </div>
-            </div>
-            )}
-
             </form>
 
 
