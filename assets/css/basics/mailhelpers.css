@@ -1,0 +1,52 @@
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+}
+
+/* buttons */
+
+.btn-mail {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    padding: 0.3rem;
+}
+
+.btn-mail:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+
+}
+
+.btn-mail:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn-mail img,
+.btn-mail i {
+    width: 1.7rem;
+    height: 1.7rem;
+}

@@ -7,17 +7,14 @@
 
 @import './basics/base.css';
 @import './basics/helpers.css';
+@import './basics/mailhelpers.css';
 /* @import './basics/layout.css'; */
 
 /* Pages */
 @import './pages/home.css';
 
 @import './apps/note/pages/NoteIndex.css';
-
-@import './apps/mail/pages/MailFilter.css';
 @import './apps/mail/pages/MailIndex.css';
-@import './apps/mail/pages/MailDetails.css';
-@import './apps/mail/pages/MailSideFilter.css';
 
 /* Cmps */
 
@@ -37,5 +34,10 @@
 @import './apps/note/cmps/NoteSidebar.css';
 @import './apps/note/cmps/note-container.css';
 
+@import './apps/mail/cmps/MailHeader.css';
+
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailPreview.css';
+@import './apps/mail/pages/MailFilter.css';
+@import './apps/mail/pages/MailDetails.css';
+@import './apps/mail/pages/MailSideFilter.css';

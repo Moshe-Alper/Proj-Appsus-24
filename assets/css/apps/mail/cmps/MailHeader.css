@@ -1,0 +1,44 @@
+.mail-header {
+    position: sticky;
+    top: 0;
+
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 60px;
+    padding: 0.5em;
+
+    background-color: #f6f8fc;
+    font-family: Google Sans, Roboto, Arial, sans-serif;
+    z-index: 100;
+}
+
+.mail-header .logo {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    max-width: 200px;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.mail-header .logo .mail-logo {
+    width: 3rem;
+    font-stretch: 100%;
+}
+
+.mail-header .logo h1 {
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    top: -0.09375rem;
+    
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: rgb(0,0,0);
+}
+

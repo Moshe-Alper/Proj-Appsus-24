@@ -7,6 +7,7 @@ import { MailList } from "../cmps/MailList.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailSideFilter } from "../cmps/MailSideFilter.jsx"
 import { getTruthyValues } from "../services/util.service.js"
+import { MailHeader } from "../cmps/MailHeader.jsx"
 
 
 export function MailIndex() {
@@ -52,10 +53,14 @@ export function MailIndex() {
     return (
 
         <section className="mail-index">
+             <MailHeader
+                filterBy={filterBy}
+                onSetFilterBy={onSetFilterBy}
+            />
             <section>
                 <Link to="/mail/edit" >Compose Mail</Link>
             </section>
-            <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            {/* <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} /> */}
             <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts}  />
             <MailList mails={mails} setMails={setMails} />
         </section>

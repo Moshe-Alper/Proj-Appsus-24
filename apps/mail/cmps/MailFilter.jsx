@@ -1,7 +1,7 @@
 const { useState, useEffect } = React
 
 export function MailFilter({ filterBy, onSetFilterBy }) {
-    
+
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
@@ -33,24 +33,30 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
 
     return (
         <section className="mail-filter">
+
+            <div className="search-btn">
+                <img src="assets/img/google-material-icons/search.svg" alt="search-btn" />
+            </div>
+
             <form onSubmit={onSubmit}>
-                <div>
-                    <input
-                        type="text"
-                        name="txt"
-                        placeholder="🔍 Search mail"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <input
-                        type="checkbox"
-                        name="isRead"
-                        checked={filterByToEdit.isRead} 
-                        onChange={handleChange}
-                    />
-                    Show Read Emails
-                </div>
+
+                <input
+                    type="text"
+                    name="txt"
+                    placeholder="Search mail"
+                    onChange={handleChange}
+                />
+
+
+                <input
+                    id="checkbox"
+                    type="checkbox"
+                    name="isRead"
+                    checked={filterByToEdit.isRead}
+                    onChange={handleChange}
+                />
+                <label for="checkbox">Show Read Mails</label>
+
             </form>
 
         </section>
