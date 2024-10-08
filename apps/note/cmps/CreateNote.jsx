@@ -9,7 +9,7 @@ export function CreateNote({ loadNotes }) {
     const [newNote, setNewNote] = useState(noteService.getEmptyNote('', '', false, '#fff', noteType))
     const [isExpanded, setIsExpanded] = useState(false)
     const [imgSrc, setImgSrc] = useState(null)
-    const [newTodo, setNewTodo] = useState('')
+    const [isPinned, setIsPinned] = useState(false)
 
     const inputRef = useRef(null)
     const navigate = useNavigate()
@@ -38,8 +38,9 @@ export function CreateNote({ loadNotes }) {
         inputRef.current.click()
     }
 
-    function handleTodoChange(ev) {
-        setNewTodo(ev.target.value)
+    function onTogglePin(ev) {
+        ev.stopPropagation()
+        setIsPinned(prevState => !prevState)
     }
 
 
@@ -72,7 +73,7 @@ export function CreateNote({ loadNotes }) {
             setIsExpanded(false)
             return
         }
-        const noteToSave = { ...newNote }
+        const noteToSave = { ...newNote, isPinned }
 
         if (noteType === 'NoteImg' && imgSrc) {
             noteToSave.info.imgSrc = imgSrc || noteToSave.info.imgSrc
@@ -80,7 +81,7 @@ export function CreateNote({ loadNotes }) {
 
         if (noteType === 'NoteTodos') {
             // noteToSave.info.todos = newNote.info.todos
-        } 
+        }
 
         noteService.save(noteToSave)
             .then(note => {
@@ -130,6 +131,15 @@ export function CreateNote({ loadNotes }) {
                             name="title"
                             onChange={handleChange}
                         />
+
+                        <button type="button" onClick={onTogglePin} className="btn-note">
+                            <img
+                                src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                                alt={isPinned ? "unpin" : "pin"}
+                            />
+                        </button>
+
+
                     </div>
                 )}
 
@@ -158,7 +168,7 @@ export function CreateNote({ loadNotes }) {
                         </div>
                     )}
                 </div>
-                    {/* todos */}
+                {/* todos */}
 
                 {isExpanded && (
                     <div className="expanded-buttons">
