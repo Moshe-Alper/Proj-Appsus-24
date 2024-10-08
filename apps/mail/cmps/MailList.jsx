@@ -6,8 +6,7 @@ import { MailPreview } from "./MailPreview.jsx";
 
 export function MailList({ mails,setMails }) {
     const { mailId } = useParams()
-    console.log(mailId)
-
+  
     return (
 
         <React.Fragment>

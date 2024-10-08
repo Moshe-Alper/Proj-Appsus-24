@@ -31,8 +31,10 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
                                     src={`assets/img/google-material-icons/${folder}.svg`}
                                     alt={`${folder}-icon`}
                                 />
-                               <span className="folder-name">{folder}</span>
-                               <span className="folder-count">{counts[folder]}</span>
+                                <span className="folder-name">{folder}</span>
+                                {counts[folder] > 0 && (
+                                    <span className="folder-count">{counts[folder]}</span>
+                                )}
                             </section>
                         </li>
                     ))}

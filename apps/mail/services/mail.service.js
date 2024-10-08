@@ -103,8 +103,8 @@ function getMailCountByFolder() {
         .then(mails => {
             const counts = {
                 Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-                Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
-                Trash: mails.filter(mail => mail.removedAt).length,
+                // Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
+                // Trash: mails.filter(mail => mail.removedAt).length,
                 Draft: mails.filter(mail => !mail.sentAt && !mail.removedAt).length
             }
             return counts

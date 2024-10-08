@@ -55,7 +55,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                     checked={filterByToEdit.isRead}
                     onChange={handleChange}
                 />
-                <label for="checkbox">Show Read Mails</label>
+                <label htmlFor="checkbox">Show Read Mails</label>
 
             </form>
 
