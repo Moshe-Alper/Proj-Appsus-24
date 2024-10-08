@@ -1,10 +1,9 @@
 const { useState, useEffect } = React
 
-export function NoteFilter({ filterBy, onSetFilterBy }) {
+export function NoteFilter({ filterBy, onSetFilterBy, setIsFiltering }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-        const [isExpanded, setIsExpanded] = useState(false)
-
+    const [isExpanded, setIsExpanded] = useState(false)
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
@@ -21,15 +20,12 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
 
             case 'checkbox':
                 value = target.checked
-                break
+                break;
+            default:
+                setIsFiltering(false)
         }
 
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
-    }
-
-    function handleFilterChange(type) {
-        setFilterByToEdit(prevFilter => ({ ...prevFilter, type }))
-        setIsExpanded(false)
     }
 
     const { txt, type } = filterByToEdit
@@ -39,14 +35,28 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
         onSetFilterBy(filterByToEdit)
     }
 
+    function handleFilter() {
+        setIsFiltering(true)
+        if (!isExpanded) {
+            setIsExpanded(true)
+        }
+    }
+
+    function handleReset(ev) {
+        ev.stopPropagation()
+        console.log('Resetting filters')
+        setIsFiltering(false)
+        setFilterByToEdit({ txt: '', type: '' })
+    }
+
     return (
         <section
-    className="note-filter"
-    onClick={() => { if (!isExpanded) setIsExpanded(true) }}
->
-            
-            <div  className="search-btn">
-                <img src="assets/img/google-material-icons/search.svg" alt="search-btn" />
+            className="note-filter"
+            onClick={handleFilter}
+        >
+
+            <div className="search-btn">
+                <img src="assets/img/google-material-icons/search.svg" alt="search" className="btn-note" />
             </div>
             <form onSubmit={onSubmit}>
                 <input
@@ -57,6 +67,9 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
                     id="txt"
                     placeholder="Search"
                 />
+                <button type="button" onClick={handleReset} className="btn-note" >
+                <img src="assets/img/google-material-icons/close.svg" alt="close"  />
+                </button>
             </form>
 
 

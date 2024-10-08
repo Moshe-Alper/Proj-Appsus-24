@@ -14,7 +14,7 @@ export function NoteIndex() {
     const [notes, setNotes] = useState(null)
     const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchPrms))
-    const [isFiltering, setIsFiltering] = useState(true)
+    const [isFiltering, setIsFiltering] = useState(false)
 
     useEffect(() => {
         loadNotes()
@@ -81,6 +81,7 @@ export function NoteIndex() {
             <KeepHeader
                 filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy}
+                setIsFiltering={setIsFiltering}
             />
             <main className="note-container">
                 <NoteSidebar />
@@ -104,7 +105,10 @@ export function NoteIndex() {
                         )}
                     </Fragment>
                 ) : (
-                <NoteSearch/> 
+                <NoteSearch
+                onSetFilterBy={onSetFilterBy}
+                setIsFiltering={setIsFiltering} 
+                /> 
                 )}
             </main>
         </section>

@@ -1,7 +1,8 @@
 import { NoteFilter } from "../cmps/NoteFilter.jsx"
 
-export function KeepHeader({ filterBy, onSetFilterBy }) {
+export function KeepHeader({ filterBy, onSetFilterBy, setIsFiltering, handleReset }) {
     return <header className="keep-header">
+
         <div className="logo">
         <button className="btn-note"><img src="assets/img/google-material-icons/menu.svg" alt="menu"/></button>
             <img src="assets/img/notes/keep-logo.png" alt="logo image" className="keep-logo" />
@@ -10,6 +11,7 @@ export function KeepHeader({ filterBy, onSetFilterBy }) {
         <NoteFilter 
             filterBy={filterBy} 
             onSetFilterBy={onSetFilterBy}
+            setIsFiltering={setIsFiltering}
             />
         <div className="actions">
             <button className="btn-note"><img src="assets/img/google-material-icons/refresh.svg" alt="refresh"/></button>

@@ -1,6 +1,6 @@
 .note-filter {
     display: grid;
-    grid-template-columns: auto 1fr; /* Adjust grid columns */
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     justify-content: space-between;
     width: 38.75rem; 
@@ -24,5 +24,10 @@
     padding-block: 11px;
     width: 100%;
     border: none;
+}
+
+
+.note-filter form {
+    display: flex;
 }
 
