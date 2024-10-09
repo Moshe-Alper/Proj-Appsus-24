@@ -67,19 +67,15 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
 
     if (!noteToEdit) return <p>Loading...</p>
     return (
-        <section className="note-section">
-            <section className="note-edit">
-                <h1>Edit Note</h1>
-                <form onSubmit={onSaveNote} className="note-form">
-                    <div className="edit-modal">
+            <section className="editing-section">
+                <form onSubmit={onSaveNote} className="editing-section-form">
                         <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                        <button>Save</button>
-                        <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
-                    </div>
-                </form>
+                        <div className="editing-footer">
+                        <button>Close</button>
+                        </div>
+                    </form>
             </section>
 
-        </section>
     )
 
     function DynamicCmp({ type, info }) {
@@ -88,6 +84,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                 return <NoteTxt
                     info={info}
                     onChangeInfo={handleChange}
+                    onToggleEditModal={toggleEditModal}
                 />
             case 'NoteImg':
                 return <NoteImg info={info} />
