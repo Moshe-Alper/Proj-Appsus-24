@@ -1,3 +1,4 @@
+const { Link } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js"
@@ -6,21 +7,22 @@ import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 import { NoteFooter } from "./NoteFooter.jsx"
-import { NoteEdit } from "./NoteEdit.jsx";
+import { NoteEdit } from "./NoteEdit.jsx"
 import { NoteHeader } from "./NoteHeader.jsx"
 
 export function NotePreview({
-    note, onRemoveNote, refreshNotes, togglePinNote, onDuplicateNote
+    note, onRemoveNote, loadNotes, togglePin, onDuplicateNote
 }) {
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
-    
+
     const initialBackgroundColor = note.style.backgroundColor || '#fff'
     const [noteStyle, setNoteStyle] = useState({
         backgroundColor: initialBackgroundColor
     })
 
     function onToggleEditModal() {
+        console.log('hi:')
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
 
@@ -29,7 +31,7 @@ export function NotePreview({
     }
 
     function onSetNoteStyle(newStyle) {
-        setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }));
+        setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }))
 
         const updatedNote = {
             ...note,
@@ -37,23 +39,41 @@ export function NotePreview({
                 ...note.style,
                 ...newStyle
             }
-        };
+        }
 
         noteService.save(updatedNote)
             .then(() => {
-                console.log('New note color:', updatedNote.style.backgroundColor)
-                onToggleStyleModal()
+                console.log('New note color:', note.style.backgroundColor)
+
             })
-            .catch(err => console.log('Error saving note style:', err));
+            .catch(err => console.log('Error saving note style:', err))
     }
+
+    // function handleLinkClick(ev) {
+    //     ev.preventDefault()
+    //     console.log('note.id:', note.id)
+    //     onToggleEditModal(note.id)
+
+    //     // setTimeout(() => {
+    //     //     window.location.hash = `/note/${note.id}`
+    //     // }, 100)
+    // }
 
     return (
         <article style={{ ...noteStyle }} className="note-preview">
             <NoteHeader
-                togglePinNote={togglePinNote}
+                togglePin={togglePin}
                 note={note}
+                onToggleEditModal={onToggleEditModal}
             />
-            <DynamicCmp type={note.type} info={note.info} />
+
+            <Link to={`/note/${note.id}`}>
+                <DynamicCmp
+                    type={note.type}
+                    info={note.info}
+                />
+            </Link>
+
             <NoteFooter
                 note={note}
                 onRemoveNote={onRemoveNote}
@@ -64,7 +84,7 @@ export function NotePreview({
             {isShowEditModal && (
                 <NoteEdit
                     toggleEditModal={onToggleEditModal}
-                    refreshNotes={refreshNotes}
+                    loadNotes={loadNotes}
                 />
             )}
             {isShowStyleModal && (
@@ -80,11 +100,23 @@ export function NotePreview({
     function DynamicCmp({ type, info }) {
         switch (type) {
             case 'NoteTxt':
-                return <NoteTxt info={info} />
+                return <NoteTxt
+                    info={info}
+                    id={note.id}
+                    onToggleEditModal={onToggleEditModal}
+                />
             case 'NoteImg':
-                return <NoteImg info={info} />
+                return <NoteImg
+                    info={info}
+                    id={note.id}
+                    onToggleEditModal={onToggleEditModal}
+                />
             case 'NoteTodos':
-                return <NoteTodos info={info} />
+                return <NoteTodos 
+                    info={info}
+                    id={note.id}
+                    onToggleEditModal={onToggleEditModal}
+                />
             default:
                 return <p>Unknown note type</p>
         }

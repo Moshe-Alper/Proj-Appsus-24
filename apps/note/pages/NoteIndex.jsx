@@ -57,7 +57,7 @@ export function NoteIndex() {
         setFilterBy({ ...filterBy })
     }
 
-    function onTogglePinNote(noteId) {
+    function onTogglePin(noteId) {
         const note = notes.find(note => note.id === noteId)
         if (!note) return
 
@@ -99,7 +99,7 @@ export function NoteIndex() {
                                 onRemoveNote={onRemoveNote}
                                 notes={notes}
                                 loadNotes={loadNotes}
-                                togglePinNote={onTogglePinNote}
+                                togglePin={onTogglePin}
                                 onDuplicateNote={onDuplicateNote}
                             />
                         )}

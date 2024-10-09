@@ -1,4 +1,4 @@
-export function NoteTxt({ info = { txt: '' }, onChangeInfo }) {
+export function NoteTxt({ info = { txt: '' }, onChangeInfo, onToggleEditModal, id }) {
     
     const { txt } = info
 
@@ -6,7 +6,7 @@ export function NoteTxt({ info = { txt: '' }, onChangeInfo }) {
     const editClass = isEditable ? 'editable' : ''
 
     return (
-        <section className={`note-text ${editClass}`}>
+        <section className={`note-text ${editClass}`} onClick={() => onToggleEditModal(id)}>
             {isEditable ? (
                 <input
                     autoFocus

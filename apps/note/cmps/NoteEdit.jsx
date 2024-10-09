@@ -7,7 +7,7 @@ import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 
 const { useState, useEffect } = React
 
-export function NoteEdit({ toggleEditModal, refreshNotes }) {
+export function NoteEdit({ toggleEditModal, loadNotes }) {
 
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
@@ -53,7 +53,7 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
         noteService.save(noteToEdit)
             .then(note => {
                 toggleEditModal()
-                refreshNotes()
+                loadNotes()
                 navigate('/note')
             })
             .catch(err => {
