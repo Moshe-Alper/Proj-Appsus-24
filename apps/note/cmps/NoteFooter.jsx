@@ -1,7 +1,5 @@
-const { Link } = ReactRouterDOM
-
 export function NoteFooter({
-    note, onRemoveNote, onToggleEditModal, onToggleStyleModal, onDuplicateNote
+    note, onRemoveNote, onToggleStyleModal, onDuplicateNote
 }) {
 
     return (

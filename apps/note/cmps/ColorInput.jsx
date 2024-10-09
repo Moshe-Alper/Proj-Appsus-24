@@ -18,6 +18,7 @@ export function ColorInput({ onSetNoteStyle, backgroundColor, onToggleStyleModal
 
     function onColorInput(ev) {
         ev.preventDefault()
+    
     }
 
     return (

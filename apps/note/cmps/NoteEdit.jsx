@@ -12,7 +12,9 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
     const navigate = useNavigate()
-    
+    const [isPinned, setIsPinned] = useState(false)
+
+
     useEffect(() => {
         if (noteId) loadNote()
     }, [])
@@ -29,6 +31,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+
         switch (target.type) {
             case 'number':
             case 'range':
@@ -39,6 +42,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                 value = target.checked
                 break
         }
+
         setNoteToEdit(prevNote => ({
             ...prevNote,
             info: {
@@ -65,16 +69,42 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
             })
     }
 
+    function onTogglePin(ev) {
+        ev.stopPropagation();
+        setIsPinned((prevState) => !prevState);
+    
+        setNoteToEdit((prevNote) => ({
+            ...prevNote,
+            isPinned: !prevNote.isPinned,
+        }))
+    }
+
     if (!noteToEdit) return <p>Loading...</p>
     return (
-            <section className="editing-section">
-                <form onSubmit={onSaveNote} className="editing-section-form">
-                        <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                        <div className="editing-footer">
-                        <button>Close</button>
-                        </div>
-                    </form>
-            </section>
+        <section className="editing-section">
+            <form onSubmit={onSaveNote} className="editing-section-form">
+                <header className="editing-header">
+                    <input
+                        placeholder="Title"
+                        name="title"
+                        value={noteToEdit.info.title}
+                        onChange={handleChange}
+                        type="text" />
+
+                    <button type="button" onClick={onTogglePin} className="btn-note">
+                        <img
+                            src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                            alt={isPinned ? "unpin" : "pin"}
+                        />
+                    </button>
+
+                </header>
+                <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                <div className="editing-footer">
+                    <button>Close</button>
+                </div>
+            </form>
+        </section>
 
     )
 

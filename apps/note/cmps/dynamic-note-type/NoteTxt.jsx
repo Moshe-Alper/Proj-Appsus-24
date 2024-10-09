@@ -1,49 +1,32 @@
 const { useState, useRef, useEffect } = React
 
 export function NoteTxt({ info = { txt: '' }, onChangeInfo, onToggleEditModal, id }) {
-    const [hasClicked, setHasClicked] = useState(false)
 
-    const { txt, title } = info
+    const { txt } = info
 
     const isEditable = typeof onChangeInfo === 'function';
     const editClass = isEditable ? 'editable' : ''
 
-    function handleClick() {
-        if (!hasClicked) {
-            setHasClicked(true)
-            onToggleEditModal(id)
-        }
-    }
+    function handleClick(ev) {
+        if (ev.target.tagName === 'INPUT') return;
 
-    function handleInputClick(ev) {
-        if (ev.target.tagName === 'INPUT') {
-            ev.stopPropagation()
+        if (typeof onToggleEditModal === 'function') {
+            onToggleEditModal(id)
         }
     }
 
     return (
         <section className={`note-text ${editClass}`} onClick={handleClick}>
-        {isEditable ? (
-            <div className="note-input" onClick={handleInputClick}>
-
-                <input
-                    placeholder="Title"
-                    type="text"
-                    name="title"
-                    value={title}
-                    onChange={onChangeInfo}
-                    className="note-title"
+            {isEditable ? (
+                <div className="note-input">
+                    <input
+                        placeholder="Note"
+                        type="text"
+                        name="txt"
+                        value={txt}
+                        onChange={onChangeInfo}
                     />
-
-                <input
-                    placeholder="Note"
-                    type="text"
-                    name="txt"
-                    value={txt}
-                    onChange={onChangeInfo}
-                    />
-                    
-                    </div>
+                </div>
             ) : (
                 <div>
                     <p>{txt}</p>

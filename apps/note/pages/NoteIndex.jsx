@@ -75,7 +75,7 @@ export function NoteIndex() {
     }
 
     if (!notes) return <h1>Loading...</h1>
-
+    
     return (
         <section className="note-index">
             <KeepHeader

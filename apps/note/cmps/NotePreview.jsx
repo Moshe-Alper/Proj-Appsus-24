@@ -38,25 +38,17 @@ export function NotePreview({
                 ...note.style,
                 ...newStyle
             }
+
         }
 
         noteService.save(updatedNote)
             .then(() => {
                 console.log('New note color:', note.style.backgroundColor)
+                loadNotes()
 
             })
             .catch(err => console.log('Error saving note style:', err))
     }
-
-    // function handleLinkClick(ev) {
-    //     ev.preventDefault()
-    //     console.log('note.id:', note.id)
-    //     onToggleEditModal(note.id)
-
-    //     // setTimeout(() => {
-    //     //     window.location.hash = `/note/${note.id}`
-    //     // }, 100)
-    // }
 
     return (
         <article style={{ ...noteStyle }} className="note-preview">

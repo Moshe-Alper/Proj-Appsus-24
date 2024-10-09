@@ -1,5 +1,5 @@
 .note-preview {
-    position: relative; /* Ensure it has a positioning context */
+    position: relative; 
 }
 
 .note-footer {
