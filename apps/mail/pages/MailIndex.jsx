@@ -51,6 +51,19 @@ export function MailIndex() {
         setCounts(newCounts)
     }
 
+    function onRemoveMail(mailId) {
+        mailService.remove(mailId)
+            .then(() => {
+                setMails(mails => mails.filter(mail => mail.id !== mailId))
+                showSuccessMsg(`Mail removed successfully!`)
+            })
+            .catch(err => {
+                console.log('Problems removing mail:', err)
+                showErrorMsg(`Problems removing mail (${mailId})`)
+            })
+    }
+
+
     if (!mails) return <h1>Loading...</h1>
     return (
 
@@ -62,7 +75,7 @@ export function MailIndex() {
                 <section>
                     <Link to="/mail/edit" >Compose Mail</Link>
                 </section>
-                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} />
+                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} />
                 <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
             </main>
         </section >

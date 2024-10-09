@@ -1,19 +1,19 @@
 // const { Link } = ReactRouterDOM
-const { useParams, useNavigate, Link, useSearchParams, Outlet } = ReactRouterDOM
 const { useEffect, useState } = React
+const { useParams, useNavigate, Link, useOutletContext } = ReactRouterDOM
+
 
 import { MailPreview } from "./MailPreview.jsx";
 
-
-export function MailList({ mails, setMails, counts, updateCounts }) {
+export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail }) {
 
     const [countsToEdit, setCountsToEdit] = useState(counts)
     const { mailId } = useParams()
-    console.log(countsToEdit,'counts on list')
 
     useEffect(() => {
         updateCounts(counts)
     }, [mails])
+
     return (
 
         <React.Fragment>
@@ -26,6 +26,7 @@ export function MailList({ mails, setMails, counts, updateCounts }) {
                                     mail={mail}
                                 />
                             </Link>
+                            <button onClick={() => onRemoveMail(mail.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>
