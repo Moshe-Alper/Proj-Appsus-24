@@ -4,6 +4,8 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
+    console.log(counts,'counts on filter side')
+
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
