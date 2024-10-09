@@ -1,10 +1,20 @@
 .mail-preview {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%;
 }
+
+.mail-preview {
+    flex-grow: 1;
+    /* Allow the mail info to take available space */
+}
+
+.btn-delete img .btn-container i {
+    width: 1.7rem;
+    height: 1.7rem;
+
+}
+
 
 /* Starred and Unstarred Icons */
 .star {
@@ -17,34 +27,4 @@
 
 .star.unstarred {
     color: #ccc;
-}
-
-/* Email from, subject, and date columns */
-.from {
-    flex: 1;
-    color: #555;
-}
-
-.subject {
-    flex: 2;
-    font-weight: normal;
-    color: #333;
-}
-
-.date {
-    /* flex: 0.5; */
-    text-align: right;
-    color: #333;
-}
-
-.unread .subject,
-.unread .from,
-.unread .date {
-    font-weight: bold;
-}
-
-.read .subject,
-.read .from,
-.read .date {
-    font-weight: normal;
 }

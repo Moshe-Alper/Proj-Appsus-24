@@ -1,4 +1,4 @@
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, showDelete }) {
 
     const isReadClass = mail.isRead ? 'read' : 'unread'
 
@@ -8,11 +8,11 @@ export function MailPreview({ mail }) {
     }
 
     return (
-        <article className={`mail-preview ${isReadClass}`}>
+        <div className="mail-preview">
             <span className="from">{mail.from}</span>
             <span className="subject">{truncateText(mail.subject)}</span>
-            <span className="date">{new Date(mail.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-            {/* <p className="body">{truncateText(mail.body, 50)}</p> */}
-        </article>
+            {/* <span className="date">{new Date(mail.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span> */}
+            {<span className="date">{new Date(mail.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>}
+        </div>
     )
 }
