@@ -1,25 +1,44 @@
 .user-msg {
-    background-color: lightgray;
-    border: 4px solid transparent;
-    padding: 1em;
-    position: absolute;
+    background-color: #fefefe;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5em;
+    position: fixed;
     bottom: 1em;
     left: 1em;
     width: 414px;
-
+    box-shadow: 0 2px 8px #0000001a;
+    transition: box-shadow 0.3s ease;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
 }
 
 .user-msg.success {
-    background-color: #323232;
+    background-color: black;
     color: white;
 }
 
 .user-msg.error {
-    background-color: lightpink;
+    background-color: black;
+    color: #721c24;
 }
 
-
-.user-msg button{
+.user-msg button {
     float: right;
-    margin: 1em;
+    margin: 0.5em;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.user-msg button:hover {
+    color: #0056b3;
+}
+
+.user-msg:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

@@ -8,7 +8,8 @@ export const utilService = {
     getMonthName,
     getTruthyValues,
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    debounce
 }
 
 function saveToStorage(key, val) {
@@ -82,4 +83,14 @@ export function getTruthyValues(obj) {
         }
     }
     return newObj
+}
+
+function debounce(callback, wait) {
+    let timeoutId = null
+    return (...args) => {
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(() => {
+            callback(...args)
+        }, wait)
+    };
 }

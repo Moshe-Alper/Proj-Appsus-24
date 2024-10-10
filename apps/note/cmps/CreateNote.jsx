@@ -1,15 +1,73 @@
 const { useNavigate } = ReactRouterDOM
-const { useState } = React
+const { useState, useRef } = React
 
 import { noteService } from "../services/note.service.js"
 
-export function CreateNote({ refreshNotes }) {
+export function CreateNote({ loadNotes }) {
 
-    const [newNote, setNewNote] = useState(noteService.getEmptyNote())
+    const [noteType, setNoteType] = useState('NoteTxt')
+    const [newNote, setNewNote] = useState(noteService.getEmptyNote('', '', false, '#fff', noteType))
     const [isExpanded, setIsExpanded] = useState(false)
+    const [imgSrc, setImgSrc] = useState(null)
+    const [isPinned, setIsPinned] = useState(false)
+    const [todos, setTodos] = useState([])
+    const inputRef = useRef(null)
     const navigate = useNavigate()
 
+    function handleFileChange(ev) {
+        const file = ev.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                setImgSrc(e.target.result)
+                setNewNote(prevNote => ({
+                    ...prevNote,
+                    type: 'NoteImg',
+                    info: {
+                        ...prevNote.info,
+                        imgSrc: e.target.result
+                    }
+                }))
+            }
+            reader.readAsDataURL(file)
+        }
+    }
 
+    function handleImageButtonClick() {
+        setNoteType('NoteImg')
+        inputRef.current.click()
+    }
+
+    function handleAddTodo() {
+        const updatedTodos = [...todos, { txt: '', doneAt: null }]
+        setTodos(updatedTodos)
+    
+        setNewNote(prevNote => ({
+            ...prevNote,
+            type: 'NoteTodos',
+            info: {
+                ...prevNote.info,
+                todos: updatedTodos 
+            }
+        }))
+    }
+
+    function handleTodoChange(idx, value) {
+        const updatedTodos = [...todos]
+        updatedTodos[idx].txt = value
+        setTodos(updatedTodos)
+    }
+
+    function toggleTodoDone(idx) {
+        const updatedTodos = [...todos]
+        updatedTodos[idx].doneAt = updatedTodos[idx].doneAt ? null : Date.now()
+        setTodos(updatedTodos)
+    }
+
+    function onTogglePin(ev) {
+        ev.stopPropagation()
+        setIsPinned(prevState => !prevState)
+    }
 
     function handleChange({ target }) {
         const field = target.name
@@ -36,49 +94,139 @@ export function CreateNote({ refreshNotes }) {
     function onSaveNote(ev) {
         ev.preventDefault()
 
-        noteService.save(newNote)
+        if (!isValid) {
+            setIsExpanded(false)
+            return
+        }
+        console.log('newNote:', newNote)
+        let noteToSave = { ...newNote, isPinned }
+
+        if (noteType === 'NoteImg' && imgSrc) {
+            noteToSave.info.imgSrc = imgSrc || noteToSave.info.imgSrc
+        }
+
+        noteToSave.info.todos = todos
+        console.log('noteToSave:', noteToSave)
+
+        noteService.save(noteToSave)
             .then(note => {
-                console.log('Success adding note:', note)
-                setNewNote(noteService.getEmptyNote())
-                refreshNotes()
+                setNewNote(noteService.getEmptyNote('', '', false, '#fff', 'NoteTxt'))
+                setImgSrc(null)
+                setTodos([])
+                loadNotes()
+                setIsExpanded(false)
                 navigate('/note')
             })
             .catch(err => {
-                console.log('err:', err)
-                navigate('/note')
-            })
-            .finally(() => {
                 navigate('/note')
             })
     }
 
-    // console.log('newNote:', newNote)
     const { info } = newNote
     const { title, txt } = info
 
-
+    const isValid = title.trim() || txt.trim() || imgSrc
     return (
         <section className="create-note">
-            <form onSubmit={onSaveNote} onClick={() => {if (!isExpanded) setIsExpanded(true) }}>
-                {isExpanded && (
-                    <input
-                        value={title}
-                        type="text"
-                        placeholder="Title"
-                        name="title"
-                        onChange={handleChange}
-                    />
+            <input
+                type="file"
+                ref={inputRef}
+                style={{ display: 'none' }}
+                accept="image/*"
+                onChange={handleFileChange}
+            />
+            <form
+                onSubmit={onSaveNote}
+                onClick={() => {
+                    if (!isExpanded) setIsExpanded(true)
+                }}
+            >
+                {noteType === 'NoteImg' && imgSrc && (
+                    <div className="input-image">
+                        <img src={imgSrc} alt="Uploaded Image" />
+                    </div>
                 )}
-                <p>
-                    <textarea
-                        value={txt}
-                        name="txt"
-                        placeholder="Take a note..."
-                        onChange={handleChange}
-                    ></textarea>
-                </p>
-                <button type="submit" className="create-btn">Save</button> {/* Changed to "Save" */}
+
+                {isExpanded && (
+                    <div className="input-title">
+                        <input
+                            value={title}
+                            type="text"
+                            placeholder="Title"
+                            name="title"
+                            onChange={handleChange}
+                        />
+                        <button type="button" onClick={onTogglePin} className="btn-note">
+                            <img
+                                src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                                alt={isPinned ? "unpin" : "pin"}
+                            />
+                        </button>
+                    </div>
+                )}
+
+                <div className="note-contracted-container">
+                    {!isExpanded || (isExpanded && noteType !== 'NoteTodos') ? (
+                        <div className="note-text-container">
+                            <textarea
+                                value={txt}
+                                name="txt"
+                                placeholder="Take a note..."
+                                onChange={handleChange}
+                            ></textarea>
+                        </div>
+                    ) : null}
+
+                    {!isExpanded && (
+                        <div className="button-container">
+                            <button onClick={() => setNoteType('NoteTodos')} className="btn-note">
+                                <img src="assets/img/google-material-icons/check_box.svg" alt="New List" />
+                            </button>
+                            {/* <button className="btn-note">
+                                <img src="assets/img/google-material-icons/brush.svg" alt="New note with drawing" />
+                            </button> */}
+                            <button onClick={handleImageButtonClick} className="btn-note">
+                                <img src="assets/img/google-material-icons/image.svg" alt="New note with image" />
+                            </button>
+                        </div>
+                    )}
+
+                </div>
+                {isExpanded && noteType === 'NoteTodos' && (
+                    <div className="todos-container">
+                        {todos.map((todo, idx) => (
+                            <div key={idx} className="todo-item">
+                                <input
+                                    type="checkbox"
+                                    checked={!!todo.doneAt}
+                                    onChange={() => toggleTodoDone(idx)}
+                                />
+                                <input
+                                    type="text"
+                                    value={todo.txt}
+                                    onChange={(ev) => handleTodoChange(idx, ev.target.value)}
+                                    placeholder="Todo..."
+                                />
+                            </div>
+                        ))}
+                        <button type="button" onClick={handleAddTodo} className="btn-add-todo">
+                            + List item
+                        </button>
+                    </div>
+                )}
+
+                {isExpanded && (
+                    <div className="expanded-buttons">
+                        <button className="btn-note">
+                            <img src="assets/img/google-material-icons/palette.svg" alt="background-color-button" />
+                        </button>
+                    </div>
+                )}
+
+                {isExpanded && (
+                    <button type="submit" className="create-btn">Close</button>
+                )}
             </form>
         </section>
     )
-}
+}    

@@ -7,7 +7,9 @@
     --clr-primary-1: rgb(0, 0, 0);
     --clr-primary-0: rgb(235, 235, 235);
 
-    --clr-secondary-1: rgb(241, 243, 244) 
+    --clr-secondary-1: rgb(241, 243, 244);
+    --clr-secondary-2: #1a73e8;
+    --clr-secondary-3: #3e85f9;
     
     --clr-note-yellow: rgb(246, 235, 97);
     --clr-note-red: rgb(239, 154, 154);

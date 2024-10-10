@@ -1,6 +1,6 @@
 .note-filter {
     display: grid;
-    grid-template-columns: auto 1fr; /* Adjust grid columns */
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     justify-content: space-between;
     width: 38.75rem; 
@@ -9,6 +9,8 @@
     border-radius: 0.5rem; 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
     gap: 1rem; 
+
+    z-index: 1;
 }
 
 .note-filter .search-btn img {
@@ -19,38 +21,15 @@
 }
 
 .note-filter input {
+    outline: none;
+    padding-inline-start: 8px;
     padding-block: 11px;
     width: 100%;
     border: none;
 }
 
-.filter-icons-container {
+
+.note-filter form {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;  
-    background-color: white;
-    border: 1px solid black;
-}
-
-.filter-icon {
-    cursor: pointer; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    width: 157px; 
-    height: 157px; 
-    border-radius: 0.25rem; 
-    transition: background-color 0.2s; 
-    background-color: #4287f5;
-}
-
-.filter-icon img {
-    width: 25%; 
-    height: 25%; 
-}
-
-.filter-icon h1 {
-  color: white;
-  font-weight: 100;
 }
 

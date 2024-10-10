@@ -1,34 +1,45 @@
 const { useNavigate, useParams } = ReactRouterDOM
+const { useState, useEffect, useRef, Fragment } = React
+
 
 import { noteService } from "../services/note.service.js"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
+import { AppLoader } from "../../../cmps/AppLoader.jsx"
 
-const { useState, useEffect } = React
 
-export function NoteEdit({ toggleEditModal, refreshNotes }) {
+export function NoteEdit({ toggleEditModal, loadNotes }) {
 
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
     const { noteId } = useParams()
     const navigate = useNavigate()
-    
+    const [isPinned, setIsPinned] = useState(false)
+    const inputRef = useRef(null)
+    const [isLoading, setIsLoading] = useState(true)
+
+
     useEffect(() => {
         if (noteId) loadNote()
     }, [])
 
     function loadNote() {
+        setIsLoading(true)
         noteService.get(noteId)
             .then(setNoteToEdit)
             .catch(err => {
                 console.log('Problem getting note:', err)
                 navigate('/note')
             })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
+        console.log('field:', field)
         switch (target.type) {
             case 'number':
             case 'range':
@@ -37,8 +48,9 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
 
             case 'checkbox':
                 value = target.checked
-                break
+                break;
         }
+
         setNoteToEdit(prevNote => ({
             ...prevNote,
             info: {
@@ -48,12 +60,27 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
         }))
     }
 
+    function handleTodoChange(idx, text) {
+        const newTodos = noteToEdit.info.todos.map((todo, i) =>
+            i === idx ? { ...todo, txt: text } : todo
+        )
+
+        setNoteToEdit(prevNote => ({
+            ...prevNote,
+            info: {
+                ...prevNote.info,
+                todos: newTodos
+            }
+        }))
+    }
+
+
     function onSaveNote(ev) {
         ev.preventDefault()
         noteService.save(noteToEdit)
             .then(note => {
                 toggleEditModal()
-                refreshNotes()
+                loadNotes()
                 navigate('/note')
             })
             .catch(err => {
@@ -65,21 +92,57 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
             })
     }
 
-    if (!noteToEdit) return <p>Loading...</p>
+    function onTogglePin(ev) {
+        ev.stopPropagation()
+        setIsPinned((prevState) => !prevState)
+
+        setNoteToEdit((prevNote) => ({
+            ...prevNote,
+            isPinned: !prevNote.isPinned,
+        }))
+    }
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [noteToEdit.info.title])
+
     return (
-        <section className="note-section">
-            <section className="note-edit">
-                <h1>Edit Note</h1>
-                <form onSubmit={onSaveNote} className="note-form">
-                    <div className="edit-modal">
-                        <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                        <button>Save</button>
-                        <button type="button" onClick={() => setNoteToEdit(null)}>Close</button>
+        <Fragment>
+            <div className="loading-overlay" style={{ display: isLoading ? 'block' : 'none' }}>
+                <AppLoader />
+            </div>
+            <section className="editing-section" style={{ display: isLoading ? 'none' : 'block' }}>
+                <form onSubmit={onSaveNote} className="editing-section-form" style={{ backgroundColor: noteToEdit.style.backgroundColor }}>                <header className="editing-header">
+                    <input
+                        autoFocus
+                        ref={inputRef}
+                        placeholder="Title"
+                        name="title"
+                        value={noteToEdit.info.title}
+                        onChange={handleChange}
+                        type="text" />
+
+                    <button type="button" onClick={onTogglePin} className="btn-note">
+                        <img
+                            src={`assets/img/google-material-icons/${noteToEdit.isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                            alt={isPinned ? "unpin" : "pin"}
+                        />
+                    </button>
+
+                </header>
+                    <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                    <div className="editing-footer">
+                        <button className="btn-note">
+                            <img src="assets/img/google-material-icons/palette.svg" alt="background-color-button" />
+                        </button>
+                        <button>Close</button>
                     </div>
                 </form>
             </section>
+        </Fragment>
 
-        </section>
     )
 
     function DynamicCmp({ type, info }) {
@@ -88,11 +151,20 @@ export function NoteEdit({ toggleEditModal, refreshNotes }) {
                 return <NoteTxt
                     info={info}
                     onChangeInfo={handleChange}
+                    onToggleEditModal={toggleEditModal}
                 />
             case 'NoteImg':
-                return <NoteImg info={info} />
+                return <NoteImg
+                    info={info}
+                    onChangeInfo={handleChange}
+                    onToggleEditModal={toggleEditModal}
+                />
             case 'NoteTodos':
-                return <NoteTodos info={info} />
+                return <NoteTodos
+                    info={info}
+                    onChangeInfo={handleTodoChange}
+                    onToggleEditModal={toggleEditModal}
+                />
             default:
                 return <p>Loading...</p>
         }

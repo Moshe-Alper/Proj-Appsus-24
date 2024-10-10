@@ -44,19 +44,16 @@ function save(note) {
     }
 }
 
-function getEmptyNote(title = '', txt='', isPinned = false) {
+function getEmptyNote(title = '', txt = '', isPinned = false, backgroundColor = '#fff', type = 'NoteTxt') {
     return {
         id: '',
         createdAt: Date.now(),
-        type: 'NoteTxt', 
+        type: type,
         isPinned: isPinned,
         style: {
-            backgroundColor: 'white' 
+            backgroundColor
         },
-        info: {
-            title: title,
-            txt: txt
-        }
+        info: _getInfoByType(type)
     }
 }
 
@@ -78,11 +75,11 @@ function getFilterFromSearchParams(searchParams) {
 function duplicate(note) {
     const newNote = {
         ...note,
-        id: '', 
-        createdAt: Date.now(),    
-        isPinned: false         
+        id: '',
+        createdAt: Date.now(),
+        isPinned: false
     }
-    return save(newNote) 
+    return save(newNote)
 }
 
 // Local Functions
@@ -104,7 +101,7 @@ function _createNotes() {
             info: {
                 title: 'Fullstack Me Baby!',
                 txt: 'Im Stacking you',
-                imgUrl: '',
+                imgSrc: '',
                 todos: {}
             }
         },
@@ -115,7 +112,7 @@ function _createNotes() {
             isPinned: false,
             info: {
                 title: 'Bobi and Me',
-                imgUrl: 'assets/img/notes/Sea-turtle.jpg',
+                imgSrc: 'assets/img/notes/Sea-turtle.jpg',
             },
             style: {
                 backgroundColor: 'rgb(246, 235, 97)'
@@ -140,6 +137,20 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTE_KEY, notes)
 }
+
+function _getInfoByType(type) {
+    switch (type) {
+        case 'NoteTxt':
+            return { title: '', txt: '' }
+        case 'NoteImg':
+            return { title: '', imgSrc: '' }
+        case 'NoteTodos':
+            return { title: '', todos: [] }
+        default:
+            return { title: '', txt: '' }
+    }
+}
+
 
 function _setNextPrevNoteId(note) {
     return query().then((notes) => {

@@ -1,7 +1,5 @@
-const { Link } = ReactRouterDOM
-
 export function NoteFooter({
-    note, onRemoveNote, onToggleEditModal, onToggleStyleModal, onDuplicateNote
+    note, onRemoveNote, onToggleStyleModal, onDuplicateNote
 }) {
 
     return (
@@ -15,12 +13,6 @@ export function NoteFooter({
                 <img src="assets/img/google-material-icons/duplicate.svg" alt="duplicate-button" />
             </button>
             
-            <Link to={`/note/${note.id}`}>
-                <button className="btn-note" onClick={onToggleEditModal}>
-                    <img src="assets/img/google-material-icons/edit.svg" alt="edit-button" />
-                </button>
-            </Link>
-
             <button className="btn-note" onClick={onToggleStyleModal}>
                 <img src="assets/img/google-material-icons/palette.svg" alt="background-color-button" />
             </button>
