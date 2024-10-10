@@ -18,7 +18,8 @@
 .create-note form textarea {
     width: 100%;
     border: none;
-    padding: 0.25rem 0 0.25rem 0.625rem;
+    padding-inline: 8px;
+    padding-block: 0;
     outline: none;
     font-size: 1rem;
     resize: none;
@@ -64,6 +65,7 @@
 }
 
 .note-contracted-container {
+    max-height: 48px;
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;

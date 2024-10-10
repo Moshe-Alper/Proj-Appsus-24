@@ -73,6 +73,7 @@ export function NoteIndex() {
                 showErrorMsg('Problem pinning/unpinning note')
             })
     }
+    
 
     if (!notes) return <h1>Loading...</h1>
     
