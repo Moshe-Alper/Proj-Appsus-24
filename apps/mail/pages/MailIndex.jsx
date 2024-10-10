@@ -68,14 +68,14 @@ export function MailIndex() {
 
     function onSendMail(newMail) {
         mailService.save(newMail)
-            .then((sentMail) => {
-                setMails((prevMails) => ({ ...prevMails, sentMail }))
-                setIsCompose(false)
+        .then((sentMail) => {
+            console.log('newMail:', newMail)
+            setMails((prevMails) => [...prevMails, sentMail])
+            setIsCompose(false)
             })
             .catch(err => {
                 console.log('Error sending mail:', err)
             })
-        console.log('Mail sent:', newMail)
     }
 
 
@@ -92,7 +92,7 @@ export function MailIndex() {
                 </div>
                 {isCompose && (
 
-                    <div className="compose-mail-form" style={{ position: 'absolute', left: '0', top: '0', zIndex: '10', width: '300px' }}>
+                    <div className="compose-mail-form" >
                         <MailCompose onSendMail={onSendMail} />
                     </div>
 

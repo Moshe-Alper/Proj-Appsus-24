@@ -25,7 +25,6 @@ window.mailService = mailService
 console.log('mailService is available:', window.mailService)
 
 function query(filterBy = {}) {
-    // console.log('Current filter:', filterBy)
     return storageService.query(MAIL_KEY)
         .then(mails => {
             mails = _getFilteredMails(mails, filterBy)
@@ -43,10 +42,11 @@ function remove(mailId) {
 }
 
 function save(mail) {
+    console.log(mail)
     if (mail.id) {
-        return storageService.put(MAIL_KEY, mail)
-    } else {
         return storageService.post(MAIL_KEY, mail)
+    } else {
+        return storageService.put(MAIL_KEY, mail)
     }
 }
 
@@ -63,7 +63,7 @@ function _getFilteredMails(mails, filterBy) {
                 case 'Trash':
                     return mail.removedAt
                 case 'Draft':
-                    return !mail.sentAt
+                    return !mail.sentAt && !mail.removedAt
                 default:
                     return true
             }
@@ -115,7 +115,6 @@ function getMailCountByFolder() {
 }
 
 function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
-    console.log('hi')
     return {
         id: makeId(),
         createdAt: Date.now(),
@@ -128,6 +127,7 @@ function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail
         to,
         labels: [],
         isStared: false,
+        isDraft: false
     }
 }
 
