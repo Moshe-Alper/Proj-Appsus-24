@@ -13,26 +13,34 @@
     transition: all 0.3s ease; 
 }
 label {
-    display: block; /* Makes each label take a full line */
-    margin-bottom: 10px; /* Adds space below each label */
-   
+    display: block;
+    margin-bottom: 10px; 
+    
 }
 
 input[type="email"],
-input[type="text"],
-textarea {
-    width: 100%; /* Make inputs take the full width of the form */
-    padding: 10px; /* Padding inside the inputs */
-    margin-top: 5px; /* Space above inputs */
-    border: none;    
+input[type="text"] {
+    width: 100%; 
+    padding: 10px; 
+    border: none;   
+    outline: none;
+    border-bottom: 1px solid #ddd;
+ 
 }
 
-
+textarea{
+    width: 100%; 
+    padding: 10px; 
+    border: none;  
+    outline: none;  
+}
 
 .compose-mail-button {
-    margin-bottom: 10px; /* Space below the button */
+    margin-bottom: 100px; 
 }
 
 .mail-container {
-    position: relative; /* Ensure the form stays above the mail list */
+    position: relative; 
 }
+
+

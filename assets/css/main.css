@@ -42,6 +42,7 @@
 @import './apps/mail/cmps/MailPreview.css';
 @import './apps/mail/cmps/mail-container.css';
 @import './apps/mail/cmps/MailCompose.css';
+@import './apps/mail/cmps/mail-compose-btn.css';
 
 @import './apps/mail/pages/MailFilter.css';
 @import './apps/mail/pages/MailDetails.css';

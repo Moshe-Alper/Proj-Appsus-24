@@ -20,20 +20,20 @@
 /*     
     justify-content: flex-start; */
     /* align-items:center; */
-    width: 100%; /* Ensure it takes the full width */
+    width: 100%; 
 }
 
 .mail-list li.read {
-    background-color: #f2f6fc; /* Lighter color for read emails */
+    background-color: #f2f6fc; 
 }
 
 .mail-list li.unread {
-    background-color: #ffffff; /* Default color for unread emails */
+    background-color: #ffffff; 
     font-weight: bold;
 }
 
 .delete-container {
-    display: inline-block; /* Show delete button inline */
+    display: inline-block; 
 }
 
 .btn-delete{

@@ -68,10 +68,10 @@ export function MailIndex() {
 
     function onSendMail(newMail) {
         mailService.save(newMail)
-        .then((sentMail) => {
-            console.log('newMail:', newMail)
-            setMails((prevMails) => [...prevMails, sentMail])
-            setIsCompose(false)
+            .then((sentMail) => {
+                console.log('newMail:', newMail)
+                setMails((prevMails) => [...prevMails, sentMail])
+                setIsCompose(false)
             })
             .catch(err => {
                 console.log('Error sending mail:', err)
@@ -88,7 +88,11 @@ export function MailIndex() {
                 onSetFilterBy={onSetFilterBy} />
             <main className="mail-container">
                 <div className="compose-mail-button">
-                    <button onClick={() => setIsCompose(true)}>Compose Mail</button>
+                    <img
+                        src={'assets/img/google-material-icons/pen.svg'}
+                        alt={'pen-icon'}
+                    />
+                    <button onClick={() => setIsCompose(true)}>Compose</button>
                 </div>
                 {isCompose && (
 

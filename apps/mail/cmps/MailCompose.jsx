@@ -35,38 +35,36 @@ export function MailCompose({ onSendMail }) {
 
     return (
         // <section className="compose-mail-form">
-            <form onSubmit={onComposeSubmit}>
-                <label>
-                    To:
-                    <input
-                        type="email"
-                        name="to"
-                        value={newMail.to}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label>
-                    Subject:
-                    <input
-                        type="text"
-                        name="subject"
-                        value={newMail.subject}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label>
-                    Body:
-                    <textarea
-                        name="body"
-                        value={newMail.body}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <button type="submit">Send</button>
-            </form>
+        <form onSubmit={onComposeSubmit}>
+            <label>
+
+                <input
+                    type="email"
+                    placeholder="To"
+                    value={newMail.to}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                <input
+                    type="text"
+                    placeholder="Subject"
+                    value={newMail.subject}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                <textarea
+                    name="body"
+                    value={newMail.body}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <button type="submit">Send</button>
+        </form>
         // </section>
     )
 }
