@@ -25,6 +25,7 @@
 @import './cmps/AppHeader.css';
 
 @import './apps/note/cmps/KeepHeader.css';
+@import './apps/note/cmps/AppLoader.css';
 
 
 @import './apps/note/cmps/NoteHeader.css';

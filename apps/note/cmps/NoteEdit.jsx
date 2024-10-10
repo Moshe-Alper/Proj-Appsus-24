@@ -1,13 +1,13 @@
 const { useNavigate, useParams } = ReactRouterDOM
-const { useRef } = React
+const { useState, useEffect, useRef, Fragment } = React
 
 
 import { noteService } from "../services/note.service.js"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
+import { AppLoader } from "../../../cmps/AppLoader.jsx"
 
-const { useState, useEffect } = React
 
 export function NoteEdit({ toggleEditModal, loadNotes }) {
 
@@ -16,6 +16,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     const navigate = useNavigate()
     const [isPinned, setIsPinned] = useState(false)
     const inputRef = useRef(null)
+    const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
@@ -23,18 +24,22 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     }, [])
 
     function loadNote() {
+        setIsLoading(true)
         noteService.get(noteId)
             .then(setNoteToEdit)
             .catch(err => {
                 console.log('Problem getting note:', err)
                 navigate('/note')
             })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-    console.log('field:', field)
+        console.log('field:', field)
         switch (target.type) {
             case 'number':
             case 'range':
@@ -90,7 +95,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     function onTogglePin(ev) {
         ev.stopPropagation()
         setIsPinned((prevState) => !prevState)
-        
+
         setNoteToEdit((prevNote) => ({
             ...prevNote,
             isPinned: !prevNote.isPinned,
@@ -103,34 +108,37 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
         }
     }, [noteToEdit.info.title])
 
-    if (!noteToEdit) return <p>Loading...</p>
-
     return (
-        <section className="editing-section">
-            <form onSubmit={onSaveNote} className="editing-section-form" style={{ backgroundColor: noteToEdit.style.backgroundColor }}>                <header className="editing-header">
-                <input
-                    autoFocus
-                    ref={inputRef}
-                    placeholder="Title"
-                    name="title"
-                    value={noteToEdit.info.title}
-                    onChange={handleChange}
-                    type="text" />
+        <Fragment>
+            <div className="loading-overlay" style={{ display: isLoading ? 'block' : 'none' }}>
+                <AppLoader />
+            </div>
+            <section className="editing-section" style={{ display: isLoading ? 'none' : 'block' }}>
+                <form onSubmit={onSaveNote} className="editing-section-form" style={{ backgroundColor: noteToEdit.style.backgroundColor }}>                <header className="editing-header">
+                    <input
+                        autoFocus
+                        ref={inputRef}
+                        placeholder="Title"
+                        name="title"
+                        value={noteToEdit.info.title}
+                        onChange={handleChange}
+                        type="text" />
 
-                <button type="button" onClick={onTogglePin} className="btn-note">
-                    <img
-                        src={`assets/img/google-material-icons/${noteToEdit.isPinned ? 'pin' : 'pin_nofill'}.svg`}
-                        alt={isPinned ? "unpin" : "pin"}
-                    />
-                </button>
+                    <button type="button" onClick={onTogglePin} className="btn-note">
+                        <img
+                            src={`assets/img/google-material-icons/${noteToEdit.isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                            alt={isPinned ? "unpin" : "pin"}
+                        />
+                    </button>
 
-            </header>
-                <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
-                <div className="editing-footer">
-                    <button>Close</button>
-                </div>
-            </form>
-        </section>
+                </header>
+                    <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
+                    <div className="editing-footer">
+                        <button>Close</button>
+                    </div>
+                </form>
+            </section>
+        </Fragment>
 
     )
 

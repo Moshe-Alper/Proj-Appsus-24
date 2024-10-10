@@ -182,9 +182,9 @@ export function CreateNote({ loadNotes }) {
                             <button onClick={() => setNoteType('NoteTodos')} className="btn-note">
                                 <img src="assets/img/google-material-icons/check_box.svg" alt="New List" />
                             </button>
-                            <button className="btn-note">
+                            {/* <button className="btn-note">
                                 <img src="assets/img/google-material-icons/brush.svg" alt="New note with drawing" />
-                            </button>
+                            </button> */}
                             <button onClick={handleImageButtonClick} className="btn-note">
                                 <img src="assets/img/google-material-icons/image.svg" alt="New note with image" />
                             </button>

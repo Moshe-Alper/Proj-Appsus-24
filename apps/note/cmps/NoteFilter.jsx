@@ -44,7 +44,6 @@ export function NoteFilter({ filterBy, onSetFilterBy, setIsFiltering }) {
 
     function handleReset(ev) {
         ev.stopPropagation()
-        console.log('Resetting filters')
         setIsFiltering(false)
         setFilterByToEdit({ txt: '', type: '' })
     }
