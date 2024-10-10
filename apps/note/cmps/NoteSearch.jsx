@@ -1,12 +1,29 @@
-export function NoteSearch({ onSetFilterBy, setIsFiltering  }) {
+const { useEffect, useRef } = React
+
+export function NoteSearch({ onSetFilterBy, setIsFiltering }) {
+    const formRef = useRef(null)
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                setIsFiltering(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [setIsFiltering])
 
     function handleSearch(searchType) {
-        setIsFiltering(false)  
+        setIsFiltering(false);  
         onSetFilterBy({ type: searchType })
     }
-    
+
     return (
-        <section className="note-search">
+        <form className="note-search" ref={formRef}>
             <div className="note-search-container">
                 <h1>Types</h1>
                 <div className="search-items">
@@ -21,6 +38,6 @@ export function NoteSearch({ onSetFilterBy, setIsFiltering  }) {
                     </div>
                 </div>
             </div>
-        </section>
-    )
+        </form>
+    );
 }

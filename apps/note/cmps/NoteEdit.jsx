@@ -72,33 +72,31 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     function onTogglePin(ev) {
         ev.stopPropagation();
         setIsPinned((prevState) => !prevState);
-    
+
         setNoteToEdit((prevNote) => ({
             ...prevNote,
             isPinned: !prevNote.isPinned,
         }))
     }
-
     if (!noteToEdit) return <p>Loading...</p>
     return (
         <section className="editing-section">
-            <form onSubmit={onSaveNote} className="editing-section-form">
-                <header className="editing-header">
-                    <input
-                        placeholder="Title"
-                        name="title"
-                        value={noteToEdit.info.title}
-                        onChange={handleChange}
-                        type="text" />
+            <form onSubmit={onSaveNote} className="editing-section-form" style={{ backgroundColor: noteToEdit.style.backgroundColor }}>                <header className="editing-header">
+                <input
+                    placeholder="Title"
+                    name="title"
+                    value={noteToEdit.info.title}
+                    onChange={handleChange}
+                    type="text" />
 
-                    <button type="button" onClick={onTogglePin} className="btn-note">
-                        <img
-                            src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
-                            alt={isPinned ? "unpin" : "pin"}
-                        />
-                    </button>
+                <button type="button" onClick={onTogglePin} className="btn-note">
+                    <img
+                        src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                        alt={isPinned ? "unpin" : "pin"}
+                    />
+                </button>
 
-                </header>
+            </header>
                 <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
                 <div className="editing-footer">
                     <button>Close</button>
@@ -117,7 +115,11 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                     onToggleEditModal={toggleEditModal}
                 />
             case 'NoteImg':
-                return <NoteImg info={info} />
+                return <NoteImg 
+                info={info} 
+                onChangeInfo={handleChange}
+                onToggleEditModal={toggleEditModal}
+                />
             case 'NoteTodos':
                 return <NoteTodos info={info} />
             default:
