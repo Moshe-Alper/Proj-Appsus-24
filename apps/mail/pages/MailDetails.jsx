@@ -31,6 +31,7 @@ export function MailDetails({ }) {
             })
             .catch((err) => {
                 console.error('Problem getting mail', err)
+                showErrorMsg('Problem getting car')
                 navigate('/mail')
             })
     }

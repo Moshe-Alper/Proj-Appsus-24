@@ -1,0 +1,14 @@
+.compose-mail-form {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.compose-mail-button {
+    margin-bottom: 10px;
+}

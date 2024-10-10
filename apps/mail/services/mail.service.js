@@ -115,6 +115,7 @@ function getMailCountByFolder() {
 }
 
 function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
+    console.log('hi')
     return {
         id: makeId(),
         createdAt: Date.now(),

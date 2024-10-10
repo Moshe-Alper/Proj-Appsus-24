@@ -2,12 +2,14 @@
 const { Link, useSearchParams } = ReactRouterDOM
 const { useEffect, useState } = React
 
+import { showErrorMsg, showSuccessMsg, showUserMsg } from "../services/event-bus.service.js"
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailSideFilter } from "../cmps/MailSideFilter.jsx"
 import { getTruthyValues } from "../services/util.service.js"
 import { MailHeader } from "../cmps/MailHeader.jsx"
+import { MailCompose } from "../cmps/MailCompose.jsx"
 
 
 export function MailIndex() {
@@ -15,6 +17,7 @@ export function MailIndex() {
     const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchPrms))
     const [counts, setCounts] = useState()
+    const [isCompose, setIsCompose] = useState(false)
 
 
     useEffect(() => {
@@ -25,29 +28,29 @@ export function MailIndex() {
 
     function loadMails() {
         mailService.query(filterBy)
-        .then(setMails)
-        .catch(err => {
-            console.log('Problems getting mails:', err)
-        })
+            .then(setMails)
+            .catch(err => {
+                console.log('Problems getting mails:', err)
+            })
     }
-    
+
     // Fetch counts for each folder
     function updateMailCounts() {
         mailService.getMailCountByFolder()
-        .then(fetchedCounts => {
-            setCounts(fetchedCounts)
-        })
-        .catch(err => {
-            console.log('Problems fetching counts:', err)
-        })
+            .then(fetchedCounts => {
+                setCounts(fetchedCounts)
+            })
+            .catch(err => {
+                console.log('Problems fetching counts:', err)
+            })
     }
-    
+
     function onSetFilterBy(filterBy) {
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
-    
+
     function updateCounts(newCounts) {
-        console.log('after update counts',newCounts)
+        // console.log('after update counts', newCounts)
         setCounts(newCounts)
     }
 
@@ -63,6 +66,18 @@ export function MailIndex() {
             })
     }
 
+    function onSendMail(newMail) {
+        mailService.save(newMail)
+            .then((sentMail) => {
+                setMails((prevMails) => ({ ...prevMails, sentMail }))
+                setIsCompose(false)
+            })
+            .catch(err => {
+                console.log('Error sending mail:', err)
+            })
+        console.log('Mail sent:', newMail)
+    }
+
 
     if (!mails) return <h1>Loading...</h1>
     return (
@@ -72,9 +87,16 @@ export function MailIndex() {
                 filterBy={filterBy}
                 onSetFilterBy={onSetFilterBy} />
             <main className="mail-container">
-                <section>
-                    <Link to="/mail/edit" >Compose Mail</Link>
-                </section>
+                <div className="compose-mail-button">
+                    <button onClick={() => setIsCompose(true)}>Compose Mail</button>
+                </div>
+                {isCompose && (
+
+                    <div className="compose-mail-form" style={{ position: 'absolute', left: '0', top: '0', zIndex: '10', width: '300px' }}>
+                        <MailCompose onSendMail={onSendMail} />
+                    </div>
+
+                )}
                 <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} />
                 <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
             </main>
