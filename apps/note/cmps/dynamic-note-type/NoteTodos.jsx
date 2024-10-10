@@ -5,7 +5,13 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
 
     const isEditable = typeof onChangeInfo === 'function'
     const editClass = isEditable ? 'editable' : ''
-    const [completedTodos, setCompletedTodos] = useState(todos.filter(todo => todo.doneAt))
+    const todoRefs = useRef([])
+
+    useEffect(() => {
+        if (isEditable && todoRefs.current[0]) {
+            todoRefs.current[0].focus()
+        }
+    }, [isEditable])
 
     function handleClick(ev) {
         if (ev.target.tagName === 'INPUT') return
@@ -24,7 +30,6 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
         const todo = updatedTodos[idx]
         todo.doneAt = todo.doneAt ? null : Date.now()
         onChangeInfo(updatedTodos)
-        setCompletedTodos(updatedTodos.filter(todo => todo.doneAt))
     }
 
     return (
@@ -33,14 +38,15 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
                 {todos
                     .sort((a, b) => (a.doneAt ? 1 : 0) - (b.doneAt ? 1 : 0))
                     .map((todo, idx) => (
-                        <li key={idx} className={todo.doneAt ? 'done' : 'pending'}>
+                        <li key={todo.id || idx} className={todo.doneAt ? 'done' : 'pending'}>
                             <input
                                 type="checkbox"
                                 checked={!!todo.doneAt}
                                 onChange={() => toggleTodoDone(idx)}
                             />
-                            {isEditable ? (
-                                <input
+                            {isEditable && !todo.doneAt ? ( 
+                                <input 
+                                    ref={(el) => (todoRefs.current[idx] = el)} 
                                     name={`todo-${idx}-txt`}
                                     type="text"
                                     value={todo.txt}
@@ -48,7 +54,7 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
                                     className={todo.doneAt ? 'done' : 'pending'}
                                 />
                             ) : (
-                                <span>{todo.txt}</span>
+                                <span>{todo.txt}</span> 
                             )}
                         </li>
                     ))}

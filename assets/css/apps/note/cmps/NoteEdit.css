@@ -95,6 +95,7 @@
 }
 
 .editing-section .note-todos input {
+    font-size: 1rem;
     border: none;
     outline: none;
     background-color: inherit;
