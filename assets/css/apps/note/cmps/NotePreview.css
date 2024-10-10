@@ -28,13 +28,8 @@
     margin-block-end: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
+    padding-inline-start: 0;
 }
-
-.note-preview ul {
-    padding-left: 20px;
-    list-style-type: disc;
-}
-
 
 .color-input {
     position: absolute;
@@ -79,6 +74,17 @@
 
 .note-preview .note-todos {
     list-style: none;
+}
+
+.note-preview .note-todos li {
+    display: flex;
+}
+
+.note-preview .note-todos [type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-inline-end: 15px;
+    accent-color: var(--clr-secondary-3);
 }
 
 .note-preview .note-todos .done {

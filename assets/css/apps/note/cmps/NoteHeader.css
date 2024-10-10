@@ -5,9 +5,10 @@
 }
 
 .note-header h1 {
+    font-family: Roboto-Black;
     letter-spacing: .00625rem;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
-    padding-top: 0.75rem;
+    padding-block: 0.75rem;
 }

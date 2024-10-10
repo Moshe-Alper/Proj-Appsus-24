@@ -34,21 +34,19 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
                     .sort((a, b) => (a.doneAt ? 1 : 0) - (b.doneAt ? 1 : 0))
                     .map((todo, idx) => (
                         <li key={idx} className={todo.doneAt ? 'done' : 'pending'}>
+                            <input
+                                type="checkbox"
+                                checked={!!todo.doneAt}
+                                onChange={() => toggleTodoDone(idx)}
+                            />
                             {isEditable ? (
-                                <div>
-                                    <input
-                                        type="checkbox"
-                                        checked={!!todo.doneAt}
-                                        onChange={() => toggleTodoDone(idx)}
-                                    />
-                                    <input
-                                        name={`todo-${idx}-txt`}
-                                        type="text"
-                                        value={todo.txt}
-                                        onChange={(ev) => handleTodoChange(idx, ev.target.value)}
-                                        className={todo.doneAt ? 'done' : 'pending'}
-                                    />
-                                </div>
+                                <input
+                                    name={`todo-${idx}-txt`}
+                                    type="text"
+                                    value={todo.txt}
+                                    onChange={(ev) => handleTodoChange(idx, ev.target.value)}
+                                    className={todo.doneAt ? 'done' : 'pending'}
+                                />
                             ) : (
                                 <span>{todo.txt}</span>
                             )}

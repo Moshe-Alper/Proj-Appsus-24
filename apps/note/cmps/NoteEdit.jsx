@@ -88,15 +88,14 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     }
 
     function onTogglePin(ev) {
-        ev.stopPropagation();
+        ev.stopPropagation()
         setIsPinned((prevState) => !prevState)
-        console.log('prevNote:', prevNote)
+        
         setNoteToEdit((prevNote) => ({
             ...prevNote,
             isPinned: !prevNote.isPinned,
         }))
     }
-
 
     useEffect(() => {
         if (inputRef.current) {

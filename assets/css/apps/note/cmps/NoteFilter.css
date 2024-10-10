@@ -21,6 +21,8 @@
 }
 
 .note-filter input {
+    outline: none;
+    padding-inline-start: 8px;
     padding-block: 11px;
     width: 100%;
     border: none;

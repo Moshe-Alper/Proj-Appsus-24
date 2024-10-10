@@ -88,7 +88,10 @@
 }
 
 .editing-section .note-todos [type="checkbox"] {
-    margin-inline-end: 8px;
+    width: 18px;
+    height: 18px;
+    margin-inline-end: 15px;
+    accent-color: var(--clr-secondary-3);
 }
 
 .editing-section .note-todos input {
