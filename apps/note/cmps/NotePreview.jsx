@@ -43,7 +43,7 @@ export function NotePreview({
 
         noteService.save(updatedNote)
             .then(() => {
-                console.log('New note color:', note.style.backgroundColor)
+                // console.log('New note color:', note.style.backgroundColor)
                 loadNotes()
 
             })

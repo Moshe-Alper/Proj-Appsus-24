@@ -1,10 +1,13 @@
+const { useRef, useEffect } = React
+
 export function NoteImg({ info = { imgSrc: '', txt: '' }, onChangeInfo, onToggleEditModal, id }) {
+    const inputRef = useRef(null)
 
     const isEditable = typeof onChangeInfo === 'function'
     const editClass = isEditable ? 'editable' : ''
 
     function getDefaultUrl(ev) {
-        ev.target.src = 'https://via.placeholder.com/150'
+    ev.target.src = 'https://via.placeholder.com/150'
     }
 
     function handleClick(ev) {
@@ -15,6 +18,12 @@ export function NoteImg({ info = { imgSrc: '', txt: '' }, onChangeInfo, onToggle
         }
     }
 
+    useEffect(() => {
+        if (isEditable && inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [isEditable])
+
     const { imgSrc, txt } = info
 
     return (
@@ -24,6 +33,7 @@ export function NoteImg({ info = { imgSrc: '', txt: '' }, onChangeInfo, onToggle
                     <img src={imgSrc} onError={getDefaultUrl} alt="note-image" />
 
                     <input
+                        ref={inputRef}
                         placeholder="Note"
                         type="text"
                         name="txt"

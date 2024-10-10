@@ -1,4 +1,6 @@
 const { useNavigate, useParams } = ReactRouterDOM
+const { useRef } = React
+
 
 import { noteService } from "../services/note.service.js"
 import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
@@ -13,6 +15,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     const { noteId } = useParams()
     const navigate = useNavigate()
     const [isPinned, setIsPinned] = useState(false)
+    const inputRef = useRef(null)
 
 
     useEffect(() => {
@@ -31,7 +34,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-
+    console.log('field:', field)
         switch (target.type) {
             case 'number':
             case 'range':
@@ -40,7 +43,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
 
             case 'checkbox':
                 value = target.checked
-                break
+                break;
         }
 
         setNoteToEdit(prevNote => ({
@@ -51,6 +54,21 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
             }
         }))
     }
+
+    function handleTodoChange(idx, text) {
+        const newTodos = noteToEdit.info.todos.map((todo, i) =>
+            i === idx ? { ...todo, txt: text } : todo
+        )
+
+        setNoteToEdit(prevNote => ({
+            ...prevNote,
+            info: {
+                ...prevNote.info,
+                todos: newTodos
+            }
+        }))
+    }
+
 
     function onSaveNote(ev) {
         ev.preventDefault()
@@ -71,18 +89,29 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
 
     function onTogglePin(ev) {
         ev.stopPropagation();
-        setIsPinned((prevState) => !prevState);
-
+        setIsPinned((prevState) => !prevState)
+        console.log('prevNote:', prevNote)
         setNoteToEdit((prevNote) => ({
             ...prevNote,
             isPinned: !prevNote.isPinned,
         }))
     }
+
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [noteToEdit.info.title])
+
     if (!noteToEdit) return <p>Loading...</p>
+
     return (
         <section className="editing-section">
             <form onSubmit={onSaveNote} className="editing-section-form" style={{ backgroundColor: noteToEdit.style.backgroundColor }}>                <header className="editing-header">
                 <input
+                    autoFocus
+                    ref={inputRef}
                     placeholder="Title"
                     name="title"
                     value={noteToEdit.info.title}
@@ -91,7 +120,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
 
                 <button type="button" onClick={onTogglePin} className="btn-note">
                     <img
-                        src={`assets/img/google-material-icons/${isPinned ? 'pin' : 'pin_nofill'}.svg`}
+                        src={`assets/img/google-material-icons/${noteToEdit.isPinned ? 'pin' : 'pin_nofill'}.svg`}
                         alt={isPinned ? "unpin" : "pin"}
                     />
                 </button>
@@ -115,13 +144,17 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                     onToggleEditModal={toggleEditModal}
                 />
             case 'NoteImg':
-                return <NoteImg 
-                info={info} 
-                onChangeInfo={handleChange}
-                onToggleEditModal={toggleEditModal}
+                return <NoteImg
+                    info={info}
+                    onChangeInfo={handleChange}
+                    onToggleEditModal={toggleEditModal}
                 />
             case 'NoteTodos':
-                return <NoteTodos info={info} />
+                return <NoteTodos
+                    info={info}
+                    onChangeInfo={handleTodoChange}
+                    onToggleEditModal={toggleEditModal}
+                />
             default:
                 return <p>Loading...</p>
         }

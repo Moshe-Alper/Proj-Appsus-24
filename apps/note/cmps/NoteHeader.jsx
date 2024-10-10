@@ -8,7 +8,6 @@ export function NoteHeader({ note, togglePin, onToggleEditModal }) {
         ev.stopPropagation()
         togglePin(note.id)
     }
-
     return (
         
         <Link to={`/note/${note.id}`}>

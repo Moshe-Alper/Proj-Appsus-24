@@ -1,16 +1,59 @@
-export function NoteTodos({ info }) {
+const { useRef, useEffect, useState } = React
 
-    // console.log('info:', info)
+export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
     const { todos } = info
-    // console.log('todos:', todos)
+
+    const isEditable = typeof onChangeInfo === 'function'
+    const editClass = isEditable ? 'editable' : ''
+    const [completedTodos, setCompletedTodos] = useState(todos.filter(todo => todo.doneAt))
+
+    function handleClick(ev) {
+        if (ev.target.tagName === 'INPUT') return
+
+        if (typeof onToggleEditModal === 'function') {
+            onToggleEditModal(id)
+        }
+    }
+
+    function handleTodoChange(idx, text) {
+        onChangeInfo(idx, text)
+    }
+
+    function toggleTodoDone(idx) {
+        const updatedTodos = [...todos]
+        const todo = updatedTodos[idx]
+        todo.doneAt = todo.doneAt ? null : Date.now()
+        onChangeInfo(updatedTodos)
+        setCompletedTodos(updatedTodos.filter(todo => todo.doneAt))
+    }
+
     return (
-        <section className="note-text">
+        <section className={`note-todos ${editClass}`} onClick={handleClick}>
             <ul className="note-todos">
-                {todos.map((todo, index) => (
-                    <li key={index} className={todo.doneAt ? 'done' : 'pending'}>
-                    {todo.txt}
-                </li>
-                ))}
+                {todos
+                    .sort((a, b) => (a.doneAt ? 1 : 0) - (b.doneAt ? 1 : 0))
+                    .map((todo, idx) => (
+                        <li key={idx} className={todo.doneAt ? 'done' : 'pending'}>
+                            {isEditable ? (
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={!!todo.doneAt}
+                                        onChange={() => toggleTodoDone(idx)}
+                                    />
+                                    <input
+                                        name={`todo-${idx}-txt`}
+                                        type="text"
+                                        value={todo.txt}
+                                        onChange={(ev) => handleTodoChange(idx, ev.target.value)}
+                                        className={todo.doneAt ? 'done' : 'pending'}
+                                    />
+                                </div>
+                            ) : (
+                                <span>{todo.txt}</span>
+                            )}
+                        </li>
+                    ))}
             </ul>
         </section>
     )

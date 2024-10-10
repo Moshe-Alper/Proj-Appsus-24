@@ -52,7 +52,6 @@
 
 .editing-section-form .note-input {
     display: grid;
-    gap: 1rem;
     grid-auto-flow: row;
     margin-block-end: 1rem;
 }
@@ -62,17 +61,39 @@
     border: none;
     font-size: 1rem;
     background-color: inherit;
+    outline: none
 }
 
 .editing-header {
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
     justify-content: space-between;
 }
 
 .editing-header input {
+    width: 100%;
     border: none;
     font-size: 1.25rem;
     font-weight: 400;
     background-color: inherit;
+}
+
+/* todos */
+
+.editing-section .note-todos {
+    display: grid;
+    justify-content: left;
+    color: #202124;
+}
+
+.editing-section .note-todos [type="checkbox"] {
+    margin-inline-end: 8px;
+}
+
+.editing-section .note-todos input {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    line-height: 24px;
 }
