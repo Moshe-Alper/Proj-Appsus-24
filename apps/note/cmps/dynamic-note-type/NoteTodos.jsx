@@ -45,11 +45,12 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
                                 type="checkbox"
                                 checked={!!todo.doneAt}
                                 onChange={() => toggleTodoDone(idx)}
+                                name={`todo-checkbox-${idx}`}
                             />
                             {isEditable && !todo.doneAt ? ( 
                                 <input 
                                     ref={(el) => (todoRefs.current[idx] = el)} 
-                                    name={`todo-${idx}-txt`}
+                                    name={`todo-text-${idx}`}
                                     type="text"
                                     value={todo.txt}
                                     onChange={(ev) => handleTodoChange(idx, ev.target.value)}
