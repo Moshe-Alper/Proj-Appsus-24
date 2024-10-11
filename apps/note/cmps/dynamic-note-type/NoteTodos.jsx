@@ -1,4 +1,4 @@
-const { useRef, useEffect, useState } = React
+const { useRef, useEffect } = React
 
 export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
     const { todos } = info
@@ -22,7 +22,9 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
     }
 
     function handleTodoChange(idx, text) {
-        onChangeInfo(idx, text)
+        const updatedTodos = [...todos]
+        updatedTodos[idx].txt = text
+        onChangeInfo(updatedTodos)
     }
 
     function toggleTodoDone(idx) {

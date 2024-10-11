@@ -145,12 +145,99 @@ function _createNotes() {
             info: {
                 title: 'Weezer',
                 txt: 'Pinkerton',
-                imgSrc: './assets/img/notes/folder.jpg',
+                imgSrc: './assets/img/notes/Folder.jpg',
             },
             style: {
                 backgroundColor: 'rgb(248, 187, 208)'
             }
         },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: false,
+            info: {
+                title: 'Seas Turtle',
+                txt: '',
+                imgSrc: './assets/img/notes/Sea-turtle.jpg',
+            },
+            style: {
+                backgroundColor: 'rgb(246, 235, 97)'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTodos',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(200, 230, 201)'
+            },
+            info: {
+                title: 'Gardening To-Do List',
+                todos: [
+                    { txt: 'Prepare the soil for planting', doneAt: Date.now() },
+                    { txt: 'Sow seeds for vegetables and flowers', doneAt: Date.now() },
+                    { txt: 'Transplant seedlings to larger pots', doneAt: null },
+                    { txt: 'Build a trellis for climbing plants', doneAt: Date.now() },
+                    { txt: 'Apply organic fertilizer to plants', doneAt: Date.now() },
+                    { txt: 'Install a rain barrel to collect rainwater', doneAt: null },
+                    { txt: 'Weed flower beds and vegetable patches', doneAt: Date.now() },
+                    { txt: 'Harvest ripe fruits and vegetables', doneAt: Date.now() },
+                ]
+            }
+        },
+
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: true,
+            info: {
+                title: 'Almost Famous',
+                imgSrc: './assets/img/notes/1-almost-famous-group-shot-poster-joshua-williams.jpg',
+            },
+            style: {
+                backgroundColor: 'rgb(187, 222, 251)'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: false,
+            info: {
+                title: 'Iron Man',
+                txt: 'I am Iron Man',
+                imgSrc: './assets/img/notes/F1EdmDZWwAAWb50.jpeg',
+            },
+            style: {
+                backgroundColor: 'rgb(225, 190, 231)'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTodos',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(255, 255, 255)' // White background for a clean look
+            },
+            info: {
+                title: 'Home Organization To-Do List',
+                todos: [
+                    { txt: 'Declutter the living room', doneAt: null },
+                    { txt: 'Organize kitchen cabinets', doneAt: null },
+                    { txt: 'Sort through clothes and donate', doneAt: null },
+                    { txt: 'Clean out the garage', doneAt: null },
+                    { txt: 'Create a filing system for paperwork', doneAt: null },
+                    { txt: 'Rearrange furniture for better flow', doneAt: null },
+                    { txt: 'Set up a cleaning schedule', doneAt: null },
+                    { txt: 'Label storage bins in the attic', doneAt: null },
+                ]
+            }
+        }
+
     ]
     utilService.saveToStorage(NOTE_KEY, notes)
 }

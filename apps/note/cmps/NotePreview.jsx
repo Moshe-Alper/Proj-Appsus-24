@@ -49,6 +49,20 @@ function onToggleStyleModal() {
             .catch(err => console.log('Error saving note style:', err))
     }
 
+    function onUpdateNoteTodos(updatedTodos) {
+        const updatedNote = {
+            ...note,
+            info: {
+                ...note.info,
+                todos: updatedTodos
+            }
+        }
+        
+        noteService.save(updatedNote)
+            .then(() => loadNotes()) 
+            .catch(err => console.log('Error updating todos:', err))
+    }
+
     return (
         <article style={{ ...noteStyle }} className="note-preview">
             <NoteHeader
@@ -106,6 +120,7 @@ function onToggleStyleModal() {
                     info={info}
                     id={note.id}
                     onToggleEditModal={onToggleEditModal}
+                    onChangeInfo={onUpdateNoteTodos}
                 />
             default:
                 return <p>Unknown note type</p>

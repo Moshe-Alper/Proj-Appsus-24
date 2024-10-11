@@ -27,7 +27,7 @@
     font-size: 1rem;
     margin-block-end: 10px;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-wrap: break-;
     padding-inline-start: 0;
 }
 
@@ -77,7 +77,8 @@
 }
 
 .note-preview .note-todos li {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
 }
 
 .note-preview .note-todos [type="checkbox"] {
@@ -89,7 +90,22 @@
 
 .note-preview .note-todos .done {
     text-decoration: line-through;
+    
     color: gray;
+}
+
+.note-preview .note-todos .pending {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: inherit;
+    line-height: 24px;
+    overflow-wrap: break-word;
+    flex-grow: 1;
+}
+
+.note-preview .note-todos span {
+    display: flex;
 }
 
 /* image */

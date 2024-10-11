@@ -49,8 +49,3 @@
     color: var(--clr-primary-base);
     text-align: center; 
 }
-
-.search-item img {
-    width: 40%; 
-    height: auto; 
-}
