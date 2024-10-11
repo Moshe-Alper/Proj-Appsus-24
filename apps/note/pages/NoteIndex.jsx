@@ -9,6 +9,7 @@ import { getTruthyValues } from "../../../services/util.service.js"
 import { NoteSidebar } from "../cmps/NoteSidebar.jsx"
 import { CreateNote } from "../cmps/CreateNote.jsx"
 import { NoteSearch } from "../cmps/NoteSearch.jsx"
+import { designSvgs } from "../../../cmps/Svgs.jsx"
 
 export function NoteIndex() {
     const [notes, setNotes] = useState(null)
@@ -92,7 +93,7 @@ export function NoteIndex() {
                         <CreateNote loadNotes={loadNotes} />
                         {notes.length === 0 ? (
                             <div className="no-notes-msg">
-                                <img src="../assets/img/google-material-icons/lightbulb.svg" alt="lightbulb image" />
+                                {designSvgs.lightbulbSvgs}
                                 <h1>Notes will appear here</h1>
                             </div>
                         ) : (

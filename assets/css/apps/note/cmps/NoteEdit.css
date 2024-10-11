@@ -82,7 +82,8 @@
 /* todos */
 
 .editing-section .note-todos {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: left;
     color: #202124;
 }
@@ -101,3 +102,4 @@
     background-color: inherit;
     line-height: 24px;
 }
+

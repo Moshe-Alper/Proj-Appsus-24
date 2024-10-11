@@ -195,6 +195,7 @@ function _createNotes() {
             isPinned: true,
             info: {
                 title: 'Almost Famous',
+                txt: 'Almost Famous (2000) is a coming-of-age film directed by Cameron Crowe.',
                 imgSrc: './assets/img/notes/1-almost-famous-group-shot-poster-joshua-williams.jpg',
             },
             style: {

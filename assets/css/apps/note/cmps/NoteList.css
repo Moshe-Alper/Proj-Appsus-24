@@ -26,6 +26,7 @@ h1.pinned-title, h1.other-title {
    align-items: center;
    height: 100%;
    flex-direction: column;
+   gap: 20px;
  }
 
  .no-notes-msg h1 {
@@ -36,9 +37,3 @@ h1.pinned-title, h1.other-title {
    color: rgb(95, 99, 104);
  }
 
- .no-notes-msg img {
-   width: 7.5rem;
-   height: 7.5rem;
-   opacity: .1;
-   margin: 1.25em;
- }

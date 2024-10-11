@@ -74,11 +74,31 @@
 
 .note-preview .note-todos {
     list-style: none;
+    line-height: 24px;
 }
 
 .note-preview .note-todos li {
+    font-size: .875rem;
     display: grid;
     grid-template-columns: auto 1fr;
+    
+}
+
+.note-preview .note-todos li.pending {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto 1fr;
+    font-size: .875rem;
+
+    
+}
+
+.note-preview .note-todos li.pending input {
+    grid-column: 2;
+}
+
+.note-preview .note-todos li.pending [type="checkbox"] {
+    grid-column: 1;
 }
 
 .note-preview .note-todos [type="checkbox"] {
@@ -90,18 +110,17 @@
 
 .note-preview .note-todos .done {
     text-decoration: line-through;
-    
     color: gray;
 }
 
 .note-preview .note-todos .pending {
-    font-size: 1rem;
+    display: flex;
+    font-size: .875rem;
     border: none;
     outline: none;
     background-color: inherit;
-    line-height: 24px;
-    overflow-wrap: break-word;
-    flex-grow: 1;
+    word-break: break-word; 
+    white-space: normal; 
 }
 
 .note-preview .note-todos span {
