@@ -1,47 +1,48 @@
 .compose-mail-form {
     display: grid;
     position: fixed;
-    grid-template-columns: 400px ;
-    bottom: 20px; 
-    right: 20px;  
-    width: 450px; 
+    grid-template-columns: 400px;
+    bottom: 20px;
+    right: 20px;
+    width: 450px;
     height: 450px;
-    background-color: white; 
-    padding: 20px; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
-    border-radius: 8px; 
-    z-index: 10; 
-    transition: all 0.3s ease; 
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 10;
+    transition: all 0.3s ease;
 }
+
 label {
     display: block;
-    margin-bottom: 10px; 
-    
+    margin-bottom: 10px;
+
 }
 
 input[type="email"],
 input[type="text"] {
-    width: 100%; 
-    padding: 10px; 
-    border: none;   
+    width: 100%;
+    padding: 10px;
+    border: none;
     outline: none;
     border-bottom: 1px solid #ddd;
- 
+
 }
 
-textarea{
-    width: 100%; 
+textarea {
+    width: 100%;
     height: 300px;
-    padding: 10px; 
-    border: none;  
-    outline: none;  
+    padding: 10px;
+    border: none;
+    outline: none;
 }
 
 .mail-container {
-    position: relative; 
+    position: relative;
 }
 
-.btn-send{
+.btn-send {
     background-color: #0b57d0;
     border-radius: 18px;
     font-size: .875rem;
@@ -55,4 +56,15 @@ textarea{
     border: none;
 }
 
-
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 23px;
+    height: 20px;
+    font-weight: bold;
+    
+}
