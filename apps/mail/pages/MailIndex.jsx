@@ -50,7 +50,6 @@ export function MailIndex() {
     }
 
     function updateCounts(newCounts) {
-        // console.log('after update counts', newCounts)
         setCounts(newCounts)
     }
 
@@ -78,6 +77,10 @@ export function MailIndex() {
             })
     }
 
+    
+function onCloseCompose(){
+    setIsCompose(false)
+}
 
     if (!mails) return <h1>Loading...</h1>
     return (
@@ -97,7 +100,7 @@ export function MailIndex() {
                 {isCompose && (
 
                     <div className="compose-mail-form" >
-                        <MailCompose onSendMail={onSendMail} />
+                        <MailCompose onSendMail={onSendMail} onCloseCompose={onCloseCompose} />
                     </div>
 
                 )}
