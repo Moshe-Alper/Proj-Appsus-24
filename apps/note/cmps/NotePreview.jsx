@@ -24,8 +24,7 @@ export function NotePreview({
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
-
-    function onToggleStyleModal() {
+function onToggleStyleModal() {
         setIsShowStyleModal((prevIsStyleModal) => !prevIsStyleModal)
     }
 

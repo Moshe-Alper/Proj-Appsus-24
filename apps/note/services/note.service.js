@@ -91,49 +91,66 @@ function _createNotes() {
 
     notes = [
         {
-            id: 'n101',
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteTxt',
             isPinned: true,
             style: {
-                backgroundColor: 'white'
+                backgroundColor: 'rgb(239, 154, 154)'
             },
             info: {
-                title: 'Fullstack Me Baby!',
-                txt: 'Im Stacking you',
+                title: 'We were all so young!',
+                txt: '"I suppose at one time in my life I might have had any number of stories, but now there is no other. This is the only story I will ever be able to tell. ',
                 imgSrc: '',
                 todos: {}
             }
         },
         {
-            id: 'n102',
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteImg',
-            isPinned: false,
+            isPinned: true,
             info: {
-                title: 'Bobi and Me',
-                imgSrc: 'assets/img/notes/Sea-turtle.jpg',
+                title: 'When Curiosity Meets Determination',
+                imgSrc: './assets/img/notes/Solar_opposites_e207_0015.webp',
             },
             style: {
-                backgroundColor: 'rgb(246, 235, 97)'
+                backgroundColor: 'rgb(178, 235, 242)'
             }
         },
         {
-            id: 'n103',
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteTodos',
             isPinned: false,
             style: {
-                backgroundColor: 'white'
+                backgroundColor: 'rgb(255, 204, 128)'
             },
             info: {
-                title: 'Get my stuff together',
+                title: 'Gift Planning & Shopping',
                 todos: [
-                    { txt: 'Driving license', doneAt: null },
-                    { txt: 'Coding power', doneAt: 187111111 }
+                    { txt: 'Make a gift list for family and friends', doneAt: null },
+                    { txt: 'Set a budget for holiday shopping', doneAt: null },
+                    { txt: 'Order any personalized gifts early', doneAt: null },
+                    { txt: 'Wrap presents and add name tags', doneAt: null },
+                    { txt: 'Ship gifts to out-of-town loved ones', doneAt: 187111111 }
                 ]
             }
-        }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: false,
+            info: {
+                title: 'Weezer',
+                txt: 'Pinkerton',
+                imgSrc: './assets/img/notes/folder.jpg',
+            },
+            style: {
+                backgroundColor: 'rgb(248, 187, 208)'
+            }
+        },
     ]
     utilService.saveToStorage(NOTE_KEY, notes)
 }
