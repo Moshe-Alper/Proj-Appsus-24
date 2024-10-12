@@ -9,6 +9,7 @@ import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 import { NoteFooter } from "./NoteFooter.jsx"
 import { NoteEdit } from "./NoteEdit.jsx"
 import { NoteHeader } from "./NoteHeader.jsx"
+import { NoteVideo } from "./dynamic-note-type/NoteVideo.jsx"
 
 export function NotePreview({
     note, onRemoveNote, loadNotes, togglePin, onDuplicateNote
@@ -24,7 +25,7 @@ export function NotePreview({
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
-function onToggleStyleModal() {
+    function onToggleStyleModal() {
         setIsShowStyleModal((prevIsStyleModal) => !prevIsStyleModal)
     }
 
@@ -57,9 +58,9 @@ function onToggleStyleModal() {
                 todos: updatedTodos
             }
         }
-        
+
         noteService.save(updatedNote)
-            .then(() => loadNotes()) 
+            .then(() => loadNotes())
             .catch(err => console.log('Error updating todos:', err))
     }
 
@@ -116,11 +117,17 @@ function onToggleStyleModal() {
                     onToggleEditModal={onToggleEditModal}
                 />
             case 'NoteTodos':
-                return <NoteTodos 
+                return <NoteTodos
                     info={info}
                     id={note.id}
                     onToggleEditModal={onToggleEditModal}
                     onChangeInfo={onUpdateNoteTodos}
+                />
+            case 'NoteVideo':
+                return <NoteVideo
+                    info={info}
+                    id={note.id}
+                    onToggleEditModal={onToggleEditModal}
                 />
             default:
                 return <p>Unknown note type</p>

@@ -93,7 +93,7 @@ export function NoteIndex() {
                         <CreateNote loadNotes={loadNotes} />
                         {notes.length === 0 ? (
                             <div className="no-notes-msg">
-                                {designSvgs.lightbulbSvgs}
+                                {designSvgs.lightbulbSvg}
                                 <h1>Notes will appear here</h1>
                             </div>
                         ) : (

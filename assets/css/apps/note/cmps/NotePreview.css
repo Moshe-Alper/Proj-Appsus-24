@@ -108,6 +108,10 @@
     display: flex;
 }
 
+.note-preview .note-todos .todo-text {
+    outline: none;
+}
+
 /* image */
 
 .note-preview img {
@@ -115,3 +119,10 @@
     height: auto;
     border-radius: 4px;
 }
+
+.note-preview iframe {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+

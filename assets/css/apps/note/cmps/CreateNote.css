@@ -142,3 +142,12 @@
 .todo-item {
     transition: all 0.2s ease;
 }
+
+/* video */
+
+.create-note .input-video {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+

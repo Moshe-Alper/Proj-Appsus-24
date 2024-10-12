@@ -151,6 +151,23 @@ function _createNotes() {
                 backgroundColor: 'rgb(248, 187, 208)'
             }
         },
+
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteVideo',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(239, 154, 154)'
+            },
+            info: {
+                title: 'Video!',
+                txt: '',
+                imgSrc: '',
+                videoSrc: 'https://www.youtube.com/watch?v=8kWIYfMeuZM&list=PL3rKz4t8GPIbIZ6K2aDrX48XGFtQ83cGn',
+                todos: {}
+            }
+        },
         {
             id: utilService.makeId(),
             createdAt: Date.now(),
@@ -176,14 +193,14 @@ function _createNotes() {
             info: {
                 title: 'Gardening To-Do List',
                 todos: [
-                    { txt: 'Prepare the soil for planting', doneAt: Date.now() },
-                    { txt: 'Sow seeds for vegetables and flowers', doneAt: Date.now() },
-                    { txt: 'Transplant seedlings to larger pots', doneAt: null },
-                    { txt: 'Build a trellis for climbing plants', doneAt: Date.now() },
-                    { txt: 'Apply organic fertilizer to plants', doneAt: Date.now() },
-                    { txt: 'Install a rain barrel to collect rainwater', doneAt: null },
-                    { txt: 'Weed flower beds and vegetable patches', doneAt: Date.now() },
-                    { txt: 'Harvest ripe fruits and vegetables', doneAt: Date.now() },
+                    { txt: 'Prepare the soil', doneAt: Date.now() },
+                    { txt: 'Sow seeds', doneAt: Date.now() },
+                    { txt: 'Transplant seedlings', doneAt: null },
+                    { txt: 'Build a trellis', doneAt: Date.now() },
+                    { txt: 'Apply organic fertilizer', doneAt: Date.now() },
+                    { txt: 'Install a rain barrel', doneAt: null },
+                    { txt: 'Weed flower beds ', doneAt: Date.now() },
+                    { txt: 'Harvest ripe fruits', doneAt: Date.now() },
                 ]
             }
         },
@@ -220,22 +237,37 @@ function _createNotes() {
             id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteTodos',
-            isPinned: true,
+            isPinned: false,
             style: {
-                backgroundColor: 'rgb(255, 255, 255)' // White background for a clean look
+                backgroundColor: 'rgb(255, 255, 255)'
             },
             info: {
                 title: 'Home Organization To-Do List',
                 todos: [
                     { txt: 'Declutter the living room', doneAt: null },
                     { txt: 'Organize kitchen cabinets', doneAt: null },
-                    { txt: 'Sort through clothes and donate', doneAt: null },
+                    { txt: 'Sort through clothes and donate', doneAt: Date.now() },
                     { txt: 'Clean out the garage', doneAt: null },
-                    { txt: 'Create a filing system for paperwork', doneAt: null },
-                    { txt: 'Rearrange furniture for better flow', doneAt: null },
+                    { txt: 'Create a filing system for paperwork', doneAt: Date.now() },
+                    { txt: 'Rearrange furniture for better flow', doneAt: Date.now() },
                     { txt: 'Set up a cleaning schedule', doneAt: null },
-                    { txt: 'Label storage bins in the attic', doneAt: null },
+                    { txt: 'Label storage bins', doneAt: null },
                 ]
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTxt',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(255, 255, 255)'
+            },
+            info: {
+                title: 'לזכור להתקשר לאמא',
+                txt: '',
+                imgSrc: '',
+                todos: {}
             }
         }
 
@@ -251,6 +283,8 @@ function _getInfoByType(type) {
             return { title: '', imgSrc: '' }
         case 'NoteTodos':
             return { title: '', todos: [] }
+        case 'NoteVideo':
+            return { title: '', videoSrc: '' }
         default:
             return { title: '', txt: '' }
     }
