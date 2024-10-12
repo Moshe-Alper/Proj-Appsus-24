@@ -4,20 +4,19 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
-    // console.log(counts,'counts on filter side')
+    const folders = ['Inbox', 'Sent', 'Trash', 'Draft']
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
 
-    const handleChange = (folder) => {
+    function handleChange(folder) {
         setFilterByToEdit(prevFilter => ({
             ...prevFilter,
             folder: folder
         }))
     }
 
-    const folders = ['Inbox', 'Sent', 'Trash', 'Draft']
     return (
         <section className="mail-side-filter">
             <nav>
