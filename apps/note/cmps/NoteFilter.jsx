@@ -1,4 +1,5 @@
 const { useState, useEffect } = React
+import { designSvgs } from "../../../cmps/Svgs.jsx"
 
 export function NoteFilter({ filterBy, onSetFilterBy, setIsFiltering }) {
 
@@ -66,8 +67,8 @@ export function NoteFilter({ filterBy, onSetFilterBy, setIsFiltering }) {
                     id="txt"
                     placeholder="Search"
                 />
-                <button type="button" onClick={handleReset} className="btn-note" >
-                <img src="assets/img/google-material-icons/close.svg" alt="close"  />
+                <button type="button" onClick={handleReset} className={`btn-note ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                {designSvgs.closeSvg}
                 </button>
             </form>
 

@@ -1,5 +1,6 @@
 .note-preview {
     position: relative; 
+    /* max-width: fit-content; */
 }
 
 .note-footer {

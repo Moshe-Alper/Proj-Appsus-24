@@ -161,7 +161,7 @@ function _createNotes() {
                 backgroundColor: 'rgb(239, 154, 154)'
             },
             info: {
-                title: 'Video!',
+                title: 'Popeye!',
                 txt: '',
                 imgSrc: '',
                 videoSrc: 'https://www.youtube.com/watch?v=8kWIYfMeuZM&list=PL3rKz4t8GPIbIZ6K2aDrX48XGFtQ83cGn',

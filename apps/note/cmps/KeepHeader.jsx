@@ -15,10 +15,10 @@ export function KeepHeader({ filterBy, onSetFilterBy, setIsFiltering, handleRese
             setIsFiltering={setIsFiltering}
         />
         <div className="actions">
-            <button className="btn-note"><img src="assets/img/google-material-icons/refresh.svg" alt="refresh" /></button>
+            {/* <button className="btn-note"><img src="assets/img/google-material-icons/refresh.svg" alt="refresh" /></button>
             <button className="btn-note"><img src="assets/img/google-material-icons/view_agenda.svg" alt="view" /></button>
             <button className="btn-note"><img src="assets/img/google-material-icons/settings.svg" alt="settings" /></button>
-            <button className="btn-note"><img src="assets/img/google-material-icons/apps.svg" alt="apps" /></button>
+            // <button className="btn-note"><img src="assets/img/google-material-icons/apps.svg" alt="apps" /></button> */}
             <button className="btn-note"><img src="assets/img/google-material-icons/account_circle.svg" alt="account" /></button>
         </div>
     </header>
