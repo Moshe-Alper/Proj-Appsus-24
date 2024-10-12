@@ -102,7 +102,7 @@ function getMailCountByFolder() {
     return storageService.query(MAIL_KEY)
         .then(mails => {
             const counts = {
-                Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.isRead).length ,
+                Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.isRead).length,
                 // Inbox: mails.filter(mail => mail.isRead === true).length,
                 // Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
                 // Trash: mails.filter(mail => mail.removedAt).length,
@@ -155,13 +155,17 @@ function _createMails() {
     let mails = loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
             _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
             _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
-            _createMail('Project Updates', 'Here are the latest updates on the project', `${loggedinUser.mail}`, 'boss@company.com'),
+            _createMail('Miss you!', 'Would love to catch up sometime', `${loggedinUser.mail}`, 'momo@momo.com'),
+            _createMail('Miss you!', 'Would love to catch up sometime', `${loggedinUser.mail}`, 'momo@momo.com'),
+            _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', `${loggedinUser.mail}`, 'colleague@work.com'),
+
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
-            _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),
             _createMail('Miss you!', 'Would love to catch up sometime', 'momo@momo.com'),
+            _createMail('Project Updates', 'Here are the latest updates on the project', 'boss@company.com'),
+            _createMail('News', 'updates on the project', 'boss@company.com'),
+
         ]
         saveToStorage(MAIL_KEY, mails)
         console.log('Mails saved to storage:', mails)

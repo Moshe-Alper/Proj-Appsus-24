@@ -1,12 +1,19 @@
+const { Link } = ReactRouterDOM
+
 import { MailFilter } from "../cmps/MailFilter.jsx"
 
 export function MailHeader({ filterBy, onSetFilterBy }) {
+
+    console.log(filterBy)
     return <header className="mail-header">
-        <div className="logo">
-            <button className="btn-mail"><img src="assets/img/google-material-icons/menu.svg" alt="menu" /></button>
-            <img src="assets/img/mails/mail-logo.png" alt="logo image" className="mail-logo" />
-            <h1>Gmail</h1>
-        </div>
+
+        <Link to={`/mail`}>
+            <div className="logo">
+                <button className="btn-mail"><img src="assets/img/google-material-icons/menu.svg" alt="menu" /></button>
+                <img src="assets/img/mails/mail-logo.png" alt="logo image" className="mail-logo" />
+                <h1>Gmail</h1>
+            </div>
+        </Link>
         <MailFilter
             filterBy={filterBy}
             onSetFilterBy={onSetFilterBy}
