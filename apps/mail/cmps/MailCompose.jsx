@@ -13,6 +13,7 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
     // }, [isCompose])
 
     function handleChange({ target }) {
+        console.log(target.value)
         const field = target.name
         let value = target.value
 
@@ -47,18 +48,19 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
                     <input
                         type="email"
                         placeholder="To"
+                        name="to"
                         value={newMail.to}
                         onChange={handleChange}
-                        required
                     />
                 </label>
                 <label>
                     <input
                         type="text"
+                        name="subject"
                         placeholder="Subject"
                         value={newMail.subject}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </label>
                 <label>
@@ -66,7 +68,7 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
                         name="body"
                         value={newMail.body}
                         onChange={handleChange}
-                        required
+                        
                     />
                 </label>
                 <button className="btn-send" type="submit">Send</button>

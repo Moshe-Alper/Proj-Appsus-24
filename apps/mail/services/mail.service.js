@@ -42,14 +42,13 @@ function remove(mailId) {
 }
 
 function save(mail) {
-    console.log(mail)
     if (!mail.id) {
+        console.log(mail)
         return storageService.post(MAIL_KEY, mail)
     } else {
         return storageService.put(MAIL_KEY, mail)
     }
 }
-
 
 function _getFilteredMails(mails, filterBy) {
     // Filter by status (inbox, sent, trash, draft)
@@ -116,7 +115,7 @@ function getMailCountByFolder() {
 
 function getEmptyMail(subject = '', body = '', to = '', from = loggedinUser.mail) {
     return {
-        id: makeId(),
+        // id: makeId(),
         createdAt: Date.now(),
         subject,
         body,
@@ -174,6 +173,7 @@ function _createMails() {
 
 function _createMail(subject, body, to, from) {
     const mail = getEmptyMail(subject, body, to, from)
+    mail.id = makeId()
     mail.sentAt = Date.now()
     return mail
 }

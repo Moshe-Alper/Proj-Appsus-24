@@ -1,3 +1,5 @@
+import { makeId } from "./util.service.js"
+
 export const storageService = {
     query,
     get,
@@ -21,8 +23,9 @@ function get(entityType, entityId) {
 
 function post(entityType, newEntity) {
     newEntity = { ...newEntity }
-    newEntity.sentAt = Date.now()
+    newEntity.id = makeId()
     newEntity.createdAt = Date.now()
+    newEntity.sentAt = Date.now()
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)
