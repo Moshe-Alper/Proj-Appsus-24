@@ -1,0 +1,32 @@
+.new-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    width: auto;
+    width: 35px;
+    height: 18px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border-radius: 50px;
+    color: var(--clr-primary-2);
+    background-color: rgb(200 193 193);
+    position: relative;
+}
+
+.new-label .remove-btn {
+    display: none;
+    margin-inline-start: 1px;
+    background: none;
+    border: none;
+    color: var(--clr-primary-2);
+    font-size: .875rem;
+    cursor: pointer;
+}
+
+.new-label:hover .remove-btn {
+    display: inline-block;
+}

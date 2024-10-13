@@ -79,6 +79,9 @@
     background-color: inherit;
 }
 
+.editing-header .btn-note {
+    max-height: 40px;
+}
 .editing-section .note-todos {
     display: grid;
     justify-content: left;

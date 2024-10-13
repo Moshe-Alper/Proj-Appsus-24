@@ -10,6 +10,7 @@ import { NoteFooter } from "./NoteFooter.jsx"
 import { NoteEdit } from "./NoteEdit.jsx"
 import { NoteHeader } from "./NoteHeader.jsx"
 import { NoteVideo } from "./dynamic-note-type/NoteVideo.jsx"
+import { NoteLabels } from "./NoteLabels.jsx"
 
 export function NotePreview({
     note, onRemoveNote, loadNotes, togglePin, onDuplicateNote
@@ -63,7 +64,6 @@ export function NotePreview({
             .then(() => loadNotes())
             .catch(err => console.log('Error updating todos:', err))
     }
-
     return (
         <article style={{ ...noteStyle }} className="note-preview">
             <NoteHeader
@@ -78,7 +78,9 @@ export function NotePreview({
                     info={note.info}
                 />
             </Link>
-
+            <NoteLabels
+            createdAt={note.createdAt}
+            />
             <NoteFooter
                 note={note}
                 onRemoveNote={onRemoveNote}

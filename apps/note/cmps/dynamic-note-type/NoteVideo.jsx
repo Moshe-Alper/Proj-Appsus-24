@@ -21,7 +21,7 @@ export function NoteVideo({ info = { videoSrc: '', txt: '' }, onChangeInfo, onTo
     function handleVideoUrlChange({ target }) {
         const url = target.value
         setVideoSrc(url)
-        onChangeInfo({ ...info, videoSrc: url }) // Update parent component
+        onChangeInfo({ ...info, videoSrc: url })
     }
 
     function handleFileChange(ev) {
@@ -30,7 +30,7 @@ export function NoteVideo({ info = { videoSrc: '', txt: '' }, onChangeInfo, onTo
             const reader = new FileReader()
             reader.onload = (e) => {
                 setVideoSrc(e.target.result)
-                onChangeInfo({ ...info, videoSrc: e.target.result }) // Update parent component
+                onChangeInfo({ ...info, videoSrc: e.target.result }) 
             }
             reader.readAsDataURL(file)
         }
