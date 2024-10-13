@@ -26,6 +26,14 @@ export function MailIndex() {
         setSearchPrms(getTruthyValues(filterBy))
     }, [filterBy])
 
+    useEffect(() => {
+        updateMailCounts()
+    }, [counts])
+
+    useEffect(() => {
+        loadMails()
+    }, [isCompose])
+
     function loadMails() {
         mailService.query(filterBy)
             .then(setMails)

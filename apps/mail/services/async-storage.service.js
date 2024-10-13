@@ -24,7 +24,7 @@ function get(entityType, entityId) {
 function post(entityType, newEntity) {
     newEntity = { ...newEntity }
     newEntity.id = makeId()
-    newEntity.createdAt = Date.now()
+    console.log(entityType)
     newEntity.sentAt = Date.now()
     return query(entityType).then(entities => {
         entities.push(newEntity)

@@ -4,7 +4,7 @@ import { MailFilter } from "../cmps/MailFilter.jsx"
 
 export function MailHeader({ filterBy, onSetFilterBy }) {
 
-    console.log(filterBy)
+    // console.log(filterBy)
     return <header className="mail-header">
 
         <Link to={`/mail`}>

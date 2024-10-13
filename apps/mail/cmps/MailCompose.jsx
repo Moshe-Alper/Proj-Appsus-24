@@ -8,10 +8,6 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
     const [newMail, setNewMail] = useState(mailService.getEmptyMail())
     const [isCompose, setIsCompose] = useState(false)
 
-    // useEffect(() => {
-    //     onCloseCompose(isCompose)
-    // }, [isCompose])
-
     function handleChange({ target }) {
         console.log(target.value)
         const field = target.name
