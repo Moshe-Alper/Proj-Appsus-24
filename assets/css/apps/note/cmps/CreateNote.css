@@ -145,8 +145,42 @@
     background-color: #e8eaed;
 }
 
+.close-palette-btn::hover {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+}
+
+
 /* video */
 
 .input-video video {
     width: 100%;  
+}
+
+.note-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-block: 10px;
+}
+
+.note-text-container textarea {
+    width: 80%;   
+    resize: none;        
+    display: flex;
+    align-items: center;  
+    padding-block: 10px;      
+    box-sizing: border-box;
+    font-size: 1rem;   
+}
+
+.note-text-container textarea::placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;      
+    line-height: 1.5;   
+    color: var(--clr-primary-2);
 }

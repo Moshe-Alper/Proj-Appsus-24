@@ -7,11 +7,11 @@ export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
     const editClass = isEditable ? 'editable' : ''
     const todoRefs = useRef([])
 
-    useEffect(() => {
-        if (isEditable && todoRefs.current[0]) {
-            todoRefs.current[0].focus()
-        }
-    }, [isEditable])
+    // useEffect(() => {
+    //     if (isEditable && todoRefs.current[0]) {
+    //         todoRefs.current[0].focus()
+    //     }
+    // }, [isEditable])
 
     function handleClick(ev) {
         if (ev.target.tagName === 'INPUT') return

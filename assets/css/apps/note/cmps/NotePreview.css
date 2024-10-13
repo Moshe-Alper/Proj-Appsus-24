@@ -51,7 +51,7 @@
 }
 
 
-.item:not(.close-btn) {
+.item:not(.close-note-btn) {
     border: lavender 2px solid;
     padding: 5px;
     margin: 5px;

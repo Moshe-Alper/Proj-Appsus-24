@@ -34,7 +34,7 @@ export function ColorInput({ onSetNoteStyle, backgroundColor, onToggleStyleModal
                     ></div>
 
                 ))}
-                <button className="btn-note close-btn" onClick={onToggleStyleModal}>x</button>
+                <button className="btn-note close-palette-btn" onClick={onToggleStyleModal}>x</button>
             </div>
         </section >
     )

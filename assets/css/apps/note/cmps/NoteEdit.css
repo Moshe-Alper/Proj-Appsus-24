@@ -101,6 +101,8 @@
 }
 
 .editing-section-form .note-input iframe {
+    height: 300px;
+    width: 100%;
     justify-self: center;
 }
 
