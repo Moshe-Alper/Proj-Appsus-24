@@ -3,7 +3,7 @@
     top: 0;
 
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
@@ -22,15 +22,15 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    max-width: 200px;
+    min-width: 180px;
     gap: 0.5rem;
     cursor: pointer;
 }
 
 .keep-header .logo .keep-logo {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-stretch: 100%;
+    width: 40px;
+    height: 40px;
+    padding-inline-end: 4px;
 }
 
 .keep-header .logo h1 {
@@ -39,6 +39,7 @@
     position: relative;
     text-overflow: ellipsis;
     top: -0.09375rem;
+    margin-inline-end: 80px;
     
     font-weight: 400;
     font-size: 1.375rem;
@@ -46,3 +47,12 @@
     color: rgb(95, 99, 104);
 }
 
+.keep-header .actions {
+    justify-self: right;
+}
+
+@media (max-width: 600px) {
+    .keep-header .logo h1 {
+        color: transparent;
+    }
+}

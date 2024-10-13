@@ -1,15 +1,33 @@
- .note-list {
-   grid-column: 2;
-   grid-row: 2;
+.note-container {
+  display: grid;
+  grid-template-columns: 240px 1fr 240px; 
+  grid-template-rows: auto 1fr;
+  height: 100vh; 
+  gap: 1rem;
+  
+}
+ .note-lists-container {
+  grid-column: 2;
+}
 
-   list-style: none;
-   display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-   gap: 1em;
-   padding: 1.25em;
-   justify-content: center;
+.note-list {
+  grid-column: 2;
+  grid-row: 2;
+  grid-auto-flow: dense;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  justify-content: center;
+  /* padding-inline-start: 0; */
+}
 
- }
+ .note-list li {
+  height: auto; 
+  width: 100%; 
+  overflow: hidden;
+}
+
 
 h1.pinned-title, h1.other-title {
    color: rgb(95, 99, 104);
@@ -28,6 +46,7 @@ h1.pinned-title, h1.other-title {
    align-items: center;
    height: 100%;
    flex-direction: column;
+   gap: 20px;
  }
 
  .no-notes-msg h1 {
@@ -38,9 +57,11 @@ h1.pinned-title, h1.other-title {
    color: rgb(95, 99, 104);
  }
 
- .no-notes-msg img {
-   width: 7.5rem;
-   height: 7.5rem;
-   opacity: .1;
-   margin: 1.25em;
- }
+
+ @media(max-width: 888px) {
+  .note-container {
+    grid-template-columns: 60px 1fr 60px; 
+  }
+
+
+}

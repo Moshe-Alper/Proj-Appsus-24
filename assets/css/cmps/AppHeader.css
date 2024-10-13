@@ -1,6 +1,5 @@
 .app-header {
-    background: lightcyan;
-    border-bottom: 2px solid white;
+    background: var(--clr-primary-base);
     display: flex;
     justify-content: space-between;
     padding: 20px 0;

@@ -1,5 +1,7 @@
 const { useEffect, useRef } = React
 
+import { searchSvgs } from "../../../cmps/Svgs.jsx"
+
 export function NoteSearch({ onSetFilterBy, setIsFiltering }) {
     const formRef = useRef(null)
 
@@ -9,7 +11,6 @@ export function NoteSearch({ onSetFilterBy, setIsFiltering }) {
                 setIsFiltering(false)
             }
         }
-
         document.addEventListener('mousedown', handleClickOutside)
 
         return () => {
@@ -28,12 +29,12 @@ export function NoteSearch({ onSetFilterBy, setIsFiltering }) {
                 <h1>Types</h1>
                 <div className="search-items">
                     <div className="search-item" onClick={() => handleSearch('NoteImg')}>
-                        <img src="../../../assets/img/google-material-icons/image.svg" alt="Image Notes" />
+                        {searchSvgs.imageSvg}
                         <h2>Image</h2>
                     </div>
 
                     <div className="search-item" onClick={() => handleSearch('NoteTodos')}>
-                        <img src="../../../assets/img/google-material-icons/list.svg" alt="Todo Notes" />
+                        {searchSvgs.listSvg}
                         <h2>Lists</h2>
                     </div>
                 </div>

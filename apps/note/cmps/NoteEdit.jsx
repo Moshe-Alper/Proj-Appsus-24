@@ -7,6 +7,7 @@ import { NoteImg } from "./dynamic-note-type/NoteImg.jsx"
 import { NoteTodos } from "./dynamic-note-type/NoteTodos.jsx"
 import { NoteTxt } from "./dynamic-note-type/NoteTxt.jsx"
 import { AppLoader } from "../../../cmps/AppLoader.jsx"
+import { NoteVideo } from "./dynamic-note-type/NoteVideo.jsx"
 
 
 export function NoteEdit({ toggleEditModal, loadNotes }) {
@@ -39,7 +40,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
-        console.log('field:', field)
+        
         switch (target.type) {
             case 'number':
             case 'range':
@@ -161,6 +162,12 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                 />
             case 'NoteTodos':
                 return <NoteTodos
+                    info={info}
+                    onChangeInfo={handleTodoChange}
+                    onToggleEditModal={toggleEditModal}
+                />
+            case 'NoteVideo':
+                return <NoteVideo
                     info={info}
                     onChangeInfo={handleTodoChange}
                     onToggleEditModal={toggleEditModal}
