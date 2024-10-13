@@ -6,7 +6,7 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailCompose({ onSendMail, onCloseCompose }) {
     const [newMail, setNewMail] = useState(mailService.getEmptyMail())
-    const [isCompose, setIsCompose] = useState(false)
+    // const [isCompose, setIsCompose] = useState(false)
 
     function handleChange({ target }) {
         console.log(target.value)
@@ -26,7 +26,6 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
         setNewMail(prevMail => ({ ...prevMail, [field]: value }))
     }
 
-    // Handle form submission
     function onComposeSubmit(ev) {
         ev.preventDefault()
         onSendMail(newMail)

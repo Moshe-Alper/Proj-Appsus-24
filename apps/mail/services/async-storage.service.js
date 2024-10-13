@@ -24,13 +24,14 @@ function get(entityType, entityId) {
 function post(entityType, newEntity) {
     newEntity = { ...newEntity }
     newEntity.id = makeId()
-    console.log(entityType)
     newEntity.sentAt = Date.now()
-    return query(entityType).then(entities => {
-        entities.unshift(newEntity)
-        _save(entityType, entities)
-        return newEntity
-    })
+    console.log(newEntity)
+    return query(entityType)
+        .then(entities => {
+            entities.unshift(newEntity)
+            _save(entityType, entities)
+            return newEntity
+        })
 }
 
 function put(entityType, updatedEntity) {

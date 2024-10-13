@@ -5,7 +5,7 @@ const { useParams, useNavigate, Link, useSearchParams, Outlet } = ReactRouterDOM
 
 import { MailPreview } from "./MailPreview.jsx";
 
-export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail,filterBy, onSetFilterBy }) {
+export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail, filterBy, onSetFilterBy }) {
 
     const [countsToEdit, setCountsToEdit] = useState(counts)
     const { mailId } = useParams()
@@ -15,11 +15,19 @@ export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail,f
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
-    
+
     useEffect(() => {
         updateCounts(counts)
     }, [counts])
 
+    function onReadMail(isRead, mailId) {
+        setMails(prevMails =>
+            prevMails.map(mail =>
+                mail.id === mailId ? { ...mail, isRead } : mail
+            )
+        )
+    }
+    
     function handleChange({ target }) {
         const field = target.name
         let value = target.value
@@ -66,9 +74,19 @@ export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail,f
                                 </Link>
                                 {hoveredMailId === mail.id && (
                                     <div className="btn-container">
-                                        <button onClick={() => onRemoveMail(mail.id)} className="btn-delete"><img src="assets/img/google-material-icons/delete.svg" alt="refresh" /></button>
-                                        {/* <button className="btn-mail"><img src="assets/img/google-material-icons/settings.svg" alt="settings" /></button> */}
+                                        <button onClick={() => onRemoveMail(mail.id)} className="btn-delete">
+                                            <img src="assets/img/google-material-icons/delete.svg" alt="delete" />
+                                        </button>
 
+                                        {mail.isRead ? (
+                                            <button onClick={() => onReadMail(false, mail.id)} className="btn-read">
+                                                <img src="assets/img/google-material-icons/read_mail.svg" alt="Mark as Unread" />
+                                            </button>
+                                        ) : (
+                                            <button onClick={() => onReadMail(true, mail.id)} className="btn-read">
+                                                <img src="assets/img/google-material-icons/unread_mail.svg" alt="Mark as Read" />
+                                            </button>
+                                        )}
                                     </div>
                                 )}
                             </div>

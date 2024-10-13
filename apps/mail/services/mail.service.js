@@ -57,7 +57,7 @@ function _getFilteredMails(mails, filterBy) {
                 case 'Inbox':
                     return mail.to === loggedinUser.mail && !mail.removedAt
                 case 'Sent':
-                    return mail.from === loggedinUser.mail&& !mail.removedAt
+                    return mail.from === loggedinUser.mail && !mail.removedAt
                 case 'Trash':
                     return mail.removedAt
                 case 'Draft':
