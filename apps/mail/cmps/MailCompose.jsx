@@ -39,34 +39,33 @@ export function MailCompose({ onSendMail, onCloseCompose }) {
                 <button className="close-btn" onClick={() => onCloseCompose(false)}><img src="assets/img/google-material-icons/close.svg" alt="search-btn" /></button>
             </div>
             <form onSubmit={onComposeSubmit}>
-                <label>
 
                     <input
+                        className="compose-to"
                         type="email"
                         placeholder="To"
                         name="to"
                         value={newMail.to}
                         onChange={handleChange}
                     />
-                </label>
-                <label>
+
                     <input
+                        className="compose-subject"
                         type="text"
                         name="subject"
                         placeholder="Subject"
                         value={newMail.subject}
                         onChange={handleChange}
-                        
+
                     />
-                </label>
-                <label>
                     <textarea
+                        className="compose-textarea "
                         name="body"
                         value={newMail.body}
                         onChange={handleChange}
-                        
+
                     />
-                </label>
+
                 <button className="btn-send" type="submit">Send</button>
             </form>
         </section>
