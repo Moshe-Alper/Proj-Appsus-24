@@ -1,5 +1,4 @@
 .note-preview {
-    width: 14.875rem;
     height: fit-content;
 
     font-size: 0.9375rem;
@@ -31,17 +30,16 @@
 }
 
 .color-input {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 454px;
     height: 49px;
     padding: 9px;
 
-
     transform: translateX(-50%);
     background-color: var(--clr-primary-base);
-    border-radius: 10px 0px;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
@@ -51,6 +49,7 @@
     grid-auto-flow: column;
     gap: 8px;
 }
+
 
 .item:not(.close-btn) {
     border: lavender 2px solid;
