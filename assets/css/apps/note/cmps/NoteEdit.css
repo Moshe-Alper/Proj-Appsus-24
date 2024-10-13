@@ -101,3 +101,9 @@
     background-color: inherit;
     line-height: 24px;
 }
+
+/* videos */
+
+.editing-section-form .note-input iframe {
+    justify-self: center;
+}

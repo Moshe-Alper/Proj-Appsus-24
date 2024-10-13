@@ -2,6 +2,8 @@ const { useNavigate } = ReactRouterDOM
 const { useState, useRef } = React
 
 import { noteService } from "../services/note.service.js"
+import { createNoteSvgs, videoSvg } from "../../../cmps/Svgs.jsx"
+
 
 export function CreateNote({ loadNotes }) {
 
@@ -9,6 +11,7 @@ export function CreateNote({ loadNotes }) {
     const [newNote, setNewNote] = useState(noteService.getEmptyNote('', '', false, '#fff', noteType))
     const [isExpanded, setIsExpanded] = useState(false)
     const [imgSrc, setImgSrc] = useState(null)
+    const [videoSrc, setVideoSrc] = useState(null)
     const [isPinned, setIsPinned] = useState(false)
     const [todos, setTodos] = useState([])
     const inputRef = useRef(null)
@@ -38,16 +41,32 @@ export function CreateNote({ loadNotes }) {
         inputRef.current.click()
     }
 
+    function handleVideoButtonClick() {
+        setNoteType('NoteVideo')
+        const videoUrl = prompt('Please enter a video URL')
+        if (videoUrl) {
+            setVideoSrc(videoUrl)
+            setNewNote(prevNote => ({
+                ...prevNote,
+                type: 'NoteVideo',
+                info: {
+                    ...prevNote.info,
+                    videoSrc: videoUrl
+                }
+            }))
+        }
+    }
+
     function handleAddTodo() {
         const updatedTodos = [...todos, { txt: '', doneAt: null }]
         setTodos(updatedTodos)
-    
+
         setNewNote(prevNote => ({
             ...prevNote,
             type: 'NoteTodos',
             info: {
                 ...prevNote.info,
-                todos: updatedTodos 
+                todos: updatedTodos
             }
         }))
     }
@@ -105,13 +124,18 @@ export function CreateNote({ loadNotes }) {
             noteToSave.info.imgSrc = imgSrc || noteToSave.info.imgSrc
         }
 
+        if (noteType === 'NoteVideo' && videoSrc) {
+            noteToSave.info.videoSrc = videoSrc || noteToSave.info.videoSrc
+        }
+
         noteToSave.info.todos = todos
-        console.log('noteToSave:', noteToSave)
+        // console.log('noteToSave:', noteToSave)
 
         noteService.save(noteToSave)
             .then(note => {
                 setNewNote(noteService.getEmptyNote('', '', false, '#fff', 'NoteTxt'))
                 setImgSrc(null)
+                setVideoSrc(null)
                 setTodos([])
                 loadNotes()
                 setIsExpanded(false)
@@ -121,11 +145,11 @@ export function CreateNote({ loadNotes }) {
                 navigate('/note')
             })
     }
-
+    // console.log('newNote:', newNote)
     const { info } = newNote
     const { title, txt } = info
 
-    const isValid = title.trim() || txt.trim() || imgSrc
+    const isValid = title.trim() || txt.trim() || imgSrc || videoSvg
     return (
         <section className="create-note">
             <input
@@ -144,6 +168,16 @@ export function CreateNote({ loadNotes }) {
                 {noteType === 'NoteImg' && imgSrc && (
                     <div className="input-image">
                         <img src={imgSrc} alt="Uploaded Image" />
+                    </div>
+                )}
+
+                {noteType === 'NoteVideo' && videoSrc && (
+                    <div className="input-video">
+                        <video controls>
+
+                            <source src={videoSrc} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 )}
 
@@ -180,13 +214,13 @@ export function CreateNote({ loadNotes }) {
                     {!isExpanded && (
                         <div className="button-container">
                             <button onClick={() => setNoteType('NoteTodos')} className="btn-note">
-                                <img src="assets/img/google-material-icons/check_box.svg" alt="New List" />
+                                {createNoteSvgs.checkboxSvg}
                             </button>
-                            {/* <button className="btn-note">
-                                <img src="assets/img/google-material-icons/brush.svg" alt="New note with drawing" />
-                            </button> */}
+                            <button onClick={handleVideoButtonClick} className="btn-note">
+                                {createNoteSvgs.videoSvg}
+                            </button>
                             <button onClick={handleImageButtonClick} className="btn-note">
-                                <img src="assets/img/google-material-icons/image.svg" alt="New note with image" />
+                                {createNoteSvgs.imgSvg}
                             </button>
                         </div>
                     )}

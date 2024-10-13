@@ -91,49 +91,186 @@ function _createNotes() {
 
     notes = [
         {
-            id: 'n101',
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteTxt',
             isPinned: true,
             style: {
-                backgroundColor: 'white'
+                backgroundColor: 'rgb(239, 154, 154)'
             },
             info: {
-                title: 'Fullstack Me Baby!',
-                txt: 'Im Stacking you',
+                title: 'We were all so young!',
+                txt: '"I suppose at one time in my life I might have had any number of stories, but now there is no other. This is the only story I will ever be able to tell. ',
                 imgSrc: '',
                 todos: {}
             }
         },
         {
-            id: 'n102',
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: true,
+            info: {
+                title: 'When Curiosity Meets Determination',
+                imgSrc: './assets/img/notes/Solar_opposites_e207_0015.webp',
+            },
+            style: {
+                backgroundColor: 'rgb(178, 235, 242)'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTodos',
+            isPinned: false,
+            style: {
+                backgroundColor: 'rgb(255, 204, 128)'
+            },
+            info: {
+                title: 'Gift Planning & Shopping',
+                todos: [
+                    { txt: 'Make a gift list for family and friends', doneAt: null },
+                    { txt: 'Set a budget for holiday shopping', doneAt: null },
+                    { txt: 'Order any personalized gifts early', doneAt: null },
+                    { txt: 'Wrap presents and add name tags', doneAt: null },
+                    { txt: 'Ship gifts to out-of-town loved ones', doneAt: 187111111 }
+                ]
+            }
+        },
+        {
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteImg',
             isPinned: false,
             info: {
-                title: 'Bobi and Me',
-                imgSrc: 'assets/img/notes/Sea-turtle.jpg',
+                title: 'Weezer',
+                txt: 'Pinkerton',
+                imgSrc: './assets/img/notes/Folder.jpg',
+            },
+            style: {
+                backgroundColor: 'rgb(248, 187, 208)'
+            }
+        },
+
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteVideo',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(239, 154, 154)'
+            },
+            info: {
+                title: 'Popeye!',
+                txt: '',
+                imgSrc: '',
+                videoSrc: 'https://www.youtube.com/watch?v=8kWIYfMeuZM&list=PL3rKz4t8GPIbIZ6K2aDrX48XGFtQ83cGn',
+                todos: {}
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: false,
+            info: {
+                title: 'Seas Turtle',
+                txt: '',
+                imgSrc: './assets/img/notes/Sea-turtle.jpg',
             },
             style: {
                 backgroundColor: 'rgb(246, 235, 97)'
             }
         },
         {
-            id: 'n103',
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTodos',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(200, 230, 201)'
+            },
+            info: {
+                title: 'Gardening To-Do List',
+                todos: [
+                    { txt: 'Prepare the soil', doneAt: Date.now() },
+                    { txt: 'Sow seeds', doneAt: Date.now() },
+                    { txt: 'Transplant seedlings', doneAt: null },
+                    { txt: 'Build a trellis', doneAt: Date.now() },
+                    { txt: 'Apply organic fertilizer', doneAt: Date.now() },
+                    { txt: 'Install a rain barrel', doneAt: null },
+                    { txt: 'Weed flower beds ', doneAt: Date.now() },
+                    { txt: 'Harvest ripe fruits', doneAt: Date.now() },
+                ]
+            }
+        },
+
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: true,
+            info: {
+                title: 'Almost Famous',
+                txt: 'Almost Famous (2000) is a coming-of-age film directed by Cameron Crowe.',
+                imgSrc: './assets/img/notes/1-almost-famous-group-shot-poster-joshua-williams.jpg',
+            },
+            style: {
+                backgroundColor: 'rgb(187, 222, 251)'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteImg',
+            isPinned: false,
+            info: {
+                title: 'Iron Man',
+                txt: 'I am Iron Man',
+                imgSrc: './assets/img/notes/F1EdmDZWwAAWb50.jpeg',
+            },
+            style: {
+                backgroundColor: 'rgb(225, 190, 231)'
+            }
+        },
+        {
+            id: utilService.makeId(),
             createdAt: Date.now(),
             type: 'NoteTodos',
             isPinned: false,
             style: {
-                backgroundColor: 'white'
+                backgroundColor: 'rgb(255, 255, 255)'
             },
             info: {
-                title: 'Get my stuff together',
+                title: 'Home Organization To-Do List',
                 todos: [
-                    { txt: 'Driving license', doneAt: null },
-                    { txt: 'Coding power', doneAt: 187111111 }
+                    { txt: 'Declutter the living room', doneAt: null },
+                    { txt: 'Organize kitchen cabinets', doneAt: null },
+                    { txt: 'Sort through clothes and donate', doneAt: Date.now() },
+                    { txt: 'Clean out the garage', doneAt: null },
+                    { txt: 'Create a filing system for paperwork', doneAt: Date.now() },
+                    { txt: 'Rearrange furniture for better flow', doneAt: Date.now() },
+                    { txt: 'Set up a cleaning schedule', doneAt: null },
+                    { txt: 'Label storage bins', doneAt: null },
                 ]
             }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: Date.now(),
+            type: 'NoteTxt',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(255, 255, 255)'
+            },
+            info: {
+                title: 'לזכור להתקשר לאמא',
+                txt: '',
+                imgSrc: '',
+                todos: {}
+            }
         }
+
     ]
     utilService.saveToStorage(NOTE_KEY, notes)
 }
@@ -146,6 +283,8 @@ function _getInfoByType(type) {
             return { title: '', imgSrc: '' }
         case 'NoteTodos':
             return { title: '', todos: [] }
+        case 'NoteVideo':
+            return { title: '', videoSrc: '' }
         default:
             return { title: '', txt: '' }
     }
