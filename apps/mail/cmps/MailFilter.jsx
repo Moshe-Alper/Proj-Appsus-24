@@ -32,22 +32,23 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
     }
 
     return (
-        <section className="mail-filter">
+        <React.Fragment>
+            <section className="mail-filter">
+                <div className="search-btn">
+                    <img src="assets/img/google-material-icons/search.svg" alt="search-btn" />
+                </div>
 
-            <div className="search-btn">
-                <img src="assets/img/google-material-icons/search.svg" alt="search-btn" />
-            </div>
+                <form onSubmit={onSubmit}>
+                    <input
+                        type="text"
+                        name="txt"
+                        placeholder="Search mail"
+                        onChange={handleChange}
+                    />
+                </form>
+            </section>
 
-            <form onSubmit={onSubmit}>
-
-                <input
-                    type="text"
-                    name="txt"
-                    placeholder="Search mail"
-                    onChange={handleChange}
-                />
-
-
+            <div className="checkbox-wrapper">
                 <input
                     id="checkbox"
                     type="checkbox"
@@ -56,9 +57,8 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                     onChange={handleChange}
                 />
                 <label htmlFor="checkbox">Show Read Mails</label>
-
-            </form>
-
-        </section>
+            </div>
+        </React.Fragment>
     )
+
 }

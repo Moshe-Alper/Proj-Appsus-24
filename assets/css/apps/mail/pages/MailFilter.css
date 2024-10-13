@@ -1,6 +1,6 @@
 .mail-filter {
     display: flex;
-    justify-content:flex-start;
+    flex: 1;
     align-items: center;
     padding: 5px;
     background-color: #eaf1fb;
@@ -30,3 +30,18 @@
     border: none;
     background-color: #eaf1fb;
 }
+
+.checkbox-wrapper {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px; 
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-right: 5px; 
+}
+
+.checkbox-wrapper label {
+    font-size: 14px; 
+}
+
