@@ -135,9 +135,7 @@ export function NoteEdit({ toggleEditModal, loadNotes }) {
                 </header>
                     <DynamicCmp type={noteToEdit.type} info={noteToEdit.info} />
                     <div className="editing-footer">
-                        <button className="btn-note">
-                            <img src="assets/img/google-material-icons/palette.svg" alt="background-color-button" />
-                        </button>
+
                         <button>Close</button>
                     </div>
                 </form>

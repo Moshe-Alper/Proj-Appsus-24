@@ -264,7 +264,7 @@ function _createNotes() {
                 backgroundColor: 'rgb(255, 255, 255)'
             },
             info: {
-                title: 'לזכור להתקשר לאמא',
+                title: 'Call Mom!!',
                 txt: '',
                 imgSrc: '',
                 todos: {}

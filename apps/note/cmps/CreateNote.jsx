@@ -127,9 +127,11 @@ export function CreateNote({ loadNotes }) {
         if (noteType === 'NoteVideo' && videoSrc) {
             noteToSave.info.videoSrc = videoSrc || noteToSave.info.videoSrc
         }
-
-        noteToSave.info.todos = todos
-        // console.log('noteToSave:', noteToSave)
+        
+        if (noteType === 'NoteTodos') {
+            noteToSave.info.todos = todos
+        }
+        
 
         noteService.save(noteToSave)
             .then(note => {
@@ -144,12 +146,15 @@ export function CreateNote({ loadNotes }) {
             .catch(err => {
                 navigate('/note')
             })
+            .finally(() => {
+                setNoteType('NoteTxt')
+            })
     }
     // console.log('newNote:', newNote)
     const { info } = newNote
     const { title, txt } = info
 
-    const isValid = title.trim() || txt.trim() || imgSrc || videoSvg
+    const isValid = title.trim() || txt.trim() || imgSrc || videoSrc || todos.length > 0
     return (
         <section className="create-note">
             <input
@@ -245,14 +250,6 @@ export function CreateNote({ loadNotes }) {
                         ))}
                         <button type="button" onClick={handleAddTodo} className="btn-add-todo">
                             + List item
-                        </button>
-                    </div>
-                )}
-
-                {isExpanded && (
-                    <div className="expanded-buttons">
-                        <button className="btn-note">
-                            <img src="assets/img/google-material-icons/palette.svg" alt="background-color-button" />
                         </button>
                     </div>
                 )}
