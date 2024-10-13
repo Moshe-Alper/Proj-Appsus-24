@@ -112,7 +112,7 @@ function onCloseCompose(){
                     </div>
 
                 )}
-                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} />
+                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
                 <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
             </main>
         </section >

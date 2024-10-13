@@ -29,12 +29,14 @@
     font-size: 1.0rem;
     border: none;
     background-color: #eaf1fb;
+    outline: none;
 }
 
 .checkbox-wrapper {
     display: flex; 
     align-items: center; 
     margin-top: 10px; 
+    margin-bottom: 10px; 
 }
 
 .checkbox-wrapper input[type="checkbox"] {

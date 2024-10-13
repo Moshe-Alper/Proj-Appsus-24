@@ -48,7 +48,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                 </form>
             </section>
 
-            <div className="checkbox-wrapper">
+            {/* <div className="checkbox-wrapper">
                 <input
                     id="checkbox"
                     type="checkbox"
@@ -57,7 +57,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
                     onChange={handleChange}
                 />
                 <label htmlFor="checkbox">Show Read Mails</label>
-            </div>
+            </div> */}
         </React.Fragment>
     )
 

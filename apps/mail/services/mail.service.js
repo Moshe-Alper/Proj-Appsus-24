@@ -43,7 +43,6 @@ function remove(mailId) {
 
 function save(mail) {
     if (!mail.id) {
-        console.log(mail)
         return storageService.post(MAIL_KEY, mail)
     } else {
         return storageService.put(MAIL_KEY, mail)
