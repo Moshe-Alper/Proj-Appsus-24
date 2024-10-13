@@ -24,7 +24,7 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
                     {folders.map(folder => (
                         <li
                             key={folder}
-                            className={filterBy.folder === folder ? 'active' : ''}
+                            className={filterBy.folder === folder ? 'active folder-item' : 'folder-item'}
                             onClick={() => handleChange(folder)}
                         >
                             <section className="btn-sidebar">

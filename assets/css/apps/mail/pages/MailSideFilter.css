@@ -23,7 +23,7 @@ body {
 }
 
 
-.mail-side-filter li {
+.mail-side-filter .folder-item {
     list-style-type: none;
     font-size: 16px;
     cursor: pointer;
@@ -32,7 +32,7 @@ body {
     padding-left: 18px;
 }
 
-li:hover {
+.folder-item:hover {
     background-color: #dce0e4;
 }
 
@@ -41,7 +41,7 @@ li:hover {
     font-weight: bold;
 }
 
-li.active img {
+.folder-item.active img {
     filter: contrast(350%);
 }
 
