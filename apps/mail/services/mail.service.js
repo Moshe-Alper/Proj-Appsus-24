@@ -100,7 +100,7 @@ function getMailCountByFolder() {
     return storageService.query(MAIL_KEY)
         .then(mails => {
             const counts = {
-                Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.isRead).length,
+                Inbox: mails.filter(mail => mail.to === loggedinUser.mail && !mail.isRead &&!mail.removedAt).length,
                 // Inbox: mails.filter(mail => mail.isRead === true).length,
                 // Sent: mails.filter(mail => mail.from === loggedinUser.mail && !mail.removedAt && mail.sentAt).length,
                 // Trash: mails.filter(mail => mail.removedAt).length,

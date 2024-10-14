@@ -16,7 +16,7 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [searchPrms, setSearchPrms] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchPrms))
-    const [counts, setCounts] = useState()
+    const [counts, setCounts] = useState(null)
     const [isCompose, setIsCompose] = useState(false)
 
 
@@ -57,21 +57,27 @@ export function MailIndex() {
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
-    function updateCounts(newCounts) {
-        setCounts(newCounts)
+    function updateCounts() {
+        updateMailCounts()
     }
 
     function onRemoveMail(mailId) {
-        mailService.remove(mailId)
-            .then(() => {
-                setMails(mails => mails.filter(mail => mail.id !== mailId))
-                showSuccessMsg(`Mail removed successfully!`)
+        mailService.get(mailId)
+            .then(mail => {
+                mail.removedAt = Date.now()
+                mailService.save(mail)
+                    .then(updatedMail => {
+                        setMails(prevMails => prevMails.map(m => m.id === mailId ? updatedMail : m))
+                    })
+                    updateMailCounts()
+                    showSuccessMsg('Mail moved to Trash')
             })
             .catch(err => {
-                console.log('Problems removing mail:', err)
-                showErrorMsg(`Problems removing mail (${mailId})`)
+                console.error('Problems moving mail to trash:', err)
+                showErrorMsg(`Could not move mail to trash (${mailId})`)
             })
     }
+
 
     function onSendMail(newMail) {
         mailService.save(newMail)
@@ -85,10 +91,10 @@ export function MailIndex() {
             })
     }
 
-    
-function onCloseCompose(){
-    setIsCompose(false)
-}
+
+    function onCloseCompose() {
+        setIsCompose(false)
+    }
 
     if (!mails) return <h1>Loading...</h1>
     return (
@@ -112,7 +118,7 @@ function onCloseCompose(){
                     </div>
 
                 )}
-                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
+                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
                 <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
             </main>
         </section >
