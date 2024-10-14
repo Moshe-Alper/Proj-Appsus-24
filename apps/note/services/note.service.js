@@ -139,7 +139,7 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912393,
             type: 'NoteImg',
             isPinned: false,
             info: {
@@ -154,7 +154,7 @@ function _createNotes() {
 
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912394,
             type: 'NoteVideo',
             isPinned: true,
             style: {
@@ -170,7 +170,7 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912395,
             type: 'NoteImg',
             isPinned: false,
             info: {
@@ -184,7 +184,7 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912396,
             type: 'NoteTodos',
             isPinned: true,
             style: {
@@ -207,7 +207,7 @@ function _createNotes() {
 
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912397,
             type: 'NoteImg',
             isPinned: true,
             info: {
@@ -221,7 +221,7 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 17288259123928,
             type: 'NoteImg',
             isPinned: false,
             info: {
@@ -235,7 +235,7 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912399,
             type: 'NoteTodos',
             isPinned: false,
             style: {
@@ -257,7 +257,23 @@ function _createNotes() {
         },
         {
             id: utilService.makeId(),
-            createdAt: Date.now(),
+            createdAt: 1728825912394,
+            type: 'NoteVideo',
+            isPinned: true,
+            style: {
+                backgroundColor: 'rgb(200, 230, 201)'
+            },
+            info: {
+                title: 'Mickey Mouse',
+                txt: 'Steamboat Wille',
+                imgSrc: '',
+                videoSrc: 'https://www.youtube.com/watch?v=hxf-UHuGobI&ab_channel=OswaldRabbit',
+                todos: {}
+            }
+        },
+        {
+            id: utilService.makeId(),
+            createdAt: 1728825912400,
             type: 'NoteTxt',
             isPinned: true,
             style: {

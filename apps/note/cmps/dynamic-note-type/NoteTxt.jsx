@@ -1,4 +1,6 @@
 const { useRef, useEffect } = React
+import { LongTxt } from "../../../../cmps/LongTxt.jsx"
+
 
 export function NoteTxt({ info = { txt: '' }, onChangeInfo, onToggleEditModal, id }) {
 
