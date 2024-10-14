@@ -79,6 +79,9 @@
     background-color: inherit;
 }
 
+.editing-header .btn-note {
+    max-height: 40px;
+}
 .editing-section .note-todos {
     display: grid;
     justify-content: left;
@@ -101,6 +104,8 @@
 }
 
 .editing-section-form .note-input iframe {
+    height: 300px;
+    width: 100%;
     justify-self: center;
 }
 

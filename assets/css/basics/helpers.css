@@ -34,6 +34,8 @@
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s ease;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 .btn-note:hover {
@@ -46,8 +48,8 @@
 
 .btn-note img,
 .btn-note i {
-  width: 1.5rem;
-  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
 }
 
 .btn-note i {

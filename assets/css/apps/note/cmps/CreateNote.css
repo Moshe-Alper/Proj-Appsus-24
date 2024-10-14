@@ -11,6 +11,10 @@
     justify-content: space-between;
 }
 
+.create-note .input-title .btn-note {
+    max-height: 40px;
+}
+
 .create-note .note-contracted-container {
     display: flex;
     justify-content: space-between;
@@ -149,4 +153,31 @@
 
 .input-video video {
     width: 100%;  
+}
+
+.note-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-block: 10px;
+}
+
+.note-text-container textarea {
+    width: 80%;   
+    resize: none;        
+    display: flex;
+    align-items: center;  
+    padding-block: 10px;      
+    box-sizing: border-box;
+    font-size: 1rem;   
+}
+
+.note-text-container textarea::placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;      
+    line-height: 1.5;   
+    color: var(--clr-primary-2);
 }

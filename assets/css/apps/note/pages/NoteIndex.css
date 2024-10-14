@@ -2,5 +2,5 @@
 
  .note-index {
     font-family: Google Sans, Roboto, Arial, sans-serif;
-    background-color: white;
+    background-color: var(--clr-primary-base);
  }

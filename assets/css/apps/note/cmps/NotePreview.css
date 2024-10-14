@@ -51,7 +51,7 @@
 }
 
 
-.item:not(.close-btn) {
+.item:not(.close-note-btn) {
     border: lavender 2px solid;
     padding: 5px;
     margin: 5px;
@@ -68,6 +68,11 @@
     border: solid rgb(12, 0, 0) 2px;
 }
 
+.color-input .items-container .btn-note {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+}
 /* todos */
 
 .note-preview .note-todos {

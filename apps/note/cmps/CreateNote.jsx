@@ -43,18 +43,6 @@ export function CreateNote({ loadNotes }) {
 
     function handleVideoButtonClick() {
         setNoteType('NoteVideo')
-        const videoUrl = prompt('Please enter a video URL')
-        if (videoUrl) {
-            setVideoSrc(videoUrl)
-            setNewNote(prevNote => ({
-                ...prevNote,
-                type: 'NoteVideo',
-                info: {
-                    ...prevNote.info,
-                    videoSrc: videoUrl
-                }
-            }))
-        }
     }
 
     function handleAddTodo() {
@@ -176,15 +164,27 @@ export function CreateNote({ loadNotes }) {
                     </div>
                 )}
 
-                {noteType === 'NoteVideo' && videoSrc && (
-                    <div className="input-video">
-                        <video controls>
-
-                            <source src={videoSrc} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                {noteType === 'NoteVideo' && isExpanded && (
+                    <div className="input-video-url">
+                        <input
+                            type="text"
+                            value={videoSrc || ''}
+                            placeholder="Enter video URL..."
+                            onChange={(ev) => {
+                                setVideoSrc(ev.target.value)
+                                setNewNote(prevNote => ({
+                                    ...prevNote,
+                                    type: 'NoteVideo',
+                                    info: {
+                                        ...prevNote.info,
+                                        videoSrc: ev.target.value
+                                    }
+                                }))
+                            }}
+                        />
                     </div>
                 )}
+
 
                 {isExpanded && (
                     <div className="input-title">

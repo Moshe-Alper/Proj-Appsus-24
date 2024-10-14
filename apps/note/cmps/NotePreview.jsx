@@ -1,4 +1,4 @@
-const { Link } = ReactRouterDOM
+const { Link, useNavigate } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { noteService } from "../services/note.service.js"
@@ -10,10 +10,11 @@ import { NoteFooter } from "./NoteFooter.jsx"
 import { NoteEdit } from "./NoteEdit.jsx"
 import { NoteHeader } from "./NoteHeader.jsx"
 import { NoteVideo } from "./dynamic-note-type/NoteVideo.jsx"
+import { NoteLabels } from "./NoteLabels.jsx"
 
-export function NotePreview({
-    note, onRemoveNote, loadNotes, togglePin, onDuplicateNote
-}) {
+export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplicateNote }) {
+    const navigate = useNavigate()
+
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
 
@@ -63,6 +64,28 @@ export function NotePreview({
             .then(() => loadNotes())
             .catch(err => console.log('Error updating todos:', err))
     }
+    
+    function sendAsEmail() {
+        const subject = encodeURIComponent(note.info.title || 'My Note')
+        let body = note.info.txt || ''
+    
+        if (note.type === 'NoteImg' && note.info.imgSrc) {
+            body += `\n\nImage: ${note.info.imgSrc}`
+        } else if (note.type === 'NoteVideo' && note.info.videoSrc) {
+            body += `\n\nWatch Video: ${note.info.videoSrc}`
+        } else if (note.type === 'NoteTodos' && note.info.todos) {
+            body += '\n\nTodos:\n'
+            note.info.todos.forEach((todo, idx) => {
+                body += `${idx + 1}. ${todo.txt} - ${todo.done ? 'DONE' : 'NOT DONE'}\n`
+            })
+        }
+    
+        const encodedBody = encodeURIComponent(body)
+    
+        console.log('subject, body:', subject, encodedBody)
+    
+        navigate(`/mail/compose?subject=${subject}&body=${encodedBody}`)
+    }
 
     return (
         <article style={{ ...noteStyle }} className="note-preview">
@@ -78,13 +101,16 @@ export function NotePreview({
                     info={note.info}
                 />
             </Link>
-
+            <NoteLabels
+            createdAt={note.createdAt}
+            />
             <NoteFooter
                 note={note}
                 onRemoveNote={onRemoveNote}
                 onDuplicateNote={onDuplicateNote}
                 onToggleEditModal={onToggleEditModal}
                 onToggleStyleModal={onToggleStyleModal}
+                sendAsEmail={sendAsEmail}
             />
             {isShowEditModal && (
                 <NoteEdit
