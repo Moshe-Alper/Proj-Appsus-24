@@ -52,8 +52,10 @@ export function MailDetails({ }) {
     if (!mail) return <div>Loading...</div>
     return (
         <section className="mail-details">
-            <button onClick={onBack}>Back to Mails</button>
-            <button onClick={onDeleteMail}>Delete Mail</button>
+            <button onClick={onBack}className="btn-back"> <img src="assets/img/google-material-icons/back_mail.svg" alt="back_mail" />
+            </button>
+            <button onClick={onDeleteMail} className="btn-delete"><img src="assets/img/google-material-icons/delete.svg" alt="delete_mail" />
+            </button>
             <p><strong>Body:</strong> {mail.body}</p>
         </section>
     )
