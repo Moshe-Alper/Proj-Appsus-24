@@ -42,7 +42,7 @@ export function MailDetails({ }) {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== params.mailId))
                 navigate('/mail')
             })
-            .catch(err => console.error('Failed to delete mail', err));
+            .catch(err => console.error('Failed to delete mail', err))
     }
 
     function onBack() {

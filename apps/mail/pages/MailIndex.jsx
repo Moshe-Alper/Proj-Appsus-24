@@ -1,5 +1,5 @@
 
-const { Link, useSearchParams } = ReactRouterDOM
+const { Link, useSearchParams,useNavigate,useLocation } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { showErrorMsg, showSuccessMsg, showUserMsg } from "../services/event-bus.service.js"
@@ -18,6 +18,8 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchPrms))
     const [counts, setCounts] = useState(null)
     const [isCompose, setIsCompose] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
 
 
     useEffect(() => {
@@ -27,12 +29,10 @@ export function MailIndex() {
     }, [filterBy])
 
     useEffect(() => {
-        updateMailCounts()
-    }, [counts])
-
-    useEffect(() => {
-        loadMails()
-    }, [isCompose])
+        if (location.pathname === '/mail/compose') {
+            setIsCompose(true)
+        }
+    }, [location.pathname])
 
     function loadMails() {
         mailService.query(filterBy)
@@ -94,6 +94,12 @@ export function MailIndex() {
 
     function onCloseCompose() {
         setIsCompose(false)
+        navigate('/mail?folder=Inbox&filterBy=%5Bobject+Object%5D')
+    }
+
+    function onSetIsCompose() {
+        setIsCompose(true)
+        navigate('/mail/compose?folder=Inbox&filterBy=%5Bobject+Object%5D')
     }
 
     if (!mails) return <h1>Loading...</h1>
@@ -109,7 +115,7 @@ export function MailIndex() {
                         src={'assets/img/google-material-icons/pen.svg'}
                         alt={'pen-icon'}
                     />
-                    <button onClick={() => setIsCompose(true)}>Compose</button>
+                    <button onClick={onSetIsCompose}>Compose</button>
                 </div>
                 {isCompose && (
 
