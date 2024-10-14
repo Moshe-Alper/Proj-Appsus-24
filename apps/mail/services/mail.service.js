@@ -158,8 +158,8 @@ function _createMails() {
             _createMail('Miss you!', 'Would love to catch up sometime', `${loggedinUser.mail}`, 'momo@momo.com'),
             _createMail('Miss you!', 'Would love to catch up sometime', `${loggedinUser.mail}`, 'momo@momo.com'),
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', `${loggedinUser.mail}`, 'colleague@work.com'),
-            _createMail('News Sky', 'News just for you', `${loggedinUser.mail}`, 'boss@company.com'),
-            _createMail('Kids present', 'Don\'t miss holiday sell', `${loggedinUser.mail}`, 'momo@company.com'),
+            // _createMail('News Sky', 'News just for you', `${loggedinUser.mail}`, 'boss@company.com'),
+            // _createMail('Kids present', 'Don\'t miss holiday sell', `${loggedinUser.mail}`, 'momo@company.com'),
 
 
             _createMail('Meeting Reminder', 'Don\'t forget our meeting at 10 AM tomorrow', 'colleague@work.com'),

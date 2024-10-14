@@ -7,7 +7,6 @@ import { MailPreview } from "./MailPreview.jsx";
 
 export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail, filterBy, onSetFilterBy }) {
 
-    const [countsToEdit, setCountsToEdit] = useState(counts)
     const { mailId } = useParams()
     const [hoveredMailId, setHoveredMailId] = useState(null)
     const [filterByToEdit, setFilterByToEdit] = useState({ filterBy })

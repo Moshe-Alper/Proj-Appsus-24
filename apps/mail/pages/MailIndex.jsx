@@ -68,16 +68,16 @@ export function MailIndex() {
                 mailService.save(mail)
                     .then(updatedMail => {
                         setMails(prevMails => prevMails.map(m => m.id === mailId ? updatedMail : m))
+                        updateMailCounts()
+                        loadMails()
                     })
-                    updateMailCounts()
-                    showSuccessMsg('Mail moved to Trash')
+                showSuccessMsg('Mail moved to Trash')
             })
             .catch(err => {
                 console.error('Problems moving mail to trash:', err)
                 showErrorMsg(`Could not move mail to trash (${mailId})`)
             })
     }
-
 
     function onSendMail(newMail) {
         mailService.save(newMail)
@@ -89,8 +89,8 @@ export function MailIndex() {
             .catch(err => {
                 console.log('Error sending mail:', err)
             })
+        loadMails()
     }
-
 
     function onCloseCompose() {
         setIsCompose(false)
