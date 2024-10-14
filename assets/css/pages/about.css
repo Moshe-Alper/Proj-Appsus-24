@@ -1,0 +1,51 @@
+.about {
+    max-width: 800px;
+    margin-block: 0;
+    margin-inline: auto;
+    padding: 20px;
+    background-color: var(--clr-primary-0);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.about h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-block: 20px;
+    color: var(--clr-secondary-2);
+}
+
+.about h2 {
+    font-size: 2rem;
+    margin-block: 30px 20px;
+    color: var(--clr-primary-2);
+}
+
+.about h3 {
+    font-size: 1.75rem;
+    margin-block: 20px 15px;
+    color: var(--clr-primary--2);
+}
+
+.about p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-block: 20px;
+}
+
+.about ul {
+    margin-block: 20px;
+    padding-inline-start: 20px;
+    list-style-type: disc;
+}
+
+.about ul li {
+    margin-block: 10px;
+    font-size: 1.1rem;
+}
+
+.about strong {
+    color: var(--clr-secondary-2);
+}

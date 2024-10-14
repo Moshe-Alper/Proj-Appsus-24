@@ -1,1 +1,43 @@
  /* home */
+ 
+ .home {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.home h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    /* color: #4CAF50; */
+}
+
+.app-links {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.app-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.app-links a:hover {
+    transform: scale(1.1);
+}
+
+.app-links svg {
+    margin-bottom: 10px;
+    transition: fill 0.2s;
+}
+
+/* .app-links a:hover svg {
+    fill: #4CAF50;
+} */
