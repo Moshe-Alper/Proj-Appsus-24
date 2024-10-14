@@ -2,50 +2,57 @@
     max-width: 800px;
     margin-block: 0;
     margin-inline: auto;
-    padding: 20px;
+    padding: 24px;
     background-color: var(--clr-primary-0);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    font-family: 'Roboto', Arial, sans-serif;
     color: #333;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.about:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .about h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-block: 20px;
+    text-align: left;
+    font-size: 2.25rem;
+    margin-block: 16px;
     color: var(--clr-secondary-2);
 }
 
 .about h2 {
-    font-size: 2rem;
-    margin-block: 30px 20px;
+    font-size: 1.75rem;
+    margin-block: 24px 16px;
     color: var(--clr-primary-2);
 }
 
 .about h3 {
-    font-size: 1.75rem;
-    margin-block: 20px 15px;
+    font-size: 1.5rem;
+    margin-block: 16px 12px;
     color: var(--clr-primary--2);
 }
 
 .about p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
-    margin-block: 20px;
+    margin-block: 16px;
 }
 
 .about ul {
     margin-block: 20px;
-    padding-inline-start: 20px;
+    padding-inline-start: 24px;
     list-style-type: disc;
 }
 
 .about ul li {
-    margin-block: 10px;
-    font-size: 1.1rem;
+    margin-block: 8px;
+    font-size: 1rem;
 }
 
 .about strong {
     color: var(--clr-secondary-2);
+    font-weight: 500;
 }
