@@ -1,5 +1,4 @@
 .mail-header {
-    /* position: sticky; */
     top: 0;
     display: grid;
     grid-template-columns: 200px auto 100px 100px ;
@@ -41,6 +40,39 @@
 
 .mail-header .mail-filter{
     margin-left: 15px;
+}
+
+@media (max-width: 600px) {
+    .mail-header {
+        grid-template-columns: 150px auto auto auto;
+        grid-template-rows: 1fr;
+        gap: 0.5rem;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .mail-header .logo {
+        max-width: 50px;
+        grid-template-columns: auto;
+    }
+
+    .mail-header .logo .mail-logo {
+        width: 3rem;
+    }
+
+    .mail-header .logo h1 {
+        font-size: 1rem;
+        display: none; 
+    }
+
+    .mail-header .mail-filter {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .mail-header .mail-actions {
+        display: none; 
+    }
 }
 
 

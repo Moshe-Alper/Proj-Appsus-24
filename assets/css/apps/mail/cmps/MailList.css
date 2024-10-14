@@ -82,4 +82,30 @@
 
 }
 
+@media (max-width: 600px) {
+    .mail-list {
+        /* grid-column: 1 / -1; */
+        /* max-width: 100%; */
+        padding: 5px;
+        border-radius: 10px;
+    }
 
+    .mail-list li {
+        padding: 0.5rem;
+        font-size: 12px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .mail-list li.unread {
+        font-size: 12px;
+    }
+
+    .mail-list .delete-container {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .mail-list .btn-delete, .mail-list .btn-read, .mail-list .btn-unread {
+        width: 1.1rem;
+    }
+}
