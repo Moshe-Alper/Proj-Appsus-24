@@ -1,3 +1,15 @@
+export const keepSvg = (
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="144px" height="144px"><path fill="#ffc107" d="M9,42h23l10-10V9c0-1.7-1.3-3-3-3H9C7.3,6,6,7.3,6,9v30C6,40.7,7.3,42,9,42z"/><path fill="#ffecb3" d="M32,42V32h10L32,42z"/><path fill="#fff" d="M28,36h-8v-7.9c-3.1-1.5-5-4.6-5-8.1c0-5,4-9,9-9c5,0,9,4,9,9c0,3.5-1.9,6.5-5,8.1V36z M22,34h4 v-7.3l0.6-0.3c2.7-1.1,4.4-3.6,4.4-6.5c0-3.9-3.1-7-7-7c-3.9,0-7,3.1-7,7c0,2.9,1.7,5.4,4.4,6.5l0.6,0.3V34z"/><path fill="#fff" d="M22 35h4v3h-4V35zM21 30H27V32H21z"/></svg>
+)
+
+export const mailSvg = (
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="144px" height="144px"><path fill="#4caf50" d="M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z"/><path fill="#1e88e5" d="M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z"/><polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/><path fill="#c62828" d="M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z"/><path fill="#fbc02d" d="M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z"/></svg>
+)
+export const homeSvg = {
+    keepSvg,
+    mailSvg
+}
+
 export const removeSvg = (
     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#202124"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" /></svg>
 )

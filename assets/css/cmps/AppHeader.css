@@ -5,6 +5,20 @@
     padding: 20px 0;
 }
 
+.app-header h3 {
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    top: -0.09375rem;
+    margin-inline-start: 80px;
+    
+    font-weight: 400;
+    font-size: 1.375rem;
+    line-height: 1.5rem;
+    color: rgb(95, 99, 104);
+}
+
 nav a {
     margin: .5em;
 }
@@ -14,7 +28,7 @@ nav a:active {
 }
 
 nav a.active {
-    color: darkblue;
+    color: var(--clr-secondary-2);
     font-weight: bold;
     text-decoration: overline;
 }

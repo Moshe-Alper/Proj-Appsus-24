@@ -1,6 +1,7 @@
 const { useEffect, useState, Fragment } = React
 const { Outlet, Link, useSearchParams } = ReactRouterDOM
 
+import { AppLoader } from "../../../cmps/AppLoader.jsx"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { KeepHeader } from "../cmps/KeepHeader.jsx"
 import { NoteList } from "../cmps/NoteList.jsx"
@@ -76,7 +77,7 @@ export function NoteIndex() {
     }
     
 
-    if (!notes) return <h1>Loading...</h1>
+    if (!notes) return <AppLoader />
     
     return (
         <section className="note-index">
