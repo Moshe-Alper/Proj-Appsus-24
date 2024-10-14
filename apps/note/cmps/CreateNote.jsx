@@ -136,6 +136,7 @@ export function CreateNote({ loadNotes }) {
             })
             .finally(() => {
                 setNoteType('NoteTxt')
+                setIsPinned(false)
             })
     }
     // console.log('newNote:', newNote)
