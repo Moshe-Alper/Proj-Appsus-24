@@ -48,8 +48,8 @@
 
 .btn-note img,
 .btn-note i {
-  width: 1.5rem;
-  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
 }
 
 .btn-note i {

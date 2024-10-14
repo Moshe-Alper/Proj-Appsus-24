@@ -10,10 +10,10 @@ export function NoteLabels({ createdAt }) {
     if (!isNew || !showLabel) return null
     return (
         <section className="note-labels">
-            <span className="new-label">
+            <label className="new-label">
                 New
                 <button className="remove-btn" onClick={() => setShowLabel(false)}>X</button>
-            </span>
+            </label>
         </section>
     )
 }
