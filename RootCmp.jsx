@@ -1,4 +1,4 @@
-const { Route, Routes } = ReactRouterDOM
+const { Route, Routes, HashRouter } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
 
 import { AppHeader } from "./cmps/AppHeader.jsx"
@@ -15,7 +15,7 @@ import { MailCompose } from "./cmps/MailCompose.jsx"
 
 
 export function App() {
-    return <Router>
+    return <HashRouter>
         <section className="app">
             <AppHeader />
             <Routes>
@@ -23,15 +23,16 @@ export function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/mail" element={<MailIndex />} >
                     <Route path="/mail/:mailId" element={<MailDetails />} />
-                    <Route path="/mail/compose" element={<MailCompose />} />
                 </Route>
+                <Route path="/mail/compose" element={<MailCompose />} />
                 <Route path="/note" element={<NoteIndex />} >
                     <Route path="/note/edit" element={<NoteEdit />} />
+                    <Route path="/note/label" element={<NoteEdit />} />
                 </Route>
                 <Route path="/note/search" element={<NoteSearch />} />
                 <Route path="/note/:noteId" element={<NoteIndex />} />
             </Routes>
         </section>
         <UserMsg />
-    </Router>
+    </HashRouter>
 }

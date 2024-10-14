@@ -18,6 +18,9 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
 
+    const [isEmailReady, setIsEmailReady] = useState(false)
+
+
     const initialBackgroundColor = note.style.backgroundColor || '#fff'
     const [noteStyle, setNoteStyle] = useState({
         backgroundColor: initialBackgroundColor
@@ -64,11 +67,12 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
             .then(() => loadNotes())
             .catch(err => console.log('Error updating todos:', err))
     }
-    
+
     function sendAsEmail() {
-        const subject = encodeURIComponent(note.info.title || 'My Note')
+
+        const subject = note.info.title || 'My Note'
         let body = note.info.txt || ''
-    
+
         if (note.type === 'NoteImg' && note.info.imgSrc) {
             body += `\n\nImage: ${note.info.imgSrc}`
         } else if (note.type === 'NoteVideo' && note.info.videoSrc) {
@@ -79,12 +83,11 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
                 body += `${idx + 1}. ${todo.txt} - ${todo.done ? 'DONE' : 'NOT DONE'}\n`
             })
         }
-    
+
         const encodedBody = encodeURIComponent(body)
-    
-        console.log('subject, body:', subject, encodedBody)
-    
-        navigate(`/mail/compose?subject=${subject}&body=${encodedBody}`)
+
+        navigate('/mail/compose', { state: { subject, body } })
+
     }
 
     return (
@@ -102,7 +105,7 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
                 />
             </Link>
             <NoteLabels
-            createdAt={note.createdAt}
+                createdAt={note.createdAt}
             />
             <NoteFooter
                 note={note}

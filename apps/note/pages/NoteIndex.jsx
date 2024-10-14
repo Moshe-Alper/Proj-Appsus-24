@@ -78,7 +78,7 @@ export function NoteIndex() {
     
 
     if (!notes) return <AppLoader />
-    
+    // console.log('notes:', notes)
     return (
         <section className="note-index">
             <KeepHeader
