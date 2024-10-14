@@ -1,12 +1,9 @@
-const { useLocation } = React
+const { useLocation } = ReactRouterDOM
 
 export function MailCompose() {
     const location = useLocation()
-    console.log('location:', location)
-    const queryParams = new URLSearchParams(location.search)
-    const subject = queryParams.get('subject')
-    const body = queryParams.get('body')
-    
+    const { subject = 'No Subject', body = 'No Body' } = location.state || {}
+
     console.log('Subject:', subject)
     console.log('Body:', body)
 
