@@ -87,7 +87,7 @@ export function NoteIndex() {
                 setIsFiltering={setIsFiltering}
             />
             <main className="note-container">
-                <NoteSidebar />
+                {/* <NoteSidebar /> */}
 
                 {!isFiltering ? (
                     <Fragment>
