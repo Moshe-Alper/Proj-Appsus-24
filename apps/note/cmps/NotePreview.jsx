@@ -18,9 +18,6 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
     const [isShowEditModal, setIsShowEditModal] = useState(false)
     const [isShowStyleModal, setIsShowStyleModal] = useState(false)
 
-    const [isEmailReady, setIsEmailReady] = useState(false)
-
-
     const initialBackgroundColor = note.style.backgroundColor || '#fff'
     const [noteStyle, setNoteStyle] = useState({
         backgroundColor: initialBackgroundColor
@@ -29,6 +26,7 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
     function onToggleEditModal() {
         setIsShowEditModal((prevIsEditModal) => !prevIsEditModal)
     }
+    
     function onToggleStyleModal() {
         setIsShowStyleModal((prevIsStyleModal) => !prevIsStyleModal)
     }
@@ -69,24 +67,7 @@ export function NotePreview({ note, onRemoveNote, loadNotes, togglePin, onDuplic
     }
 
     function sendAsEmail() {
-
-        const subject = note.info.title || 'My Note'
-        let body = note.info.txt || ''
-
-        if (note.type === 'NoteImg' && note.info.imgSrc) {
-            body += `\n\nImage: ${note.info.imgSrc}`
-        } else if (note.type === 'NoteVideo' && note.info.videoSrc) {
-            body += `\n\nWatch Video: ${note.info.videoSrc}`
-        } else if (note.type === 'NoteTodos' && note.info.todos) {
-            body += '\n\nTodos:\n'
-            note.info.todos.forEach((todo, idx) => {
-                body += `${idx + 1}. ${todo.txt} - ${todo.done ? 'DONE' : 'NOT DONE'}\n`
-            })
-        }
-
-        const encodedBody = encodeURIComponent(body)
-
-        navigate('/mail/compose', { state: { subject, body } })
+        console.log('send')
 
     }
 

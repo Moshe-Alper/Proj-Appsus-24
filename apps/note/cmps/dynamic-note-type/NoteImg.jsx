@@ -3,7 +3,7 @@ const { useRef, useEffect } = React
 export function NoteImg({ info = { imgSrc: '', txt: '' }, onChangeInfo, onToggleEditModal, id }) {
     const inputRef = useRef(null)
 
-    const isEditable = typeof onChangeInfo === 'function'
+    const isEditable = !!onChangeInfo
     const editClass = isEditable ? 'editable' : ''
 
     function getDefaultUrl(ev) {

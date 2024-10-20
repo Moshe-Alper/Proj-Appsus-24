@@ -5,7 +5,7 @@ export function KeepHeader({ filterBy, onSetFilterBy, setIsFiltering, handleRese
 
 
         <div className="logo">
-            {/* <button className="btn-note"><img src="assets/img/google-material-icons/menu.svg" alt="menu" /></button> */}
+            <button className="btn-note"><img src="assets/img/google-material-icons/menu.svg" alt="menu" /></button>
             <img src="assets/img/notes/keep-logo.png" alt="logo image" className="keep-logo" />
             <h1>Keep</h1>
         </div>

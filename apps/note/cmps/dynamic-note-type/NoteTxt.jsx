@@ -6,7 +6,7 @@ export function NoteTxt({ info = { txt: '' }, onChangeInfo, onToggleEditModal, i
 
     const { txt } = info
 
-    const isEditable = typeof onChangeInfo === 'function'
+    const isEditable = !!onChangeInfo
     const editClass = isEditable ? 'editable' : ''
     const inputRef = useRef(null)
 
@@ -29,7 +29,7 @@ export function NoteTxt({ info = { txt: '' }, onChangeInfo, onToggleEditModal, i
             {isEditable ? (
                 <div className="note-input">
                     <input
-                        ref={inputRef} 
+                        ref={inputRef}
                         placeholder="Note"
                         type="text"
                         name="txt"
