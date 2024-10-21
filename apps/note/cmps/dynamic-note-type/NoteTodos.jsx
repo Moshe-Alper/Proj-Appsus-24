@@ -3,7 +3,7 @@ const { useRef, useEffect } = React
 export function NoteTodos({ info, onChangeInfo, onToggleEditModal, id }) {
     const { todos } = info
 
-    const isEditable = typeof onChangeInfo === 'function'
+    const isEditable = !!onChangeInfo
     const editClass = isEditable ? 'editable' : ''
     const todoRefs = useRef([])
 

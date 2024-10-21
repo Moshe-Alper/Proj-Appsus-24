@@ -4,7 +4,7 @@ export function NoteVideo({ info = { videoSrc: '', txt: '' }, onChangeInfo, onTo
     const inputRef = useRef(null)
     const [videoSrc, setVideoSrc] = useState(info.videoSrc || '')
 
-    const isEditable = typeof onChangeInfo === 'function'
+    const isEditable = !!onChangeInfo
     const editClass = isEditable ? 'editable' : ''
 
     function isYouTubeUrl(url) {
