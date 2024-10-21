@@ -5,18 +5,18 @@ const { useParams, useNavigate, Link, useSearchParams, Outlet } = ReactRouterDOM
 
 import { MailPreview } from "./MailPreview.jsx";
 
-export function MailList({ mails, setMails, counts, updateCounts, onRemoveMail, filterBy, onSetFilterBy }) {
+export function MailList({ mails, setMails, counts, onUpdateCounts, onRemoveMail, filterBy, onSetFilterBy }) {
 
     const { mailId } = useParams()
     const [hoveredMailId, setHoveredMailId] = useState(null)
-    const [filterByToEdit, setFilterByToEdit] = useState({ filterBy })
+    const [filterByToEdit, setFilterByToEdit] = useState({ isRead: filterBy.isRead })
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
 
     useEffect(() => {
-        updateCounts(counts)
+        onUpdateCounts(counts)
     }, [counts])
 
     function onReadMail(isRead, mailId) {

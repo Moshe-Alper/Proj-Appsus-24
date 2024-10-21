@@ -54,10 +54,11 @@ export function MailIndex() {
     }
 
     function onSetFilterBy(filterBy) {
+        console.log(filterBy)
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
-    function updateCounts() {
+    function onUpdateCounts() {
         updateMailCounts()
     }
 
@@ -124,7 +125,9 @@ export function MailIndex() {
                     </div>
 
                 )}
-                <MailList mails={mails} setMails={setMails} counts={counts} updateCounts={updateCounts} onRemoveMail={onRemoveMail} filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                <MailList mails={mails} setMails={setMails} counts={counts} 
+                onUpdateCounts={onUpdateCounts} onRemoveMail={onRemoveMail}
+                 filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
                 <MailSideFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} counts={counts} />
             </main>
         </section >

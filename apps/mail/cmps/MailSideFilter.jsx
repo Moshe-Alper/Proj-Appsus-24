@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 
 export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
 
-    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+    const [filterByToEdit, setFilterByToEdit] = useState({ folder: filterBy.folder })
 
     const folders = ['Inbox', 'Sent', 'Trash', 'Draft']
 
@@ -11,10 +11,8 @@ export function MailSideFilter({ filterBy, onSetFilterBy, counts }) {
     }, [filterByToEdit])
 
     function handleChange(folder) {
-        setFilterByToEdit(prevFilter => ({
-            ...prevFilter,
-            folder: folder
-        }))
+        setFilterByToEdit(prevFilter => ({...prevFilter, folder:folder}))
+        // onSetFilterBy(filterByToEdit)
     }
 
     return (

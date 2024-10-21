@@ -3,7 +3,7 @@ const { useState, useEffect } = React
 export function MailFilter({ filterBy, onSetFilterBy }) {
 
 
-    const [filterByToEdit, setFilterByToEdit] = useState({ filterBy })
+    const [filterByToEdit, setFilterByToEdit] = useState({ txt: filterBy.txt })
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
@@ -27,9 +27,12 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
     }
 
     function onSubmit(ev) {
+        console.log(ev)
         ev.preventDefault()
         onSetFilterBy(filterByToEdit)
     }
+
+    const { txt, type } = filterByToEdit
 
     return (
         <React.Fragment>
@@ -40,6 +43,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
 
                 <form onSubmit={onSubmit}>
                     <input
+                        value={txt}
                         type="text"
                         name="txt"
                         placeholder="Search mail"
